@@ -3,7 +3,7 @@ const veri = {
     profil: {
         isim: "Muhammet Gölpınar",
         unvan: "Bilişim Teknolojileri Öğrencisi",
-        resim: "profil.png",
+        resim: "profil.jpg",
         hakkimda: "Teknolojiyi sadece tüketen değil, üreten tarafta olmayı hedefleyen bir bilişim teknolojileri öğrencisiyim. Yazılım geliştirme, web uygulamaları ve yapay zeka alanlarında kendimi sürekli geliştiriyorum. Disiplinli çalışma alışkanlığım ve meraklı yapım sayesinde yeni teknolojileri hızlıca öğrenir, projelerle pekiştiririm. Amacım, gelecekte kullanıcıların hayatını kolaylaştıran etkili ve yenilikçi çözümler geliştirmektir."
     },
     iletisim: {
@@ -14,7 +14,7 @@ const veri = {
         linkedin: "https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379"
     },
     egitim: [
-        { yil: "2023 - Günümüz", okul: "Şehit Büyükelçi İsmail Erez MTAL", bolum: "Bilişim Teknolojileri Alanı" },
+        { yil: "2023 - Günümüz", okul: "Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi ", bolum: "Bilişim Teknolojileri Alanı" },
         { yil: "2019 - 2023", okul: "Veysel Sacıhan İmam Hatip Ortaokulu", bolum: "Ortaokul Eğitimi" },
         { yil: "2015 - 2019", okul: "Gazi İlköğretim Okulu", bolum: "İlkokul Eğitimi" }
     ],
