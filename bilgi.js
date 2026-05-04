@@ -27,9 +27,9 @@ const veri = {
     yetenekler: [
         { kategori: "Programlama", ikon: "fa-code", liste: ["HTML5", "CSS3", "JavaScript", "Python", "Java", "C#"] },
         { kategori: "Yapay Zeka", ikon: "fa-robot", liste: ["Claude", "Google AI Studio", "Prompt Eng."] },
-        { kategori: "Ortam & Git", ikon: "fa-terminal", liste: ["VS Code", "Visual Studio", "Git & GitHub", "IDLE"] },
-        { kategori: "Web & Veri Tabanı", ikon: "fa-database", liste: ["WordPress", "SQL", "MS Access"] },
-        { kategori: "Tasarım & Ofis", ikon: "fa-pen-nib", liste: ["Canva", "Photoshop", "After Effects", "MS Word"] },
+        { kategori: "Ortam & Git", ikon: "fa-terminal", liste: ["VS Code", "Visual Studio", "GitHub", "IDLE Python"] },
+        { kategori: "Web & Veri Tabanı", ikon: "fa-database", liste: ["WordPress", "SQL", "MS Access"] }, 
+        { kategori: "Tasarım & Ofis", ikon: "fa-pen-nib", liste: ["Canva", "Photoshop", "After Effects", ] },
         { kategori: "Yabancı Dil", ikon: "fa-language", liste: ["İngilizce"] } 
     ],
     sertifikalar: [
