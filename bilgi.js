@@ -58,7 +58,7 @@ const veri = {
         { kategori: "Ortam & Git", ikon: "fa-terminal", liste: ["VS Code", "Visual Studio", "GitHub", "IDLE Python"] },
         { kategori: "Web & Veri Tabanı", ikon: "fa-database", liste: ["WordPress", "SQL", "MS Access"] }, 
         { kategori: "Tasarım & Ofis", ikon: "fa-pen-nib", liste: ["Canva", "Photoshop", "After Effects", ] },
-        { kategori: "Yabancı Dil", ikon: "fa-language", liste: ["İngilizce"] } 
+        { kategori: "Yabancı Dil", ikon: "fa-language", liste: ["İngilizce: A2"] } 
     ],
     kulupler: [
         {
