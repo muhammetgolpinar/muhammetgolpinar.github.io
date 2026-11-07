@@ -433,7 +433,7 @@ body{font-size:calc(16px*var(--fs))}
 .o3{width:60px;height:60px;left:38%;bottom:-20px;background:rgba(255,255,255,.25)}
 .hosav{position:absolute;left:50%;bottom:-52px;transform:translateX(-50%);width:104px;height:104px;z-index:1}
 .hosav::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(from 0deg,#2f4bff,#a78bfa,#38bdf8,#2f4bff)}
-.hosa{position:absolute;inset:0;left:0;bottom:auto;transform:none;width:auto;height:auto;border-width:5px}
+.hosav .hosa{position:absolute;left:0;top:0;bottom:auto;transform:none;width:100%;height:100%;border-width:5px;box-sizing:border-box}
 .hosw{position:absolute;right:-8px;bottom:-2px;width:38px;height:38px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:1.3rem;box-shadow:0 6px 14px -4px rgba(15,25,90,.5);transform-origin:70% 70%}
 .hosc{padding:72px 26px 26px}
 .hosr{display:inline-flex;align-items:center;gap:7px}
@@ -473,6 +473,52 @@ body{font-size:calc(16px*var(--fs))}
 .hosh .o{translate:var(--px,0) var(--py,0);transition:translate .3s ease-out}
 .hosav{translate:calc(var(--px,0px)*-.4) calc(var(--py,0px)*-.4)}
 .hos .btn.fill:active{transform:scale(.97)}
+
+.pw.msgd{padding:0;border:0;border-radius:28px;width:min(400px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow:auto;overscroll-behavior:contain;box-shadow:0 30px 70px -18px rgba(5,10,40,.65),0 0 0 1px rgba(255,255,255,.08)}
+.msgd::backdrop{background:radial-gradient(circle at 50% 30%,rgba(47,75,255,.3),rgba(7,11,24,.82));-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.mh{position:relative;height:84px;overflow:hidden;background:linear-gradient(135deg,#2338d5,#2f4bff 55%,#6d5bff);touch-action:none}
+.mh::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.22) 1.2px,transparent 1.4px);background-size:16px 16px;opacity:.6}
+.mh::after{content:"";position:absolute;left:50%;top:8px;width:38px;height:4px;margin-left:-19px;border-radius:4px;background:rgba(255,255,255,.55)}
+.mh .o{position:absolute;border-radius:50%;filter:blur(18px)}
+.mic{position:absolute;left:22px;top:26px;width:56px;height:56px;border-radius:18px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);display:grid;place-items:center;font-size:1.6rem;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transform:rotate(-6deg)}
+.mx{position:absolute;right:14px;top:18px;z-index:1;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.2);color:#fff;font-size:.9rem;font-weight:800;cursor:pointer}
+.mx:hover{background:rgba(255,255,255,.32)}
+.mb{padding:34px 22px 18px}
+.msgd h3{margin:0 0 2px;font-size:1.5rem;font-weight:800}
+.msgd .msp{margin:0 0 14px;color:var(--muted);font-size:.92rem}
+.mlab{margin:0 0 6px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.msgd .bt{padding:6px 12px}
+.msgd .bt[aria-pressed=true]{background:linear-gradient(135deg,#2f4bff,#5b4dff);box-shadow:0 8px 16px -8px rgba(47,75,255,.8)}
+.mf{display:block;margin:10px 0 0}.mf span{display:block;margin:0 0 4px;font-size:.8rem;font-weight:800;color:var(--sub)}
+.msgd input,.msgd textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg);color:var(--ink);font:inherit;font-size:.96rem;transition:border-color .2s,box-shadow .2s}
+.msgd textarea{resize:none;min-height:104px;line-height:1.5}
+.msgd input:focus,.msgd textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.mmeta{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-top:4px}
+.mmeta .err{margin:0;flex:1}
+.cnt{flex:none;font-size:.75rem;font-weight:700;color:var(--muted)}.cnt.lim{color:#d33}
+.msub{margin-top:2px;padding:7px 12px;border-radius:10px;background:var(--soft);color:var(--accent-d);font-size:.78rem;font-weight:700;overflow-wrap:anywhere}
+.msgd .btns{justify-content:stretch;flex-wrap:nowrap;margin-top:14px}
+.msgd .btn{flex:none;padding:12px 16px;font-size:.92rem;text-align:center}
+.msgd .btn.fill{flex:1;background:linear-gradient(135deg,#2f4bff,#5b4dff);border-color:transparent;box-shadow:0 12px 22px -10px rgba(47,75,255,.8)}
+.msgd .btn.out{border-color:var(--line);color:var(--sub);background:transparent}
+.mhint{margin-top:10px;text-align:center;font-size:.72rem;color:var(--muted)}
+@media(pointer:coarse){.mhint{display:none}}
+.mok{padding:48px 24px 44px;text-align:center;color:#22c55e}
+.mok h3{margin:10px 0 4px;color:var(--ink)}.mok p{margin:0;color:var(--muted)}
+.mok[hidden],.mb[hidden]{display:none}
+@media screen and (prefers-reduced-motion:no-preference){
+.msgd[open]{animation:hosin .4s cubic-bezier(.2,.9,.3,1.2)}
+.msgd[open]::backdrop{animation:hosfd .3s ease}
+.msgd.cik{animation:hosout .28s cubic-bezier(.5,0,.8,.4) forwards!important}
+.msgd.cik::backdrop{animation:hosfo .28s ease forwards!important}
+.msgd.sal{animation:msal .4s}
+.msgd[open] .mic{animation:mpop .5s .1s both cubic-bezier(.2,.9,.3,1.5)}
+.mok svg circle{stroke-dasharray:151;stroke-dashoffset:151;animation:mdr .5s ease forwards}
+.mok svg path{stroke-dasharray:50;stroke-dashoffset:50;animation:mdr .4s .35s ease forwards}
+@keyframes msal{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+@keyframes mpop{from{opacity:0;transform:scale(.5) rotate(-24deg)}to{opacity:1;transform:rotate(-6deg)}}
+@keyframes mdr{to{stroke-dashoffset:0}}}
+@media screen and (prefers-reduced-motion:no-preference){.hos[open] .hosav .hosa{animation:hosp2 .5s .15s both cubic-bezier(.2,.9,.3,1.4)}@keyframes hosp2{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}}
 </style>
 </head>
 <body>
@@ -531,7 +577,7 @@ body{font-size:calc(16px*var(--fs))}
 <footer>© 2026 Muhammet GÖLPINAR</footer>
 </main>
 <dialog class="pw hos" id="hos" aria-labelledby="hosg"><div class="hosh"><i class="o o1"></i><i class="o o2"></i><i class="o o3"></i><span class="hosav"><span class="hosa" aria-hidden="true">MG<img src="profil.jpg" alt="" onerror="this.remove()"></span><span class="hosw" aria-hidden="true">👋</span></span></div><div class="hosc"><span class="hosr s1"><b></b>Bilişim Teknolojileri Öğrencisi</span><h3 id="hosg" class="s2">Merhaba!</h3><p class="s3">Ben Muhammet. Portfolyoma hoş geldin; projelerimi ve deneyimlerimi keşfetmeye hazır mısın?</p><div class="hosch s4"><span>💻 Yazılım</span><span>🌐 Web</span><span>🤖 Yapay Zeka</span></div><div class="hosck s4"><span class="hosl"></span><span id="hosck"></span></div><div class="btns s5"><button class="btn fill" id="hosok" type="button">Siteye gir <span aria-hidden="true">→</span></button></div></div></dialog>
-<dialog class="pw" id="msg"><h3>Mesaj gönder</h3><p>E-posta uygulaman hazır bir taslakla açılır.</p><div class="sab" id="sab"></div><input type="text" id="msn" autocomplete="name" placeholder="Adın" aria-label="Adın"><textarea id="msm" rows="4" placeholder="Mesajın" aria-label="Mesajın"></textarea><div class="err" id="mse" role="alert"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn fill" id="mso" type="button">Gönder</button></div></dialog>
+<dialog class="pw msgd" id="msg" aria-labelledby="msgh"><div class="mh"><i class="o o1"></i><i class="o o2"></i><button class="mx" id="msx" type="button" aria-label="Kapat">✕</button><span class="mic" aria-hidden="true">✉️</span></div><div class="mb"><h3 id="msgh">Mesaj gönder</h3><p class="msp">Taslak hazır gelir, e-posta uygulaman açılır.</p><div class="mlab">Hızlı başlangıç</div><div class="sab" id="sab"></div><label class="mf"><span>Adın</span><input type="text" id="msn" autocomplete="name" placeholder="Adın (isteğe bağlı)" maxlength="60"></label><label class="mf"><span>Mesajın</span><textarea id="msm" rows="4" maxlength="1000" placeholder="Merhaba Muhammet, ..."></textarea></label><div class="mmeta"><div class="err" id="mse" role="alert"></div><span class="cnt" id="mcn">0/1000</span></div><div class="msub" id="msub"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn out" id="mkp" type="button">Kopyala</button><button class="btn fill" id="mso" type="button">Gönder <span aria-hidden="true">→</span></button></div><div class="mhint">Ctrl + Enter ile gönder · taslağın otomatik saklanır</div></div><div class="mok" id="mok" hidden><svg viewBox="0 0 52 52" width="72" height="72" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 27l8 8 14-17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Taslak hazır!</h3><p>E-posta uygulaman açılıyor…</p></div></dialog>
 <dialog class="pw" id="pw"><h3>PDF kaydet</h3><p>Devam etmek için şifreyi gir.</p><input type="password" id="pwi" autocomplete="off" aria-label="Şifre"><div class="err" id="pwe" role="alert"></div><div class="btns"><button class="btn out" id="pwc" type="button">İptal</button><button class="btn fill" id="pwo" type="button">Onayla</button></div></dialog>
 <button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
 
@@ -666,12 +712,30 @@ function dsk(c){var p=String(c[2]).split(' ');return (+p[1]||0)*12+Math.max(0,AY
 function srtf(a,b){return srm=='y'?dsk(b)-dsk(a):srm=='e'?dsk(a)-dsk(b):srm=='a'?a[0].localeCompare(b[0],'tr'):0}
 document.getElementById('sert-sirala').addEventListener('change',function(){srm=this.value;sert()});
 (function(){
-var d=document.getElementById('msg'),n=document.getElementById('msn'),t=document.getElementById('msm'),e=document.getElementById('mse');
-function ac(){e.textContent='';d.showModal();(n.value?t:n).focus()}
+var d=document.getElementById('msg'),n=document.getElementById('msn'),t=document.getElementById('msm'),e=document.getElementById('mse'),cn=document.getElementById('mcn'),sub=document.getElementById('msub'),okp=document.getElementById('mok'),mb=d.querySelector('.mb'),KEY='msgTaslak',MAIL='muhammetgolpinar@gmail.com',red=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo=='off';
+function ls(f){try{return f()}catch(x){}}
+function konu(){var ad=n.value.trim();return (window.msgKonu||'Portfolyo sitesinden mesaj')+(ad?' - '+ad:'')}
+function upd(){cn.textContent=t.value.length+'/1000';cn.classList.toggle('lim',t.value.length>900);t.style.height='auto';t.style.height=Math.min(t.scrollHeight,180)+'px';sub.textContent='Konu: '+konu();if(e.textContent&&t.value.trim().length>=5)e.textContent='';ls(function(){if(t.value||n.value)localStorage.setItem(KEY,JSON.stringify({n:n.value,m:t.value}));else localStorage.removeItem(KEY)})}
+t.addEventListener('input',upd);n.addEventListener('input',upd);
+function ac(){e.textContent='';okp.hidden=true;mb.hidden=false;ls(function(){var k=JSON.parse(localStorage.getItem(KEY)||'null');if(k){if(!n.value)n.value=k.n||'';if(!t.value)t.value=k.m||''}});upd();d.showModal();(n.value?t:n).focus()}
+function kapat(){if(!d.open)return;if(red){d.close();return}d.classList.add('cik');setTimeout(function(){d.classList.remove('cik');d.close()},280)}
+d.addEventListener('cancel',function(ev){ev.preventDefault();kapat()});
+d.addEventListener('click',function(ev){if(ev.target===d)kapat()});
 var hb=document.querySelector('.profile .btn.fill');if(hb)hb.addEventListener('click',function(ev){ev.preventDefault();ac()});
-document.getElementById('msc').addEventListener('click',function(){d.close()});
-document.getElementById('mso').addEventListener('click',function(){var m=t.value.trim();if(m.length<5){e.textContent='Lütfen kısa bir mesaj yaz.';t.focus();return}
-var ad=n.value.trim();location.href='mailto:muhammetgolpinar@gmail.com?subject='+encodeURIComponent((window.msgKonu||'Portfolyo sitesinden mesaj')+(ad?' - '+ad:''))+'&body='+encodeURIComponent(m+(ad?'\n\n'+ad:''));d.close();t.value='';toast('E-posta uygulaması açılıyor')});
+document.getElementById('msc').addEventListener('click',kapat);document.getElementById('msx').addEventListener('click',kapat);
+function gecerli(){if(t.value.trim().length<5){e.textContent='Lütfen en az birkaç kelimelik bir mesaj yaz.';d.classList.remove('sal');void d.offsetWidth;d.classList.add('sal');t.focus();return false}return true}
+function govde(){var ad=n.value.trim();return t.value.trim()+(ad?'\n\n'+ad:'')}
+document.getElementById('mkp').addEventListener('click',function(){if(!gecerli())return;var m=govde();function ok(){toast('Mesaj kopyalandı')}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(m).then(ok,function(){t.select();toast('Metni seçip kopyalayabilirsin')});else{t.select();try{document.execCommand('copy');ok()}catch(x){toast('Metni seçip kopyalayabilirsin')}}});
+function gonder(){if(!gecerli())return;try{navigator.vibrate&&navigator.vibrate(15)}catch(x){}
+location.href='mailto:'+MAIL+'?subject='+encodeURIComponent(konu())+'&body='+encodeURIComponent(govde());
+ls(function(){localStorage.removeItem(KEY)});mb.hidden=true;okp.hidden=false;
+setTimeout(function(){t.value='';upd();kapat()},red?600:1500)}
+document.getElementById('mso').addEventListener('click',gonder);
+t.addEventListener('keydown',function(ev){if(ev.key=='Enter'&&(ev.ctrlKey||ev.metaKey)){ev.preventDefault();gonder()}});
+var sy=null,hd2=d.querySelector('.mh');hd2.addEventListener('touchstart',function(ev){sy=ev.touches[0].clientY},{passive:true});
+hd2.addEventListener('touchmove',function(ev){if(sy==null)return;var dy=ev.touches[0].clientY-sy;if(dy>0){d.style.transform='translateY('+dy+'px)';d.style.opacity=Math.max(.3,1-dy/300)}},{passive:true});
+hd2.addEventListener('touchend',function(ev){if(sy==null)return;var dy=ev.changedTouches[0].clientY-sy;sy=null;d.style.transform='';d.style.opacity='';if(dy>90)kapat()});
+window.msgUpd=upd;
 document.addEventListener('keydown',function(ev){if(ev.key.toLowerCase()!='m'||ev.ctrlKey||ev.metaKey||ev.altKey)return;var x=ev.target,g=(x.tagName||'').toLowerCase();if(g=='input'||g=='textarea'||g=='select'||document.querySelector('dialog[open]'))return;ev.preventDefault();ac()});
 var h=document.querySelector('.hint');if(h)h.innerHTML+=' · <span class="kbd">M</span> mesaj yaz'})();
 
@@ -764,8 +828,8 @@ hd.addEventListener('touchend',function(e){if(sy==null)return;var d=e.changedTou
 try{hd.showModal();document.getElementById('hosok').focus()}catch(e){}
 var T=[['Staj teklifi','Staj teklifi','Merhaba Muhammet, ekibimizde staj fırsatı için seninle görüşmek isteriz. Uygun olduğun bir zamanı paylaşır mısın?'],['İş birliği','İş birliği','Merhaba Muhammet, bir proje için iş birliği yapmak istiyorum. Detayları konuşabilir miyiz?'],['Soru','Soru','Merhaba Muhammet, projelerin hakkında bir sorum var: '],['Tanışalım','Tanışma','Merhaba Muhammet, profilini inceledim ve tanışmak isterim.']];
 var sb=document.getElementById('sab'),ta=document.getElementById('msm'),dg=document.getElementById('msg');
-T.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='bt';b.textContent=t[0];b.addEventListener('click',function(){ta.value=t[2];window.msgKonu=t[1]+' - Portfolyo sitesinden mesaj';ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)});sb.appendChild(b)});
-dg.addEventListener('close',function(){window.msgKonu=null});
+var IC=['💼','🤝','❓','👋'];T.forEach(function(t,i){var b=document.createElement('button');b.type='button';b.className='bt';b.setAttribute('aria-pressed','false');b.textContent=IC[i]+' '+t[0];b.addEventListener('click',function(){sb.querySelectorAll('.bt').forEach(function(x){x.setAttribute('aria-pressed',x===b)});ta.value=t[2];window.msgKonu=t[1]+' - Portfolyo sitesinden mesaj';if(window.msgUpd)msgUpd();ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)});sb.appendChild(b)});
+dg.addEventListener('close',function(){window.msgKonu=null;sb.querySelectorAll('.bt').forEach(function(x){x.setAttribute('aria-pressed','false')})});
 })();
 </script>
 </body>
