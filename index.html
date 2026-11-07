@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<script>try{var t=localStorage.getItem('tema');if(!t&&matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script>try{var t=localStorage.getItem('tema');if(!t&&matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t;var a=localStorage.getItem('ac'),f=localStorage.getItem('fs'),o=localStorage.getItem('mo'),h=localStorage.getItem('hc');if(o)document.documentElement.dataset.mo=o;if(h)document.documentElement.dataset.hc=h;if(a)document.documentElement.dataset.ac=a;if(f)document.documentElement.style.setProperty('--fs',f)}catch(e){}</script>
 <meta name="theme-color" content="#0b1226">
 <meta name="description" content="Muhammet Gölpınar, Bilişim Teknolojileri öğrencisi. Deneyim, eğitim, sertifikalar ve projeler.">
 <meta property="og:type" content="website"><meta property="og:title" content="Muhammet GÖLPINAR - Bilişim Teknolojileri Öğrencisi"><meta property="og:description" content="Deneyim, eğitim, sertifikalar ve projeler."><meta property="og:url" content="https://muhammetgolpinar.github.io"><meta property="og:image" content="https://muhammetgolpinar.github.io/profil.jpg"><meta name="twitter:card" content="summary">
@@ -319,15 +319,93 @@ input#sert-ara{display:none}
 .sosyal{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
 .sosyal a{display:inline-block;padding:5px 14px;border:1px solid var(--line);border-radius:999px;background:var(--tagbg);color:var(--accent-d);font-weight:800;font-size:.85rem;text-decoration:none;transition:background .2s,color .2s}
 .sosyal a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+:root{--fs:1}
+html{font-size:calc(100%*var(--fs))}
+body{font-size:calc(16px*var(--fs))}
+:root[data-ac=turkuaz]{--accent:#0b7f86;--accent-d:#0a6a70;--soft:#d9f1f0;--hero:#0e5a60;--glow:rgba(60,215,205,.42)}
+:root[data-theme=dark][data-ac=turkuaz]{--accent:#22bdb8;--accent-d:#6fe0da;--soft:#0f2d2e;--hero:#0a4349}
+:root[data-ac=mor]{--accent:#7c3aed;--accent-d:#6d28d9;--soft:#ede9fe;--hero:#4c2a8a;--glow:rgba(167,139,250,.45)}
+:root[data-theme=dark][data-ac=mor]{--accent:#a78bfa;--accent-d:#c4b5fd;--soft:#261a4d;--hero:#3a2070}
+:root[data-ac=yesil]{--accent:#15803d;--accent-d:#166534;--soft:#dcfce7;--hero:#14532d;--glow:rgba(74,222,128,.35)}
+:root[data-theme=dark][data-ac=yesil]{--accent:#34d399;--accent-d:#86efac;--soft:#0f2f20;--hero:#0f3d22}
+:root[data-ac=turuncu]{--accent:#c2410c;--accent-d:#9a3412;--soft:#ffedd5;--hero:#8a3412;--glow:rgba(251,146,60,.4)}
+:root[data-theme=dark][data-ac=turuncu]{--accent:#fb923c;--accent-d:#fdba74;--soft:#3a1d0c;--hero:#7c2d12}
+@media screen{
+.card.profile{background:radial-gradient(120% 140% at 100% 0%,var(--glow,rgba(110,150,255,.5)),transparent 55%),var(--hero)}
+.profile::after{background:radial-gradient(closest-side,var(--glow,rgba(91,115,255,.55)),transparent)}
+.dtools{margin-top:auto;padding:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.dt{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:700;font-size:.88rem;color:var(--muted)}
+.sw,.fz{display:flex;gap:8px}
+.sw button{width:26px;height:26px;border-radius:50%;border:2px solid var(--card);box-shadow:0 0 0 1px var(--line);cursor:pointer;padding:0}
+.sw button[aria-pressed=true]{box-shadow:0 0 0 2px var(--ink)}
+.fz button,.dcopy{border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:10px;font:inherit;font-weight:800;cursor:pointer}
+.fz button{min-width:38px;height:32px}
+.dcopy{padding:10px;font-size:.9rem}
+.dcopy:hover,.fz button:hover{background:var(--line)}
+.bar .in{gap:8px}
+.bar b{font-size:.95rem}
+.clk{padding:0 10px}
+}
+@media screen and (max-width:430px){
+.bar b{font-size:.88rem}
+.bar b::before{display:none}
+.clk::before{display:none}
+.clk{padding:0 9px;font-size:.82rem}
+.bar .in{gap:6px;padding:0 10px}
+}
+
+@media screen{
+.bulut{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.bulut:empty{display:none}
+.bt{border:1px solid var(--line);background:var(--tagbg);color:var(--accent-d);border-radius:999px;padding:3px 12px;font:inherit;font-size:.82rem;font-weight:800;cursor:pointer;transition:background .2s,color .2s}
+.bt:hover,.bt[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+.bt.rnd{border-style:dashed;color:var(--ink)}
+}
+@media print{.bulut{display:none!important}}
+
+:root[data-hc=on]{--muted:var(--ink);--line:color-mix(in srgb,var(--ink) 40%,transparent)}
+:root[data-mo=off] *,:root[data-mo=off] *::before,:root[data-mo=off] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+:root[data-mo=off] .rv{opacity:1!important;transform:none!important}
+@media screen{
+.drawer nav{flex:1 1 auto;min-height:0}
+.dtools{flex:none;max-height:65%;overflow-y:auto;gap:8px}
+.ayar{border:1px solid var(--line);border-radius:12px;background:var(--tagbg)}
+.ayar summary{list-style:none;cursor:pointer;padding:10px 12px;font-weight:800;display:flex;justify-content:space-between;align-items:center}
+.ayar summary::-webkit-details-marker{display:none}
+.ayar summary::after{content:"▾";color:var(--muted);transition:transform .2s}
+.ayar[open] summary::after{transform:rotate(180deg)}
+.ap{display:flex;flex-direction:column;gap:12px;padding:4px 12px 12px}
+.seg{display:flex;gap:4px}
+.seg button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:5px 10px;font:inherit;font-size:.8rem;font-weight:800;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+}
+
+@media screen{
+.profile .avatar{border:4px solid #fff;box-shadow:0 0 0 5px rgba(255,255,255,.22),0 14px 32px -8px rgba(0,0,0,.5)}
+}
+
+@media screen{
+.profile .stats a small{display:block;margin-top:2px;font-size:.7rem;font-weight:600;line-height:1.3;opacity:.8}
+}
+
+@media screen{
+.selam{grid-column:1/-1;grid-row:1;margin:0;position:relative;z-index:1;color:#c9d2ff;font-weight:700;font-size:.95rem}
+.sab{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+}
+@media screen and (max-width:720px){
+.profile .avatar,.profile .info h1{grid-row:2}
+}
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div>
 <div class="bar"><div class="in"><button class="mbtn" id="mnu" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button><b>Muhammet GÖLPINAR</b><span class="clk" id="saat" title="Yerel saat (İstanbul)"></span><button class="mode" id="mode" type="button"></button></div></div>
-<aside class="drawer" id="drawer" aria-label="Menü" inert><div class="dh"><span>Menü</span><button class="mbtn" id="mnc" type="button" aria-label="Menüyü kapat"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button></div><div class="gs"><input id="gara" type="search" placeholder="Sitede ara" aria-label="Sitede ara" autocomplete="off"></div><div class="gsn" id="gsonuc" aria-live="polite" hidden></div><nav><a href="#hakkinda">Hakkında</a><a href="#deneyim">Deneyim</a><a href="#one-cikanlar">Öne çıkanlar</a><a href="#egitim">Eğitim</a><a href="#sertifikalar">Sertifikalar</a><a href="#basarilar">Başarılar</a><a href="#beceriler">Beceriler</a><a href="#iletisim">İletişim</a></nav></aside><div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Menü" inert><div class="dh"><span>Menü</span><button class="mbtn" id="mnc" type="button" aria-label="Menüyü kapat"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button></div><div class="gs"><input id="gara" type="search" placeholder="Sitede ara" aria-label="Sitede ara" autocomplete="off"></div><div class="gsn" id="gsonuc" aria-live="polite" hidden></div><nav><a href="#hakkinda">Hakkında</a><a href="#deneyim">Deneyim</a><a href="#one-cikanlar">Öne çıkanlar</a><a href="#egitim">Eğitim</a><a href="#sertifikalar">Sertifikalar</a><a href="#basarilar">Başarılar</a><a href="#beceriler">Beceriler</a><a href="#iletisim">İletişim</a></nav><div class="dtools" id="dtools"><details class="ayar"><summary>⚙️ Ayarlar</summary><div class="ap"><div class="dt"><span>Tema</span><div class="seg"><button type="button" data-th="light">Açık</button><button type="button" data-th="dark">Koyu</button><button type="button" data-th="auto">Sistem</button></div></div><div class="dt"><span>Vurgu rengi</span><div class="sw"><button type="button" data-ac="mavi" style="background:#2f4bff" aria-label="Mavi"></button><button type="button" data-ac="turkuaz" style="background:#0b7f86" aria-label="Turkuaz"></button><button type="button" data-ac="mor" style="background:#7c3aed" aria-label="Mor"></button><button type="button" data-ac="yesil" style="background:#15803d" aria-label="Yeşil"></button><button type="button" data-ac="turuncu" style="background:#c2410c" aria-label="Turuncu"></button></div></div><div class="dt"><span>Yazı boyutu</span><div class="fz"><button type="button" data-fs="-" aria-label="Yazıyı küçült">A−</button><button type="button" data-fs="0" aria-label="Varsayılan boyut">A</button><button type="button" data-fs="+" aria-label="Yazıyı büyüt">A+</button></div></div><div class="dt"><span>Animasyonlar</span><div class="seg"><button type="button" data-mo="on">Açık</button><button type="button" data-mo="off">Kapalı</button></div></div><div class="dt"><span>Yüksek kontrast</span><div class="seg"><button type="button" data-hc="off">Kapalı</button><button type="button" data-hc="on">Açık</button></div></div><button class="dcopy" id="ayr" type="button">Ayarları sıfırla</button></div></details><button class="dcopy" id="ozet" type="button">Profil özetini kopyala</button></div></aside><div class="scrim" id="scrim"></div>
 
 <main class="col">
 <section class="card profile">
+  <p class="selam" id="selam" aria-live="off"></p>
   <div class="banner"><svg viewBox="0 0 800 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="680" cy="30" r="110" fill="#fff" opacity=".12"/><circle cx="560" cy="150" r="70" fill="#fff" opacity=".1"/><circle cx="90" cy="20" r="60" fill="#fff" opacity=".1"/></svg></div>
   <div class="avatar">
     <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="var l=['profil.jpeg','profil.png','profil.webp','profil.JPG'],n=+this.dataset.n||0;if(n<l.length){this.dataset.n=n+1;this.src=l[n];return}this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial,Helvetica,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
@@ -370,13 +448,13 @@ input#sert-ara{display:none}
 <section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
 <section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="dist" id="sert-dag"></div>
 <input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select>
-<div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
+<div class="bulut" id="sert-bulut"></div><div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
 <section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
 <section class="card pad contact" id="iletisim"><h2>İletişim</h2><p>Bir proje, staj ya da iş birliği için bana yazabilirsin.</p><div class="btns"><a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">E-posta gönder</a><a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn'de bağlan</a><button class="btn out" id="kopya" type="button">E-postayı kopyala</button><button class="btn out" id="paylas" type="button">Siteyi paylaş</button></div></section>
 <footer>© 2026 Muhammet GÖLPINAR</footer>
 </main>
-<dialog class="pw" id="msg"><h3>Mesaj gönder</h3><p>E-posta uygulaman hazır bir taslakla açılır.</p><input type="text" id="msn" autocomplete="name" placeholder="Adın" aria-label="Adın"><textarea id="msm" rows="4" placeholder="Mesajın" aria-label="Mesajın"></textarea><div class="err" id="mse" role="alert"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn fill" id="mso" type="button">Gönder</button></div></dialog>
+<dialog class="pw" id="msg"><h3>Mesaj gönder</h3><p>E-posta uygulaman hazır bir taslakla açılır.</p><div class="sab" id="sab"></div><input type="text" id="msn" autocomplete="name" placeholder="Adın" aria-label="Adın"><textarea id="msm" rows="4" placeholder="Mesajın" aria-label="Mesajın"></textarea><div class="err" id="mse" role="alert"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn fill" id="mso" type="button">Gönder</button></div></dialog>
 <dialog class="pw" id="pw"><h3>PDF kaydet</h3><p>Devam etmek için şifreyi gir.</p><input type="password" id="pwi" autocomplete="off" aria-label="Şifre"><div class="err" id="pwe" role="alert"></div><div class="btns"><button class="btn out" id="pwc" type="button">İptal</button><button class="btn fill" id="pwo" type="button">Onayla</button></div></dialog>
 <button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
 
@@ -455,7 +533,7 @@ put('sert-say','('+veri.sertifikalar.length+')');sert();
 document.getElementById('sert-ara').addEventListener('input',function(){qq=this.value.trim().toLocaleLowerCase('tr');sert()});
 document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;qq='';document.getElementById('sert-ara').value='';sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
 document.getElementById('sert-more').addEventListener('click',function(){acik=!acik;sert();if(!acik)document.getElementById('sertifikalar').scrollIntoView()});
-put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</a>'}).join(''));
+put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar'],[70,'Proje','#one-cikanlar','MuGöl PORTAL’ın içinde']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+(a[3]?'<small>'+a[3]+'</small>':'')+'</a>'}).join(''));
 var root=document.documentElement,md=document.getElementById('mode');
 function ik(){var d=root.dataset.theme=='dark';md.textContent=d?'☀️':'🌙';md.setAttribute('aria-label',d?'Açık temaya geç':'Koyu temaya geç')}
 ik();md.addEventListener('click',function(){var t=root.dataset.theme=='dark'?'light':'dark';root.dataset.theme=t;try{localStorage.setItem('tema',t)}catch(e){}ik()});
@@ -498,7 +576,7 @@ var els=document.querySelectorAll('main .card.pad,main .card.profile .info,#stat
 if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('js-rv');
 var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.04,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('main .card.pad').forEach(function(x){x.classList.add('rv');ro.observe(x)})}
-var f=document.querySelector('footer');if(f){var h=document.createElement('p');h.className='hint';h.innerHTML='Kısayollar: <span class="kbd">/</span> ara · <span class="kbd">D</span> tema · <span class="kbd">T</span> başa dön';f.appendChild(h)}
+var f=document.querySelector('footer');if(f){var h=document.createElement('p');h.className='hint';h.innerHTML='Kısayollar: <span class="kbd">/</span> ara · <span class="kbd">Ctrl</span>+<span class="kbd">K</span> · <span class="kbd">D</span> tema · <span class="kbd">T</span> başa dön';f.appendChild(h)}
 document.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||e.altKey)return;var t=e.target,tg=(t.tagName||'').toLowerCase();if(tg=='input'||tg=='textarea'||t.isContentEditable||document.querySelector('dialog[open]'))return;
 var k=e.key.toLowerCase();
 if(k=='/'){e.preventDefault();if(window.menuAc)window.menuAc(1)}
@@ -516,7 +594,7 @@ function ac(){e.textContent='';d.showModal();(n.value?t:n).focus()}
 var hb=document.querySelector('.profile .btn.fill');if(hb)hb.addEventListener('click',function(ev){ev.preventDefault();ac()});
 document.getElementById('msc').addEventListener('click',function(){d.close()});
 document.getElementById('mso').addEventListener('click',function(){var m=t.value.trim();if(m.length<5){e.textContent='Lütfen kısa bir mesaj yaz.';t.focus();return}
-var ad=n.value.trim();location.href='mailto:muhammetgolpinar@gmail.com?subject='+encodeURIComponent('Portfolyo sitesinden mesaj'+(ad?' - '+ad:''))+'&body='+encodeURIComponent(m+(ad?'\n\n'+ad:''));d.close();t.value='';toast('E-posta uygulaması açılıyor')});
+var ad=n.value.trim();location.href='mailto:muhammetgolpinar@gmail.com?subject='+encodeURIComponent((window.msgKonu||'Portfolyo sitesinden mesaj')+(ad?' - '+ad:''))+'&body='+encodeURIComponent(m+(ad?'\n\n'+ad:''));d.close();t.value='';toast('E-posta uygulaması açılıyor')});
 document.addEventListener('keydown',function(ev){if(ev.key.toLowerCase()!='m'||ev.ctrlKey||ev.metaKey||ev.altKey)return;var x=ev.target,g=(x.tagName||'').toLowerCase();if(g=='input'||g=='textarea'||g=='select'||document.querySelector('dialog[open]'))return;ev.preventDefault();ac()});
 var h=document.querySelector('.hint');if(h)h.innerHTML+=' · <span class="kbd">M</span> mesaj yaz'})();
 
@@ -542,6 +620,61 @@ if(!r.length){var p=document.createElement('p');p.textContent='Sonuç bulunamad�
 r.forEach(function(x){var b=document.createElement('button'),t=document.createElement('b'),m=document.createElement('small');b.type='button';t.textContent=x.t;m.textContent=x.s;b.appendChild(t);b.appendChild(m);b.addEventListener('click',function(){git(x)});o.appendChild(b)})}
 q.addEventListener('input',function(){goster(q.value)});
 q.addEventListener('keydown',function(e){if(e.key=='Enter'){var b=o.querySelector('button');if(b)b.click()}});
+})();
+
+(function(){
+var r=document.documentElement,sv=function(k,v){try{localStorage.setItem(k,v)}catch(e){}};
+var sb=document.querySelectorAll('#dtools [data-ac]');
+function mark(){var a=r.dataset.ac||'mavi';sb.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ac==a)})}
+sb.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.ac=='mavi')delete r.dataset.ac;else r.dataset.ac=b.dataset.ac;sv('ac',b.dataset.ac=='mavi'?'':b.dataset.ac);mark();toast('Renk: '+b.getAttribute('aria-label'))})});mark();
+var St=[.9,1,1.12,1.25];
+document.querySelectorAll('#dtools [data-fs]').forEach(function(b){b.addEventListener('click',function(){var c=parseFloat(r.style.getPropertyValue('--fs'))||1,i=St.indexOf(c);if(i<0)i=1;i=b.dataset.fs=='0'?1:Math.max(0,Math.min(3,i+(b.dataset.fs=='+'?1:-1)));r.style.setProperty('--fs',St[i]);sv('fs',St[i]);toast('Yazı boyutu: %'+Math.round(St[i]*100));if(window.kisalt)kisalt()})});
+document.getElementById('ozet').addEventListener('click',function(){
+var t='Muhammet GÖLPINAR – Bilişim Teknolojileri Öğrencisi. Arçelik Türkiye’de Bilgi İşlem Stajyeri; MuGöl PORTAL’ın kurucusu ve geliştiricisi (web sitesi ve Google Play Store uygulaması). '+veri.sertifikalar.length+' sertifika. İletişim: muhammetgolpinar@gmail.com · https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379';
+try{navigator.clipboard.writeText(t).then(function(){toast('Özet kopyalandı')},function(){toast('Kopyalanamadı')})}catch(e){toast('Kopyalanamadı')}});
+document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=='k'){e.preventDefault();if(window.menuAc)window.menuAc(1)}});
+})();
+
+(function(){
+var inp=document.getElementById('sert-ara'),bl=document.getElementById('sert-bulut');
+var m={};veri.sertifikalar.forEach(function(c){c[3].forEach(function(t){m[t]=(m[t]||0)+1})});
+var ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]}).slice(0,10);
+function mk(){bl.querySelectorAll('.bt[data-t]').forEach(function(b){b.setAttribute('aria-pressed',qq==b.dataset.t.toLocaleLowerCase('tr'))})}
+function filt(v){fi=0;acik=false;var k=v.toLocaleLowerCase('tr');if(qq==k){qq='';inp.value=''}else{qq=k;inp.value=v}sert();mk()}
+ks.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='bt';b.dataset.t=t;b.textContent=t+' ('+m[t]+')';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){filt(t)});bl.appendChild(b)});
+var r=document.createElement('button');r.type='button';r.className='bt rnd';r.textContent='🎲 Rastgele sertifika';
+r.addEventListener('click',function(){var c=veri.sertifikalar[Math.floor(Math.random()*veri.sertifikalar.length)];fi=0;acik=true;qq=c[0].toLocaleLowerCase('tr');inp.value=c[0];sert();mk();toast(c[0]);document.getElementById('sertifika-list').scrollIntoView({block:'center',behavior:'smooth'})});
+bl.insertBefore(r,bl.firstChild);
+['sertifika-filter','sert-dag'].forEach(function(i){document.getElementById(i).addEventListener('click',function(){setTimeout(mk,0)})});
+var x0=0,y0=0,ed=false,dr=document.getElementById('drawer');
+document.addEventListener('touchstart',function(e){var t=e.touches[0];x0=t.clientX;y0=t.clientY;ed=x0<28},{passive:true});
+document.addEventListener('touchend',function(e){var t=e.changedTouches[0],dx=t.clientX-x0,dy=Math.abs(t.clientY-y0);if(dy>50)return;
+if(dr.classList.contains('open')){if(dx<-60&&window.menuKapat)window.menuKapat(1)}else if(ed&&dx>60&&window.menuAc)window.menuAc()},{passive:true});
+})();
+
+(function(){
+var r=document.documentElement,sv=function(k,v){try{localStorage.setItem(k,v)}catch(e){}},rm=function(k){try{localStorage.removeItem(k)}catch(e){}},gt=function(k){try{return localStorage.getItem(k)}catch(e){return null}};
+var q=function(a){return document.querySelectorAll('#dtools '+a)};
+function pr(a,f){q(a).forEach(function(b){b.setAttribute('aria-pressed',f(b))})}
+function mark(){pr('[data-th]',function(b){return b.dataset.th==(gt('tema')||'auto')});pr('[data-mo]',function(b){return b.dataset.mo==(r.dataset.mo||'on')});pr('[data-hc]',function(b){return b.dataset.hc==(r.dataset.hc||'off')})}
+function mq(){return window.matchMedia&&matchMedia('(prefers-color-scheme:dark)').matches}
+function sis(){if(mq())r.dataset.theme='dark';else delete r.dataset.theme}
+q('[data-th]').forEach(function(b){b.addEventListener('click',function(){var v=b.dataset.th;if(v=='auto'){rm('tema');sis()}else{r.dataset.theme=v;sv('tema',v)}if(window.ik)ik();mark()})});
+q('[data-mo]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.mo=='off'){r.dataset.mo='off';sv('mo','off')}else{delete r.dataset.mo;rm('mo')}mark()})});
+q('[data-hc]').forEach(function(b){b.addEventListener('click',function(){if(b.dataset.hc=='on'){r.dataset.hc='on';sv('hc','on')}else{delete r.dataset.hc;rm('hc')}mark()})});
+document.getElementById('mode').addEventListener('click',function(){setTimeout(mark,0)});
+document.getElementById('ayr').addEventListener('click',function(){['tema','ac','fs','mo','hc'].forEach(rm);delete r.dataset.ac;delete r.dataset.mo;delete r.dataset.hc;r.style.removeProperty('--fs');sis();if(window.ik)ik();q('[data-ac]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.ac=='mavi')});mark();toast('Ayarlar sıfırlandı')});
+mark();
+})();
+
+(function(){
+function selam(){var h=+new Date().toLocaleString('en-GB',{timeZone:'Europe/Istanbul',hour:'2-digit',hour12:false})%24,g=h>=5&&h<12?'Günaydın':h>=12&&h<18?'İyi günler':h>=18&&h<22?'İyi akşamlar':'İyi geceler';
+document.getElementById('selam').textContent=g+'! Ben Muhammet 👋'}
+try{selam();setInterval(selam,60000)}catch(e){document.getElementById('selam').textContent='Merhaba! Ben Muhammet 👋'}
+var T=[['Staj teklifi','Staj teklifi','Merhaba Muhammet, ekibimizde staj fırsatı için seninle görüşmek isteriz. Uygun olduğun bir zamanı paylaşır mısın?'],['İş birliği','İş birliği','Merhaba Muhammet, bir proje için iş birliği yapmak istiyorum. Detayları konuşabilir miyiz?'],['Soru','Soru','Merhaba Muhammet, projelerin hakkında bir sorum var: '],['Tanışalım','Tanışma','Merhaba Muhammet, profilini inceledim ve tanışmak isterim.']];
+var sb=document.getElementById('sab'),ta=document.getElementById('msm'),dg=document.getElementById('msg');
+T.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='bt';b.textContent=t[0];b.addEventListener('click',function(){ta.value=t[2];window.msgKonu=t[1]+' - Portfolyo sitesinden mesaj';ta.focus();ta.setSelectionRange(ta.value.length,ta.value.length)});sb.appendChild(b)});
+dg.addEventListener('close',function(){window.msgKonu=null});
 })();
 </script>
 </body>
