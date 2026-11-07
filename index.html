@@ -402,6 +402,77 @@ body{font-size:calc(16px*var(--fs))}
 @keyframes hg{from{opacity:0;transform:translateY(14px) scale(.96)}}
 }
 @media print{.hos{display:none!important}}
+
+.pw.hos{padding:0;border:0;border-radius:28px;overflow:hidden;width:min(360px,calc(100% - 40px));text-align:center;box-shadow:0 30px 70px -18px rgba(5,10,40,.65),0 0 0 1px rgba(255,255,255,.08)}
+.hos::backdrop{background:radial-gradient(circle at 50% 30%,rgba(47,75,255,.35),rgba(7,11,24,.85));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.hosh{position:relative;height:120px;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.18),transparent 45%),linear-gradient(135deg,#2338d5,#2f4bff 55%,#6d5bff)}
+.hosh::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.22) 1.2px,transparent 1.4px);background-size:16px 16px;opacity:.6}
+.hosa{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%);width:96px;height:96px;border-radius:50%;border:5px solid var(--card);background:linear-gradient(135deg,#0b1226,#1c2a6b);color:#fff;display:grid;place-items:center;font:800 1.8rem Sora,inherit;overflow:hidden;box-shadow:0 10px 24px -8px rgba(15,25,90,.6)}
+.hosa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hosc{padding:62px 26px 26px}
+.hosr{display:inline-block;padding:4px 12px;border-radius:999px;background:var(--soft);color:var(--accent-d);font-size:.74rem;font-weight:800;letter-spacing:.02em}
+.hos h3{margin:12px 0 6px;font-size:1.7rem;line-height:1.2;font-weight:800}
+.hos p{margin:0 auto;max-width:26em;font-size:.95rem;line-height:1.55;color:var(--muted)}
+.hos .btns{justify-content:center;margin-top:22px}
+.hos .btn.fill{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px 20px;font-size:1rem;background:linear-gradient(135deg,#2f4bff,#5b4dff);border-color:transparent;color:#fff;box-shadow:0 12px 24px -10px rgba(47,75,255,.8)}
+.hos .btn.fill span{transition:transform .2s}
+.hos .btn.fill:hover span{transform:translateX(4px)}
+.hos .btn:focus-visible{outline:3px solid var(--accent-d);outline-offset:3px}
+@media screen and (prefers-reduced-motion:no-preference){
+.hos[open]{animation:hosin .45s cubic-bezier(.2,.9,.3,1.2)}
+.hos[open]::backdrop{animation:hosfd .35s ease}
+.hos[open] .hosa{animation:hosp .5s .15s both cubic-bezier(.2,.9,.3,1.4)}
+@keyframes hosin{from{opacity:0;transform:translateY(24px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes hosfd{from{opacity:0}to{opacity:1}}
+@keyframes hosp{from{opacity:0;transform:translateX(-50%) scale(.6)}to{opacity:1;transform:translateX(-50%) scale(1)}}}
+
+.hosh{height:132px;overflow:visible;background-size:200% 200%}
+.hosh .o{position:absolute;border-radius:50%;filter:blur(18px);pointer-events:none}
+.o1{width:110px;height:110px;left:-20px;top:-30px;background:rgba(120,180,255,.55)}
+.o2{width:90px;height:90px;right:-10px;top:10px;background:rgba(190,120,255,.5)}
+.o3{width:60px;height:60px;left:38%;bottom:-20px;background:rgba(255,255,255,.25)}
+.hosav{position:absolute;left:50%;bottom:-52px;transform:translateX(-50%);width:104px;height:104px;z-index:1}
+.hosav::before{content:"";position:absolute;inset:-7px;border-radius:50%;background:conic-gradient(from 0deg,#2f4bff,#a78bfa,#38bdf8,#2f4bff)}
+.hosa{position:absolute;inset:0;left:0;bottom:auto;transform:none;width:auto;height:auto;border-width:5px}
+.hosw{position:absolute;right:-8px;bottom:-2px;width:38px;height:38px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:1.3rem;box-shadow:0 6px 14px -4px rgba(15,25,90,.5);transform-origin:70% 70%}
+.hosc{padding:72px 26px 26px}
+.hosr{display:inline-flex;align-items:center;gap:7px}
+.hosr b{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6)}
+.hos h3{font-size:1.9rem;background:linear-gradient(135deg,var(--ink) 30%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hosch{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
+.hosch span{padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--tagbg);font-size:.78rem;font-weight:700;color:var(--sub)}
+.hos .btn.fill{position:relative;overflow:hidden}
+.hos .btn.fill::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg)}
+@media screen and (prefers-reduced-motion:no-preference){
+.hosh{animation:hosg 8s ease-in-out infinite}
+.o1{animation:hosf 6s ease-in-out infinite}.o2{animation:hosf 7s -2s ease-in-out infinite reverse}.o3{animation:hosf 5s -1s ease-in-out infinite}
+.hosav::before{animation:hosr 6s linear infinite}
+.hos[open] .hosw{animation:hosh 2.2s .7s ease-in-out 2}
+.hosr b{animation:hosd 2s infinite}
+.hos[open] .s1,.hos[open] .s2,.hos[open] .s3,.hos[open] .s4,.hos[open] .s5{animation:hosu .5s both cubic-bezier(.2,.8,.3,1)}
+.hos[open] .s1{animation-delay:.2s}.hos[open] .s2{animation-delay:.28s}.hos[open] .s3{animation-delay:.36s}.hos[open] .s4{animation-delay:.44s}.hos[open] .s5{animation-delay:.52s}
+.hos .btn.fill::after{animation:hoss 3.4s 1.2s infinite}
+@keyframes hosg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+@keyframes hosf{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,10px)}}
+@keyframes hosr{to{transform:rotate(360deg)}}
+@keyframes hosh{0%,60%,100%{transform:rotate(0)}10%,30%,50%{transform:rotate(22deg)}20%,40%{transform:rotate(-14deg)}}
+@keyframes hosd{70%{box-shadow:0 0 0 7px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+@keyframes hosu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes hoss{0%,55%{left:-60%}100%{left:130%}}}
+
+.hosck{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;font-size:.78rem;font-weight:700;color:var(--muted);text-transform:capitalize}
+.hosl{width:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent))}
+.hosck::after{content:"";width:18px;height:2px;border-radius:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+.hosck{flex-wrap:nowrap}.hosck #hosck{order:0}
+.hos .btn.fill .rip{position:absolute;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:rgba(255,255,255,.5);pointer-events:none;animation:ripa .6s ease-out forwards}
+@keyframes ripa{to{transform:scale(28);opacity:0}}
+.hos.cik{animation:hosout .32s cubic-bezier(.5,0,.8,.4) forwards!important}
+.hos.cik::backdrop{animation:hosfo .32s ease forwards!important}
+@keyframes hosout{to{opacity:0;transform:translateY(30px) scale(.92)}}
+@keyframes hosfo{to{opacity:0}}
+.hosh .o{translate:var(--px,0) var(--py,0);transition:translate .3s ease-out}
+.hosav{translate:calc(var(--px,0px)*-.4) calc(var(--py,0px)*-.4)}
+.hos .btn.fill:active{transform:scale(.97)}
 </style>
 </head>
 <body>
@@ -459,7 +530,7 @@ body{font-size:calc(16px*var(--fs))}
 <section class="card pad contact" id="iletisim"><h2>İletişim</h2><p>Bir proje, staj ya da iş birliği için bana yazabilirsin.</p><div class="btns"><a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">E-posta gönder</a><a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn'de bağlan</a><button class="btn out" id="kopya" type="button">E-postayı kopyala</button><button class="btn out" id="paylas" type="button">Siteyi paylaş</button></div></section>
 <footer>© 2026 Muhammet GÖLPINAR</footer>
 </main>
-<dialog class="pw hos" id="hos" aria-labelledby="hosg"><h3 id="hosg">Merhaba! 👋</h3><p>Ben Muhammet. Portfolyoma hoş geldin.</p><div class="btns"><button class="btn fill" id="hosok" type="button">Siteye gir</button></div></dialog>
+<dialog class="pw hos" id="hos" aria-labelledby="hosg"><div class="hosh"><i class="o o1"></i><i class="o o2"></i><i class="o o3"></i><span class="hosav"><span class="hosa" aria-hidden="true">MG<img src="profil.jpg" alt="" onerror="this.remove()"></span><span class="hosw" aria-hidden="true">👋</span></span></div><div class="hosc"><span class="hosr s1"><b></b>Bilişim Teknolojileri Öğrencisi</span><h3 id="hosg" class="s2">Merhaba!</h3><p class="s3">Ben Muhammet. Portfolyoma hoş geldin; projelerimi ve deneyimlerimi keşfetmeye hazır mısın?</p><div class="hosch s4"><span>💻 Yazılım</span><span>🌐 Web</span><span>🤖 Yapay Zeka</span></div><div class="hosck s4"><span class="hosl"></span><span id="hosck"></span></div><div class="btns s5"><button class="btn fill" id="hosok" type="button">Siteye gir <span aria-hidden="true">→</span></button></div></div></dialog>
 <dialog class="pw" id="msg"><h3>Mesaj gönder</h3><p>E-posta uygulaman hazır bir taslakla açılır.</p><div class="sab" id="sab"></div><input type="text" id="msn" autocomplete="name" placeholder="Adın" aria-label="Adın"><textarea id="msm" rows="4" placeholder="Mesajın" aria-label="Mesajın"></textarea><div class="err" id="mse" role="alert"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn fill" id="mso" type="button">Gönder</button></div></dialog>
 <dialog class="pw" id="pw"><h3>PDF kaydet</h3><p>Devam etmek için şifreyi gir.</p><input type="password" id="pwi" autocomplete="off" aria-label="Şifre"><div class="err" id="pwe" role="alert"></div><div class="btns"><button class="btn out" id="pwc" type="button">İptal</button><button class="btn fill" id="pwo" type="button">Onayla</button></div></dialog>
 <button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
@@ -675,9 +746,21 @@ mark();
 
 (function(){
 function selam(){var h=+new Date().toLocaleString('en-GB',{timeZone:'Europe/Istanbul',hour:'2-digit',hour12:false})%24,g=h>=5&&h<12?'Günaydın':h>=12&&h<18?'İyi günler':h>=18&&h<22?'İyi akşamlar':'İyi geceler';
-document.getElementById('hosg').textContent=g+'! 👋'}
+document.getElementById('hosg').textContent=g+'!'}
 try{selam()}catch(e){}
-var hd=document.getElementById('hos');hd.addEventListener('click',function(e){if(e.target===hd)hd.close()});document.getElementById('hosok').addEventListener('click',function(){hd.close()});
+var hd=document.getElementById('hos'),ck=document.getElementById('hosck'),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo=='off',ti;
+function tk(){try{var d=new Date();ck.textContent=d.toLocaleDateString('tr-TR',{timeZone:'Europe/Istanbul',weekday:'long',day:'numeric',month:'long'})+' · '+d.toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}catch(e){}}
+tk();ti=setInterval(tk,15000);
+function kapat(){if(!hd.open)return;try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}if(reduce){hd.close();return}hd.classList.add('cik');setTimeout(function(){hd.classList.remove('cik');hd.close()},320)}
+hd.addEventListener('close',function(){clearInterval(ti)});
+hd.addEventListener('cancel',function(e){e.preventDefault();kapat()});
+hd.addEventListener('click',function(e){if(e.target===hd)kapat()});
+var ok=document.getElementById('hosok');
+ok.addEventListener('click',function(e){if(!reduce){var r=ok.getBoundingClientRect(),p=document.createElement('i');p.className='rip';p.style.left=(e.clientX-r.left||r.width/2)+'px';p.style.top=(e.clientY-r.top||r.height/2)+'px';ok.appendChild(p);setTimeout(function(){p.remove()},600)}kapat()});
+if(!reduce&&matchMedia('(pointer:fine)').matches){hd.addEventListener('pointermove',function(e){var r=hd.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;hd.style.setProperty('--px',(x*14)+'px');hd.style.setProperty('--py',(y*10)+'px')})}
+var sy=null;hd.addEventListener('touchstart',function(e){sy=e.touches[0].clientY},{passive:true});
+hd.addEventListener('touchmove',function(e){if(sy==null)return;var d=e.touches[0].clientY-sy;if(d>0){hd.style.transform='translateY('+d+'px)';hd.style.opacity=Math.max(.3,1-d/300)}},{passive:true});
+hd.addEventListener('touchend',function(e){if(sy==null)return;var d=e.changedTouches[0].clientY-sy;sy=null;if(d>90){hd.style.transform='';hd.style.opacity='';kapat()}else{hd.style.transition='transform .25s,opacity .25s';hd.style.transform='';hd.style.opacity='';setTimeout(function(){hd.style.transition=''},260)}});
 try{hd.showModal();document.getElementById('hosok').focus()}catch(e){}
 var T=[['Staj teklifi','Staj teklifi','Merhaba Muhammet, ekibimizde staj fırsatı için seninle görüşmek isteriz. Uygun olduğun bir zamanı paylaşır mısın?'],['İş birliği','İş birliği','Merhaba Muhammet, bir proje için iş birliği yapmak istiyorum. Detayları konuşabilir miyiz?'],['Soru','Soru','Merhaba Muhammet, projelerin hakkında bir sorum var: '],['Tanışalım','Tanışma','Merhaba Muhammet, profilini inceledim ve tanışmak isterim.']];
 var sb=document.getElementById('sab'),ta=document.getElementById('msm'),dg=document.getElementById('msg');
