@@ -28,7 +28,7 @@ h2{margin:0 0 14px;font-size:1.25rem;font-weight:800}
 .profile{position:relative}
 .banner{height:170px;background:linear-gradient(120deg,#6cc3fb,#2f9bec 60%,#1f7fd6);position:relative}
 .banner svg{position:absolute;inset:0;width:100%;height:100%}
-.avatar{position:absolute;left:24px;top:98px;width:136px;height:136px;border-radius:50%;border:5px solid var(--card);background:var(--soft);padding:0;overflow:hidden;cursor:pointer}
+.avatar{position:absolute;left:24px;top:98px;width:136px;height:136px;border-radius:50%;border:5px solid var(--card);background:var(--soft);padding:0;overflow:hidden}
 .avatar img,.avatar svg{width:100%;height:100%;object-fit:cover;display:block}
 .info{padding:80px 24px 22px}
 .info h1{margin:0;font-size:1.7rem;line-height:1.2;font-weight:800}
@@ -55,7 +55,6 @@ h2{margin:0 0 14px;font-size:1.25rem;font-weight:800}
 .tags span{border:1px solid var(--line);background:var(--tagbg);padding:2px 12px;border-radius:999px;font-size:.85rem;font-weight:700}
 .link{display:inline-block;margin-top:10px;color:var(--accent-d);font-weight:800;text-decoration:none}
 .link:hover{text-decoration:underline}
-input[type=file]{display:none}
 footer{text-align:center;color:var(--muted);font-size:.88rem;padding:8px}
 .mode{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--soft);cursor:pointer;font-size:1rem;line-height:1}
 .bar nav a.on{background:var(--soft);color:var(--accent-d)}
@@ -135,9 +134,9 @@ button.btn{font:inherit;font-weight:800;font-size:.95rem;background:transparent;
 <main class="col">
 <section class="card profile">
   <div class="banner"><svg viewBox="0 0 800 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="680" cy="30" r="110" fill="#fff" opacity=".12"/><circle cx="560" cy="150" r="70" fill="#fff" opacity=".1"/><circle cx="90" cy="20" r="60" fill="#fff" opacity=".1"/></svg></div>
-  <button class="avatar" id="avatar" aria-label="Profil fotoğrafı">
-    <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Nunito,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
-  </button>
+  <div class="avatar">
+    <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="var l=['profil.jpeg','profil.png','profil.webp','profil.JPG'],n=+this.dataset.n||0;if(n<l.length){this.dataset.n=n+1;this.src=l[n];return}this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Nunito,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
+  </div>
   <div class="info">
     <h1>Muhammet GÖLPINAR</h1>
     <p class="head">Bilişim Teknolojileri Öğrencisi</p>
@@ -180,7 +179,6 @@ button.btn{font:inherit;font-weight:800;font-size:.95rem;background:transparent;
 <footer>© 2026 Muhammet GÖLPINAR</footer>
 </main>
 <button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
-<input type="file" id="file" accept="image/*">
 
 <script>
 var veri={
@@ -269,11 +267,6 @@ document.getElementById('pdf').addEventListener('click',function(){window.print(
 var sv;window.addEventListener('beforeprint',function(){sv=[fi,acik];fi=0;acik=true;sert()});
 window.addEventListener('afterprint',function(){if(sv){fi=sv[0];acik=sv[1];sert()}});
 document.getElementById('kopya').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText('muhammetgolpinar@gmail.com').then(function(){b.textContent='Kopyalandı';setTimeout(function(){b.textContent='E-postayı kopyala'},1800)},function(){})}catch(e){}});
-var file=document.getElementById('file');
-document.getElementById('avatar').addEventListener('click',function(){file.click()});
-file.addEventListener('change',function(){var f=file.files[0];if(!f)return;var r=new FileReader();
-r.onload=function(e){var im=document.createElement('img');im.src=e.target.result;im.alt='Profil fotoğrafı';
-var o=document.querySelector('#avatar img,#avatar svg');if(o)o.replaceWith(im)};r.readAsDataURL(f)});
 </script>
 </body>
 </html>
