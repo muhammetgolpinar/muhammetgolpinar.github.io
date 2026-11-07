@@ -263,12 +263,68 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
 @keyframes aur{to{transform:translate(-60px,50px) scale(1.2)}}
 @media print{.rv{opacity:1!important;transform:none!important}.toast,.hint{display:none!important}}
 @media (prefers-reduced-motion:reduce){.profile::after{animation:none}.js-rv .rv{opacity:1;transform:none;transition:none}}
+
+:root{--hero:#1e3a7c}
+:root[data-theme=dark]{--hero:#172c62}
+@media screen{
+.card.profile{background:radial-gradient(120% 140% at 100% 0%,rgba(110,150,255,.5),transparent 55%),var(--hero)}
+.srt{appearance:auto;cursor:pointer}
+.pw textarea{width:100%;margin-top:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;resize:vertical}
+.pw input:focus,.pw textarea:focus,.srch:focus{outline:2px solid var(--accent);outline-offset:1px}
+.sayi{margin:-4px 0 10px;color:var(--muted);font-size:.85rem}
+}
+
+@media screen{
+.bar .in{gap:10px}
+.bar b{display:block;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin:0;font-size:1rem}
+.clk{flex:none;color:var(--muted);font-weight:700;font-size:.85rem;font-variant-numeric:tabular-nums}
+.clk:empty{display:none}
+.mbtn{flex:none;display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);cursor:pointer}
+.mbtn:hover{background:var(--line)}
+.scrim{position:fixed;inset:0;z-index:39;background:rgba(8,16,36,.5);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.scrim.on{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;bottom:0;left:0;z-index:40;width:min(290px,84vw);display:flex;flex-direction:column;background:var(--card);border-right:1px solid var(--line);box-shadow:20px 0 40px -20px rgba(0,0,0,.35);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);transform:translateX(-102%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.7,.2,1),visibility .28s}
+.drawer.open{transform:none;visibility:visible}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 20px;height:52px;border-bottom:1px solid var(--line);font-weight:800}
+.drawer nav{display:flex;flex-direction:column;gap:4px;padding:12px;overflow-y:auto}
+.drawer nav a{display:block;padding:12px 14px;border-radius:10px;text-decoration:none;color:var(--ink);font-weight:700;font-size:1rem}
+.drawer nav a:hover{background:var(--soft)}
+.drawer nav a.on{background:var(--ink);color:var(--card)}
+}
+@media print{.drawer,.scrim{display:none!important}}
+@media(prefers-reduced-motion:reduce){.drawer,.scrim{transition:none}}
+
+
+@media screen{
+.clk{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--soft);color:var(--ink);font-weight:800;font-size:.9rem;letter-spacing:.02em}
+.clk::before{content:"🕘";font-size:.85rem;filter:grayscale(.2)}
+}
+
+@media screen{
+input#sert-ara{display:none}
+.gs{padding:12px 12px 0}
+.gs input{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
+.gs input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.gsn{display:flex;flex-direction:column;gap:2px;padding:10px 12px;overflow-y:auto}
+.gsn[hidden]{display:none}
+.gsn button{display:block;width:100%;text-align:left;padding:10px 12px;border:0;border-radius:10px;background:none;color:var(--ink);font:inherit;cursor:pointer}
+.gsn button:hover,.gsn button:focus-visible{background:var(--soft)}
+.gsn b{display:block;font-weight:700;font-size:.95rem;line-height:1.35}
+.gsn small{color:var(--muted);font-size:.8rem}
+.gsn p{margin:6px 4px;color:var(--muted);font-size:.9rem}
+.bul{animation:bl 2s ease}
+@keyframes bl{0%,65%{box-shadow:0 0 0 3px var(--accent);background:var(--soft);border-radius:12px}}
+}
+
+.sosyal{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sosyal a{display:inline-block;padding:5px 14px;border:1px solid var(--line);border-radius:999px;background:var(--tagbg);color:var(--accent-d);font-weight:800;font-size:.85rem;text-decoration:none;transition:background .2s,color .2s}
+.sosyal a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
 </style>
 </head>
 <body>
 <div class="prog" id="prog"></div>
-<div class="bar"><div class="in"><b>M. GÖLPINAR</b>
-<nav><a href="#hakkinda">Hakkında</a><a href="#deneyim">Deneyim</a><a href="#one-cikanlar">Öne çıkanlar</a><a href="#egitim">Eğitim</a><a href="#sertifikalar">Sertifikalar</a><a href="#basarilar">Başarılar</a><a href="#beceriler">Beceriler</a><a href="#iletisim">İletişim</a></nav><button class="mode" id="mode" type="button"></button></div></div>
+<div class="bar"><div class="in"><button class="mbtn" id="mnu" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="drawer"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button><b>Muhammet GÖLPINAR</b><span class="clk" id="saat" title="Yerel saat (İstanbul)"></span><button class="mode" id="mode" type="button"></button></div></div>
+<aside class="drawer" id="drawer" aria-label="Menü" inert><div class="dh"><span>Menü</span><button class="mbtn" id="mnc" type="button" aria-label="Menüyü kapat"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button></div><div class="gs"><input id="gara" type="search" placeholder="Sitede ara" aria-label="Sitede ara" autocomplete="off"></div><div class="gsn" id="gsonuc" aria-live="polite" hidden></div><nav><a href="#hakkinda">Hakkında</a><a href="#deneyim">Deneyim</a><a href="#one-cikanlar">Öne çıkanlar</a><a href="#egitim">Eğitim</a><a href="#sertifikalar">Sertifikalar</a><a href="#basarilar">Başarılar</a><a href="#beceriler">Beceriler</a><a href="#iletisim">İletişim</a></nav></aside><div class="scrim" id="scrim"></div>
 
 <main class="col">
 <section class="card profile">
@@ -280,7 +336,6 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
     <h1><span>Muhammet</span> <span>GÖLPINAR</span></h1>
     <p class="head">Bilişim Teknolojileri Öğrencisi</p>
     <p class="now">Şu an: Arçelik Türkiye’de Bilgi İşlem Stajyeri</p>
-    <p class="loc">İstanbul, Türkiye · <span id="saat"></span><a href="mailto:muhammetgolpinar@gmail.com">İletişim bilgileri</a></p>
     <div class="btns">
       <a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">Mesaj gönder</a>
       <a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a>
@@ -303,22 +358,25 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
     <div class="logo"><img src="logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML='🌐'"></div>
     <div>
       <h3>MuGöl PORTAL</h3>
-      <div class="m">Kişisel proje · Yapay zeka destekli</div>
-      <p>Kullanıcıların farklı ihtiyaçlarına tek bir platform üzerinden ulaşmasını sağlayan çok yönlü bir web projesi. Haber, oyun, araçlar ve dijital içerikleri sade bir arayüzde bir araya getirir. Tasarım ve geliştirme süreci baştan sona yapay zekanın desteğiyle yürütülmüş olup platform sürekli güncellenerek gelişmeye devam etmektedir.</p>
-      <a class="link" href="https://mugol-portal.github.io" target="_blank" rel="noopener">Projeyi göster ↗</a>
+      <div class="m">Kişisel proje · Web sitesi ve Google Play Store uygulaması · Yapay zeka destekli</div>
+      <p>Kullanıcıların farklı ihtiyaçlarına tek bir platform üzerinden ulaşmasını sağlayan çok yönlü bir proje. Hem web sitesi hem de Google Play Store uygulaması olarak kullanılabilir. Haber, oyun, araçlar ve dijital içerikleri sade bir arayüzde bir araya getirir. Tasarım ve geliştirme süreci baştan sona yapay zekanın desteğiyle yürütülmüş olup platform sürekli güncellenerek gelişmeye devam etmektedir.</p>
+      <a class="link" href="https://mugol-portal.github.io" target="_blank" rel="noopener">Web sitesini aç ↗</a>
+      <a class="link" href="https://play.google.com/store/apps/details?id=com.mugol.portal2" target="_blank" rel="noopener" style="margin-left:16px">Play Store'da aç ↗</a>
+      <div class="sosyal" aria-label="MuGöl PORTAL sosyal medya"><a href="https://www.instagram.com/mugol_portal" target="_blank" rel="noopener">Instagram</a><a href="https://www.linkedin.com/company/mug%C3%B6l-portal/" target="_blank" rel="noopener">LinkedIn</a><a href="https://youtube.com/@mugolportal" target="_blank" rel="noopener">YouTube</a></div>
     </div>
   </div>
 </section>
 
 <section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
 <section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="dist" id="sert-dag"></div>
-<input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off">
+<input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select>
 <div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
 <section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
 <section class="card pad contact" id="iletisim"><h2>İletişim</h2><p>Bir proje, staj ya da iş birliği için bana yazabilirsin.</p><div class="btns"><a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">E-posta gönder</a><a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn'de bağlan</a><button class="btn out" id="kopya" type="button">E-postayı kopyala</button><button class="btn out" id="paylas" type="button">Siteyi paylaş</button></div></section>
 <footer>© 2026 Muhammet GÖLPINAR</footer>
 </main>
+<dialog class="pw" id="msg"><h3>Mesaj gönder</h3><p>E-posta uygulaman hazır bir taslakla açılır.</p><input type="text" id="msn" autocomplete="name" placeholder="Adın" aria-label="Adın"><textarea id="msm" rows="4" placeholder="Mesajın" aria-label="Mesajın"></textarea><div class="err" id="mse" role="alert"></div><div class="btns"><button class="btn out" id="msc" type="button">İptal</button><button class="btn fill" id="mso" type="button">Gönder</button></div></dialog>
 <dialog class="pw" id="pw"><h3>PDF kaydet</h3><p>Devam etmek için şifreyi gir.</p><input type="password" id="pwi" autocomplete="off" aria-label="Şifre"><div class="err" id="pwe" role="alert"></div><div class="btns"><button class="btn out" id="pwc" type="button">İptal</button><button class="btn fill" id="pwo" type="button">Onayla</button></div></dialog>
 <button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
 
@@ -377,7 +435,7 @@ function lg(src,fb,k){return '<div class="logo'+(k?' k':'')+'"><img src="'+src+'
 var deneyim=[
 {logo:'arcelik.png',fb:'💼',k:1,rol:'IT Intern / Bilgi İşlem Stajyeri',kurum:'Arçelik Türkiye · Stajyer',bas:[2026,9],yer:'Kadıköy, İstanbul, Türkiye · Ofiste'},
 {logo:'logo.png',fb:'🌐',kurum:'MuGöl PORTAL',roller:[
-{rol:'Google Play Store Yayıncısı',bas:[2026,10],acik:'MuGöl PORTAL ekosistemini Trusted Web Activity (TWA) mimarisiyle geliştirerek Google Play Store yayın prodüksiyon kanalında kullanıcılarla buluşturduk. ‘Dijital dünya, tek bir portalda’ sloganıyla web ve mobil platformlarda ölçeklenebilir dijital çözümler sunmaya devam ediyorum.'},
+{rol:'Google Play Store Yayıncısı',bas:[2026,10],acik:'MuGöl PORTAL hem web sitesi hem de Google Play Store uygulaması olarak yayında; ekosistemi Trusted Web Activity (TWA) mimarisiyle geliştirerek Google Play Store yayın prodüksiyon kanalında kullanıcılarla buluşturduk. ‘Dijital dünya, tek bir portalda’ sloganıyla web ve mobil platformlarda ölçeklenebilir dijital çözümler sunmaya devam ediyorum.'},
 {rol:'Google AdSense Entegrasyonu &amp; Reklam Yönetimi',bas:[2026,1],acik:'Ocak 2026 itibarıyla MuGöl PORTAL ekosistemine Google AdSense reklam altyapısını entegre ederek platformun dijital monetizasyon süreçlerini ve gelir modelini aktif hale getirdim; bu sayede projenin reklam yerleşimlerini optimize ederek sürdürülebilir bir yapı kazandırdım.'},
 {rol:'Kurucu &amp; Geliştirici',kurum:'Kendi işim',bas:[2025,10],acik:'MuGöl PORTAL projesini “Dijital dünya, tek bir portalda.” vizyonuyla 2 Ekim 2025 tarihinde GitHub üzerinde açık kaynaklı olarak yayınladım; bu doğrultuda modern web teknolojilerini ve Progressive Web App (PWA) altyapısını kullanarak kullanıcıların tarayıcı üzerinden hızlı, kesintisiz ve yerel bir uygulama deneyimi yaşamasını sağlayan dinamik bir ekosistem inşa ettim.'}]}
 ];
@@ -389,19 +447,19 @@ var logolar={'BTK Akademi':'btk.png','Bilgeİş':'bilgeis.png','Enstitü İstanb
 function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
 var flt=[['Tümü',function(){return 1}],['Yapay Zeka',function(c){return c[3].indexOf('Yapay Zeka')>-1}],['Web Geliştirme',function(c){return c[3].indexOf('Web Geliştirme')>-1}],['BTK Akademi',function(c){return c[1]=='BTK Akademi'}]],fi=0,acik=false,LIM=6;
 var qq='';function ara(c){return !qq||c.join(' ').toLocaleLowerCase('tr').indexOf(qq)>-1}
-function sert(){var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara),m=document.getElementById('sert-more');
+function sert(){var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf),m=document.getElementById('sert-more');
 put('sertifika-list',l.length?(acik||qq?l:l.slice(0,LIM)).map(rowS).join(''):'<p class="bos">Eşleşen sertifika bulunamadı.</p>');
 put('sertifika-filter',flt.map(function(x,i){return '<button class="chip'+(i==fi?' on':'')+'" type="button" data-i="'+i+'" aria-pressed="'+(i==fi)+'">'+x[0]+' ('+veri.sertifikalar.filter(x[1]).length+')</button>'}).join(''));
 m.hidden=!!qq||l.length<=LIM;m.textContent=acik?'Daha az göster':'Tümünü göster ('+l.length+')'}
 put('sert-say','('+veri.sertifikalar.length+')');sert();
 document.getElementById('sert-ara').addEventListener('input',function(){qq=this.value.trim().toLocaleLowerCase('tr');sert()});
-document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
+document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;qq='';document.getElementById('sert-ara').value='';sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
 document.getElementById('sert-more').addEventListener('click',function(){acik=!acik;sert();if(!acik)document.getElementById('sertifikalar').scrollIntoView()});
-put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar'],[veri.basarilar.length,'Onur ve ödül','#basarilar'],[veri.topluluklar.filter(function(t){return /Kulübü$/.test(t[0])}).length,'Kulüp','#egitim']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</a>'}).join(''));
+put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</a>'}).join(''));
 var root=document.documentElement,md=document.getElementById('mode');
 function ik(){var d=root.dataset.theme=='dark';md.textContent=d?'☀️':'🌙';md.setAttribute('aria-label',d?'Açık temaya geç':'Koyu temaya geç')}
 ik();md.addEventListener('click',function(){var t=root.dataset.theme=='dark'?'light':'dark';root.dataset.theme=t;try{localStorage.setItem('tema',t)}catch(e){}ik()});
-if('IntersectionObserver' in window){var nav=document.querySelector('.bar nav'),nv=nav.querySelectorAll('a'),io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;nv.forEach(function(a){var on=a.getAttribute('href')=='#'+e.target.id;a.classList.toggle('on',on);if(on)nav.scrollLeft+=a.getBoundingClientRect().left-nav.getBoundingClientRect().left-(nav.clientWidth-a.offsetWidth)/2})})},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('main section[id]').forEach(function(x){io.observe(x)})}
+if('IntersectionObserver' in window){var nav=document.querySelector('#drawer nav'),nv=nav.querySelectorAll('a'),io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;nv.forEach(function(a){var on=a.getAttribute('href')=='#'+e.target.id;a.classList.toggle('on',on);if(on)nav.scrollLeft+=a.getBoundingClientRect().left-nav.getBoundingClientRect().left-(nav.clientWidth-a.offsetWidth)/2})})},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('main section[id]').forEach(function(x){io.observe(x)})}
 put('basari-list',veri.basarilar.map(function(b){return '<div class="row'+(b[3]?' feat':'')+'"><div class="logo">'+(b[3]?'🏅':'🏆')+'</div><div><h3>'+b[0]+'</h3><div class="m">'+b[1]+'</div><p>'+b[2]+'</p></div></div>'}).join(''));
 put('beceri-list',veri.beceriler.map(function(b){return '<div class="row"><div class="logo">'+b[0]+'</div><div><h3>'+b[1]+'</h3><div class="tags">'+b[2].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div></div>'}).join(''));
 var bar=document.querySelector('.bar'),tp=document.getElementById('top'),pg=document.getElementById('prog');
@@ -423,8 +481,8 @@ document.getElementById('paylas').addEventListener('click',function(){var b=this
 function dag(){var m={};veri.sertifikalar.forEach(function(c){m[c[1]]=(m[c[1]]||0)+1});var k=Object.keys(m).sort(function(a,b){return m[b]-m[a]}),mx=m[k[0]];
 put('sert-dag',k.map(function(x){return '<button type="button" class="dg" data-k="'+x+'"><span class="dn">'+x+'</span><span class="db"><i style="width:'+(m[x]/mx*100)+'%"></i></span><b>'+m[x]+'</b></button>'}).join(''))}
 dag();
-document.getElementById('sert-dag').addEventListener('click',function(e){var b=e.target.closest('.dg');if(!b)return;var a=document.getElementById('sert-ara');a.value=b.dataset.k;qq=b.dataset.k.toLocaleLowerCase('tr');sert()});
-function saat(){var e=document.getElementById('saat');try{e.textContent='Yerel saat '+new Date().toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})+' · '}catch(x){}}
+document.getElementById('sert-dag').addEventListener('click',function(e){var b=e.target.closest('.dg');if(!b)return;var a=document.getElementById('sert-ara');var kk=b.dataset.k.toLocaleLowerCase('tr');if(qq==kk){qq='';a.value=''}else{qq=kk;a.value=b.dataset.k}sert()});
+function saat(){var e=document.getElementById('saat');try{e.textContent=new Date().toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}catch(x){}}
 saat();setInterval(saat,30000);
 (function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('#stats b').forEach(function(b){var n=+b.textContent,t0=null;b.textContent='0';function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/900);b.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)})})();
 function kisalt(){document.querySelectorAll('.rl p,#basarilar .row p').forEach(function(p){var o=p.nextElementSibling;if(o&&o.className=='dfb')o.remove();p.classList.remove('cl3','open');p.classList.add('cl3');if(p.scrollHeight<=p.clientHeight+1){p.classList.remove('cl3');return}
@@ -440,12 +498,50 @@ var els=document.querySelectorAll('main .card.pad,main .card.profile .info,#stat
 if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('js-rv');
 var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.04,rootMargin:'0px 0px -6% 0px'});
 document.querySelectorAll('main .card.pad').forEach(function(x){x.classList.add('rv');ro.observe(x)})}
-var f=document.querySelector('footer');if(f){var h=document.createElement('p');h.className='hint';h.innerHTML='Kısayollar: <span class="kbd">/</span> sertifika ara · <span class="kbd">D</span> tema · <span class="kbd">T</span> başa dön';f.appendChild(h)}
+var f=document.querySelector('footer');if(f){var h=document.createElement('p');h.className='hint';h.innerHTML='Kısayollar: <span class="kbd">/</span> ara · <span class="kbd">D</span> tema · <span class="kbd">T</span> başa dön';f.appendChild(h)}
 document.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||e.altKey)return;var t=e.target,tg=(t.tagName||'').toLowerCase();if(tg=='input'||tg=='textarea'||t.isContentEditable||document.querySelector('dialog[open]'))return;
 var k=e.key.toLowerCase();
-if(k=='/'){e.preventDefault();var a=document.getElementById('sert-ara');document.getElementById('sertifikalar').scrollIntoView();setTimeout(function(){a.focus()},300)}
+if(k=='/'){e.preventDefault();if(window.menuAc)window.menuAc(1)}
 else if(k=='d'){document.getElementById('mode').click();toast(document.documentElement.dataset.theme=='dark'?'Koyu tema':'Açık tema')}
 else if(k=='t'){window.scrollTo({top:0,behavior:'smooth'})}})
+})();
+
+var AYF=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],srm='o';
+function dsk(c){var p=String(c[2]).split(' ');return (+p[1]||0)*12+Math.max(0,AYF.indexOf(p[0]))}
+function srtf(a,b){return srm=='y'?dsk(b)-dsk(a):srm=='e'?dsk(a)-dsk(b):srm=='a'?a[0].localeCompare(b[0],'tr'):0}
+document.getElementById('sert-sirala').addEventListener('change',function(){srm=this.value;sert()});
+(function(){
+var d=document.getElementById('msg'),n=document.getElementById('msn'),t=document.getElementById('msm'),e=document.getElementById('mse');
+function ac(){e.textContent='';d.showModal();(n.value?t:n).focus()}
+var hb=document.querySelector('.profile .btn.fill');if(hb)hb.addEventListener('click',function(ev){ev.preventDefault();ac()});
+document.getElementById('msc').addEventListener('click',function(){d.close()});
+document.getElementById('mso').addEventListener('click',function(){var m=t.value.trim();if(m.length<5){e.textContent='Lütfen kısa bir mesaj yaz.';t.focus();return}
+var ad=n.value.trim();location.href='mailto:muhammetgolpinar@gmail.com?subject='+encodeURIComponent('Portfolyo sitesinden mesaj'+(ad?' - '+ad:''))+'&body='+encodeURIComponent(m+(ad?'\n\n'+ad:''));d.close();t.value='';toast('E-posta uygulaması açılıyor')});
+document.addEventListener('keydown',function(ev){if(ev.key.toLowerCase()!='m'||ev.ctrlKey||ev.metaKey||ev.altKey)return;var x=ev.target,g=(x.tagName||'').toLowerCase();if(g=='input'||g=='textarea'||g=='select'||document.querySelector('dialog[open]'))return;ev.preventDefault();ac()});
+var h=document.querySelector('.hint');if(h)h.innerHTML+=' · <span class="kbd">M</span> mesaj yaz'})();
+
+(function(){
+var d=document.getElementById('drawer'),sc=document.getElementById('scrim'),b=document.getElementById('mnu'),c=document.getElementById('mnc'),r=document.documentElement;
+function op(f){d.removeAttribute('inert');d.classList.add('open');sc.classList.add('on');b.setAttribute('aria-expanded','true');r.style.overflow='hidden';var a=f?document.getElementById('gara'):(d.querySelector('a.on')||d.querySelector('a'));if(a)a.focus()}
+function cl(f){d.classList.remove('open');sc.classList.remove('on');d.setAttribute('inert','');b.setAttribute('aria-expanded','false');r.style.overflow='';if(f)b.focus()}
+window.menuAc=op;window.menuKapat=cl;b.addEventListener('click',function(){op()});c.addEventListener('click',function(){cl(1)});sc.addEventListener('click',function(){cl(1)});
+d.addEventListener('click',function(e){if(e.target.closest('a'))cl(0)});
+document.addEventListener('keydown',function(e){if(e.key=='Escape'&&d.classList.contains('open'))cl(1)});
+})();
+
+(function(){
+var q=document.getElementById('gara'),o=document.getElementById('gsonuc'),nv=document.querySelector('#drawer nav');
+function ogeler(){var a=[];document.querySelectorAll('#deneyim .rl,#deneyim .row,#one-cikanlar .row,#egitim .row,#basarilar .row,#beceriler .row').forEach(function(el){if(el.classList.contains('row')&&el.querySelector('.rl'))return;var h=el.querySelector('h3'),h2=el.closest('section').querySelector('h2');a.push({t:h?h.textContent.trim():'',k:(el.textContent||'').toLocaleLowerCase('tr'),s:h2.childNodes[0].textContent.trim(),el:el})});
+veri.sertifikalar.forEach(function(c){a.push({t:c[0],k:c.join(' ').toLocaleLowerCase('tr'),s:'Sertifikalar',c:c})});return a}
+function git(it){if(window.menuKapat)window.menuKapat(0);q.value='';goster('');
+setTimeout(function(){var h;if(it.c){fi=0;acik=true;qq=it.c[0].toLocaleLowerCase('tr');document.getElementById('sert-ara').value=it.c[0];sert();h=document.getElementById('sertifikalar')}else h=it.el;
+h.scrollIntoView({block:it.c?'start':'center'});if(!it.c){h.classList.remove('bul');void h.offsetWidth;h.classList.add('bul')}},60)}
+function goster(v){v=v.trim().toLocaleLowerCase('tr');o.textContent='';if(!v){o.hidden=true;nv.hidden=false;return}
+nv.hidden=true;o.hidden=false;var r=ogeler().filter(function(x){return x.k.indexOf(v)>-1}).slice(0,12);
+if(!r.length){var p=document.createElement('p');p.textContent='Sonuç bulunamadı.';o.appendChild(p);return}
+r.forEach(function(x){var b=document.createElement('button'),t=document.createElement('b'),m=document.createElement('small');b.type='button';t.textContent=x.t;m.textContent=x.s;b.appendChild(t);b.appendChild(m);b.addEventListener('click',function(){git(x)});o.appendChild(b)})}
+q.addEventListener('input',function(){goster(q.value)});
+q.addEventListener('keydown',function(e){if(e.key=='Enter'){var b=o.querySelector('button');if(b)b.click()}});
 })();
 </script>
 </body>
