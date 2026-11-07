@@ -925,14 +925,6 @@ v.appendChild(a);v.appendChild(c);v.appendChild(r);w.appendChild(sr);w.appendChi
 return{a:a,r:r,c:c,ch:Array.from(txt)}}
 function finish(){yaz=false;tk()}
 var yenile=false;try{var nv=performance.getEntriesByType('navigation')[0];yenile=!!nv&&nv.type!=='navigate'}catch(e){}
-/* sesli okuma (yalnızca ilk açılışta) */
-if(!yenile&&'speechSynthesis' in window){
-var metin=(document.getElementById('hosg').textContent+' '+hd.querySelector('.s3').textContent).replace(/\s+/g,' ').trim(),basladi=false;
-function oku(){try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(metin);u.lang='tr-TR';u.rate=.95;var vs=speechSynthesis.getVoices().filter(function(v){return /^tr/i.test(v.lang)});if(vs[0])u.voice=vs[0];u.onstart=function(){basladi=true};speechSynthesis.speak(u)}catch(e){}}
-setTimeout(function(){if(!hd.open)return;oku();setTimeout(function(){if(basladi||!hd.open)return;var h=function(){hd.removeEventListener('pointerdown',h,true);if(hd.open&&!basladi)oku()};hd.addEventListener('pointerdown',h,true)},1200)},420);
-hd.addEventListener('close',function(){try{speechSynthesis.cancel()}catch(e){}});
-addEventListener('pagehide',function(){try{speechSynthesis.cancel()}catch(e){}})
-}
 if(reduce||yenile){finish();return}
 var q=[hd.querySelector('.hosr'),document.getElementById('hosg'),hd.querySelector('.s3')].map(prep).filter(Boolean);
 function run(k){
