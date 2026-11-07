@@ -1,835 +1,279 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammet Gölpınar - Portfolyo</title>
-    <!-- Fontlar ve İkonlar -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-dark: #e8f4fd;
-            --bg-surface: #d0eaf8;
-            --card-dark: rgba(255, 255, 255, 0.92);
-            --card-hover: rgba(240, 248, 255, 0.98);
-            --text-main: #0d2340;
-            --text-muted: #3a6080;
-            --text-dim: #7aaac8;
-            --neon-cyan: #0077b6;
-            --neon-cyan-soft: rgba(0, 119, 182, 0.10);
-            --neon-purple: #7b3fa0;
-            --neon-blue: #0096c7;
-            --grad-cyan: linear-gradient(135deg, #0077b6, #00b4d8);
-            --grad-header: linear-gradient(160deg, #cce7f5 0%, #dff1fb 50%, #cce7f5 100%);
-            --border-soft: rgba(0, 119, 182, 0.15);
-            --border-mid: rgba(0, 119, 182, 0.28);
-            --border-strong: rgba(0, 119, 182, 0.55);
-            --shadow-card: 0 4px 24px rgba(0, 80, 140, 0.10), 0 1px 0 rgba(255,255,255,0.8) inset;
-            --shadow-glow: 0 0 24px rgba(0, 119, 182, 0.12);
-            --radius: 18px;
-            --radius-sm: 10px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Nunito', sans-serif; }
-
-        html {
-            width: 100%;
-            background-color: #e8f4fd;
-        }
-
-        body {
-            width: 100%;
-            min-height: 100vh;
-            background-color: #e8f4fd;
-            background-image:
-                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0, 119, 182, 0.10) 0%, transparent 70%),
-                radial-gradient(ellipse 60% 50% at 90% 80%, rgba(0, 180, 216, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 50% 40% at 10% 60%, rgba(0, 150, 199, 0.06) 0%, transparent 55%);
-            background-attachment: fixed;
-            background-size: cover;
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.85;
-        }
-
-        /* ── MENU BUTONU ─────────────────────────────── */
-        .menu-btn {
-            position: fixed; top: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.90);
-            backdrop-filter: blur(12px);
-            color: var(--neon-cyan);
-            width: 46px; height: 46px;
-            border-radius: 13px;
-            border: 1px solid var(--border-mid);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 17px; z-index: 1000; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 80, 140, 0.15);
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .menu-btn:hover {
-            border-color: var(--border-strong);
-            box-shadow: 0 4px 20px rgba(0, 80, 140, 0.25);
-        }
-
-        /* ── SIDEBAR ─────────────────────────────────── */
-        .sidebar {
-            position: fixed; top: 0; right: -300px; width: 280px; height: 100vh;
-            background: rgba(220, 240, 252, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 1001; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 40px 32px;
-            border-left: 1px solid var(--border-mid);
-            box-shadow: -20px 0 60px rgba(0, 80, 140, 0.18);
-        }
-        .sidebar.active { right: 0; }
-
-        .sidebar ul { list-style: none; margin-top: 30px; }
-        .sidebar li { margin-bottom: 6px; }
-        .sidebar a {
-            color: var(--text-muted); text-decoration: none;
-            font-weight: 700; font-size: 14px;
-            display: flex; align-items: center; gap: 10px;
-            padding: 10px 14px; border-radius: 10px;
-            transition: all 0.25s;
-            border: 1px solid transparent;
-        }
-        .sidebar a:hover {
-            color: var(--neon-cyan);
-            background: var(--neon-cyan-soft);
-            border-color: var(--border-soft);
-            padding-left: 20px;
-        }
-
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.65); backdrop-filter: blur(3px); z-index: 999; display: none; }
-        .overlay.active { display: block; }
-
-        /* ── BANNER / HEADER ─────────────────────────── */
-        .banner {
-            padding: 90px 24px 80px;
-            text-align: center;
-            position: relative;
-            background: var(--grad-header);
-            border-bottom: 1px solid var(--border-soft);
-            overflow: hidden;
-            width: 100%;
-            min-height: 340px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .banner::before {
-            content: '';
-            position: absolute; inset: 0;
-            background:
-                radial-gradient(ellipse 60% 80% at 50% 0%, rgba(0,119,182,0.08) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 50% at 20% 100%, rgba(0,150,199,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 30% 40% at 80% 80%, rgba(0,96,199,0.06) 0%, transparent 55%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        /* Arka plan: yıldız/parçacık kanvası */
-        #banner-bg-canvas {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-        /* Geometrik dekor çizgileri */
-        .banner-geo {
-            position: absolute; inset: 0;
-            z-index: 0; pointer-events: none;
-            overflow: hidden;
-        }
-        .banner-geo svg {
-            position: absolute; inset: 0;
-            width: 100%; height: 100%;
-        }
-        /* Tüm banner içeriği z-index: 1 üzerinde */
-        .banner > *:not(#banner-bg-canvas):not(.banner-geo) {
-            position: relative;
-            z-index: 1;
-        }
-
-        .img-container {
-            width: 140px; height: 140px; margin: 0 auto 28px;
-            border-radius: 50%;
-            padding: 3px;
-            background: var(--grad-cyan);
-            box-shadow: 0 0 0 6px rgba(0,229,255,0.07), 0 0 40px rgba(0,229,255,0.2);
-            position: relative; z-index: 1;
-        }
-        .banner-img {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            border: 3px solid var(--bg-dark);
-            object-fit: cover;
-            display: block;
-        }
-
-        .banner h1 {
-            font-family: 'Nunito', sans-serif;
-            font-size: 34px; font-weight: 900;
-            letter-spacing: -0.5px;
-            line-height: 1.3;
-            padding: 4px 0;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #003f6b 20%, #0096c7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative; z-index: 1;
-        }
-
-        .banner-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--neon-cyan-soft);
-            border: 1px solid var(--border-mid);
-            border-radius: 100px;
-            padding: 9px 22px;
-            position: relative; z-index: 1;
-        }
-        .banner-badge span {
-            color: var(--neon-cyan); font-weight: 800;
-            letter-spacing: 2px; text-transform: uppercase; font-size: 11px;
-            line-height: 1.6;
-        }
-        .banner-badge-dot {
-            width: 6px; height: 6px; border-radius: 50%;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 6px var(--neon-cyan);
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* ── LAYOUT ──────────────────────────────────── */
-        main.container {
-            max-width: 720px;
-            width: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 36px 20px 80px;
-            display: block;
-            box-sizing: border-box;
-        }
-        .bento-column { display: flex; flex-direction: column; gap: 18px; width: 100%; }
-
-        /* Sayfa bölücü */
-        .page-group {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            width: 100%;
-            padding-top: 10px;
-        }
-        .page-divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 10px 0 4px;
-        }
-        .page-divider span {
-            color: var(--text-dim);
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-        .page-divider::before,
-        .page-divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-soft);
-        }
-
-        /* Her grup arası görsel ayraç */
-        .page-group + .page-group {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-soft);
-        }
-
-        /* ── KARTLAR ─────────────────────────────────── */
-        .bento-card {
-            background: var(--card-dark);
-            border-radius: var(--radius);
-            padding: 22px 20px;
-            border: 1px solid var(--border-soft);
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
-            page-break-inside: avoid;
-            break-inside: avoid;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .bento-card::before {
-            content: '';
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0,119,182,0.25), transparent);
-        }
-        .bento-card:hover {
-            border-color: var(--border-mid);
-            box-shadow: var(--shadow-card), var(--shadow-glow);
-        }
-
-        /* ── KART BAŞLIKLARI ─────────────────────────── */
-        .card-title {
-            font-family: 'Nunito', sans-serif;
-            font-size: 15px; font-weight: 900;
-            margin-bottom: 20px;
-            display: flex; align-items: center; gap: 10px;
-            color: var(--text-main);
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--border-soft);
-            position: relative;
-        }
-        .card-title i {
-            width: 32px; height: 32px;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--neon-cyan-soft);
-            border: 1px solid var(--border-mid);
-            border-radius: 8px;
-            color: var(--neon-cyan);
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        /* ── İLETİŞİM ────────────────────────────────── */
-        .contact-list { display: flex; flex-direction: column; gap: 10px; }
-        .contact-list div {
-            display: flex; align-items: center; gap: 13px;
-            font-size: 14px; color: var(--text-muted);
-            padding: 11px 14px;
-            background: rgba(0, 119, 182, 0.05);
-            border: 1px solid rgba(0, 119, 182, 0.12);
-            border-radius: var(--radius-sm);
-            transition: background 0.2s;
-            line-height: 1.8;
-        }
-        .contact-list div:hover { background: rgba(0, 119, 182, 0.10); }
-        .contact-list i {
-            color: var(--neon-cyan); width: 16px;
-            text-align: center; flex-shrink: 0; font-size: 13px;
-        }
-        .contact-list a { color: var(--text-main); text-decoration: none; font-weight: 600; }
-        .contact-list a:hover { color: var(--neon-cyan); }
-
-        /* ── HAKKIMDA ─────────────────────────────────── */
-        #about-text {
-            color: var(--text-muted); font-size: 14.5px;
-            line-height: 2; text-align: justify;
-        }
-
-        /* ── EĞİTİM ──────────────────────────────────── */
-        .edu-item {
-            border-left: 2px solid var(--border-mid);
-            padding: 12px 18px;
-            margin-bottom: 14px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            background: rgba(0, 119, 182, 0.04);
-            position: relative;
-            transition: border-color 0.2s;
-        }
-        .edu-item::before {
-            content: '';
-            position: absolute; left: -5px; top: 50%; transform: translateY(-50%);
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--neon-cyan);
-            box-shadow: 0 0 8px var(--neon-cyan);
-        }
-        .edu-item:hover { border-color: var(--border-strong); }
-        .edu-year { color: var(--neon-cyan); font-weight: 800; font-size: 11px; letter-spacing: 0.5px; margin-bottom: 4px; }
-        .edu-school { font-weight: 700; font-size: 13.5px; color: var(--text-main); margin-bottom: 2px; }
-        .edu-dep { color: var(--text-muted); font-size: 12px; }
-        .edu-item:last-child { margin-bottom: 0; }
-
-        /* ── BAŞARILAR ───────────────────────────────── */
-        .achievement-item {
-            border-left: 2px solid rgba(123, 63, 160, 0.35);
-            padding: 12px 18px;
-            margin-bottom: 14px;
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            background: rgba(123, 63, 160, 0.04);
-            position: relative;
-        }
-        .achievement-item::before {
-            content: '';
-            position: absolute; left: -4px; top: 50%; transform: translateY(-50%);
-            width: 6px; height: 6px; border-radius: 50%;
-            background: var(--neon-purple);
-            box-shadow: 0 0 8px var(--neon-purple);
-        }
-        .achievement-item:last-child { margin-bottom: 0; }
-        .achievement-item h5 {
-            font-size: 13.5px; color: var(--text-main);
-            font-weight: 800; margin-bottom: 3px;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .achievement-item h5 i { color: var(--neon-purple); font-size: 11px; }
-        .achievement-item small {
-            color: var(--neon-purple); font-weight: 700;
-            font-size: 10.5px; display: block; margin-bottom: 5px;
-            letter-spacing: 0.3px;
-        }
-        .achievement-item p { font-size: 12.5px; color: var(--text-muted); line-height: 1.9; }
-
-        /* ── SERTİFİKALAR ────────────────────────────── */
-        .cert-item {
-            display: flex; align-items: center; gap: 14px;
-            margin-bottom: 10px; padding: 12px 14px;
-            background: rgba(0, 119, 182, 0.05);
-            border: 1px solid rgba(0, 119, 182, 0.12);
-            border-radius: 12px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .cert-item:hover {
-            background: rgba(0, 119, 182, 0.10);
-            border-color: var(--border-soft);
-        }
-        .cert-item:last-child { margin-bottom: 0; }
-        .cert-icon {
-            width: 36px; height: 36px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--neon-cyan-soft);
-            border: 1px solid var(--border-soft);
-            border-radius: 9px;
-            color: var(--neon-cyan); font-size: 15px;
-        }
-        .cert-item h5 { font-size: 13px; color: var(--text-main); font-weight: 700; margin-bottom: 2px; }
-        .cert-item p { font-size: 11px; color: var(--text-muted); font-weight: 600; }
-
-        /* ── PROJE ───────────────────────────────────── */
-        .project-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-        #project-logo { width: 42px; height: 42px; border-radius: 10px; border: 1px solid var(--border-soft); object-fit: cover; }
-        #project-title { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; color: var(--text-main); }
-        #project-desc { color: var(--text-muted); font-size: 14px; line-height: 1.9; margin-bottom: 16px; }
-        #project-link {
-            display: inline-flex; align-items: center; gap: 7px;
-            color: var(--bg-dark); background: var(--grad-cyan);
-            text-decoration: none; font-weight: 800; font-size: 12.5px;
-            padding: 8px 18px; border-radius: 8px;
-            transition: opacity 0.2s, transform 0.2s;
-        }
-        #project-link:hover { opacity: 0.88; transform: translateY(-1px); }
-
-        /* ── YETENEKLER ──────────────────────────────── */
-        #skills-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .skill-box {
-            background: rgba(0, 119, 182, 0.04);
-            border: 1px solid var(--border-soft);
-            border-radius: var(--radius-sm);
-            padding: 14px 16px;
-        }
-        .skill-box h4 {
-            font-size: 12px; font-weight: 800; color: var(--text-muted);
-            text-transform: uppercase; letter-spacing: 0.8px;
-            margin-bottom: 10px;
-            display: flex; align-items: center; gap: 7px;
-        }
-        .skill-box h4 i { color: var(--neon-cyan); }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .skill-tags span {
-            background: rgba(0, 119, 182, 0.08);
-            color: var(--neon-cyan);
-            padding: 4px 11px; border-radius: 6px;
-            font-size: 11.5px; font-weight: 700;
-            border: 1px solid rgba(0, 119, 182, 0.22);
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .skill-tags span:hover { background: rgba(0, 119, 182, 0.18); border-color: rgba(0, 119, 182, 0.45); }
-
-        /* ── ETKİNLİK & PROJELER ─────────────────── */
-        .etkinlik-item {
-            display: flex; align-items: center; gap: 12px;
-            padding: 10px 14px;
-            margin-bottom: 8px;
-            background: rgba(0, 119, 182, 0.05);
-            border: 1px solid rgba(0, 119, 182, 0.12);
-            border-radius: 12px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .etkinlik-item:last-child { margin-bottom: 0; }
-        .etkinlik-item:hover {
-            background: rgba(0, 119, 182, 0.10);
-            border-color: var(--border-soft);
-        }
-        .etkinlik-no {
-            width: 24px; height: 24px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--grad-cyan);
-            border-radius: 6px;
-            color: #fff; font-size: 11px; font-weight: 800;
-        }
-        .etkinlik-icon {
-            width: 34px; height: 34px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--neon-cyan-soft);
-            border: 1px solid var(--border-mid);
-            border-radius: 9px;
-            color: var(--neon-cyan); font-size: 14px;
-        }
-        .etkinlik-baslik {
-            font-size: 13px; font-weight: 700;
-            color: var(--text-main); line-height: 1.5;
-        }
-        #etkinlikler-aciklama {
-            margin-top: 16px;
-            font-size: 13px; color: var(--text-muted);
-            line-height: 1.9;
-            padding: 12px 14px;
-            background: rgba(0, 119, 182, 0.04);
-            border-left: 2px solid var(--border-mid);
-            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-        }
-
-        /* ── KULÜP ÜYELİKLERİ ────────────────────── */
-        .kulup-item {
-            display: flex; gap: 14px;
-            padding: 12px 14px;
-            margin-bottom: 10px;
-            background: rgba(0, 119, 182, 0.05);
-            border: 1px solid rgba(0, 119, 182, 0.12);
-            border-radius: 14px;
-            transition: background 0.2s, border-color 0.2s;
-        }
-        .kulup-item:last-child { margin-bottom: 0; }
-        .kulup-item:hover {
-            background: rgba(0, 119, 182, 0.10);
-            border-color: var(--border-soft);
-        }
-        .kulup-icon {
-            width: 40px; height: 40px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(61,126,255,0.12));
-            border: 1px solid var(--border-mid);
-            border-radius: 11px;
-            color: var(--neon-cyan); font-size: 16px;
-        }
-        .kulup-body { flex: 1; }
-        .kulup-header {
-            display: flex; align-items: center;
-            flex-wrap: wrap; gap: 8px;
-            margin-bottom: 6px;
-        }
-        .kulup-header h5 {
-            font-size: 13.5px; font-weight: 800;
-            color: var(--text-main);
-        }
-        .kulup-badge {
-            background: rgba(0,229,255,0.1);
-            border: 1px solid rgba(0,229,255,0.25);
-            color: var(--neon-cyan);
-            font-size: 10px; font-weight: 800;
-            padding: 2px 9px; border-radius: 100px;
-            letter-spacing: 0.4px; text-transform: uppercase;
-        }
-        .kulup-body p {
-            font-size: 12.5px; color: var(--text-muted);
-            line-height: 1.9;
-        }
-
-        /* ── SIDEBAR LOGO ────────────────────────────── */
-        .sidebar-brand {
-            font-family: 'Nunito', sans-serif;
-            font-size: 15px; font-weight: 900;
-            color: var(--text-main);
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-soft);
-            display: flex; align-items: center; justify-content: space-between;
-        }
-        .sidebar-brand span { color: var(--neon-cyan); }
-
-                /* ── RESPONSIVE ──────────────────────────────── */
-        @media (max-width: 480px) {
-            main.container {
-                padding: 24px 14px 80px;
-            }
-            .bento-card {
-                padding: 18px 15px;
-                border-radius: 14px;
-            }
-            .banner {
-                padding: 70px 16px 60px;
-                min-height: 300px;
-            }
-            .banner h1 {
-                font-size: 26px;
-            }
-            .img-container {
-                width: 110px; height: 110px;
-                margin-bottom: 22px;
-            }
-            .skill-tags span {
-                font-size: 10.5px;
-                padding: 3px 9px;
-            }
-            .kulup-item {
-                flex-direction: row;
-                gap: 10px;
-            }
-            .contact-list div {
-                font-size: 13px;
-                padding: 9px 12px;
-            }
-            .cert-item {
-                gap: 10px;
-                padding: 10px 12px;
-            }
-            .page-divider span {
-                font-size: 10px;
-            }
-        }
-
-        @media (min-width: 481px) and (max-width: 720px) {
-            main.container {
-                padding: 30px 18px 80px;
-            }
-            .bento-card {
-                padding: 20px 18px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>try{var t=localStorage.getItem('tema');if(!t&&matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>Muhammet GÖLPINAR</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+:root{--bg:#e3f1fd;--ink:#0f2a47;--muted:#56728f;--line:#d3e5f6;--accent:#1f8fe8;--accent-d:#1272c4;--soft:#d6ecff;--card:#fff;--tagbg:#f4faff;--sub:#2e4764}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0a1829;--ink:#e6f1fc;--muted:#8fa9c4;--line:#1d3450;--accent:#2f9bec;--accent-d:#6cbcff;--soft:#122d49;--card:#0f2237;--tagbg:#0c1f33;--sub:#b5c9de}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Nunito,system-ui,sans-serif}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.bar{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar .in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:0 12px;height:52px}
+.bar b{font-weight:800;margin-right:8px;white-space:nowrap}
+.bar nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-weight:700;font-size:.9rem;white-space:nowrap}
+.bar nav a:hover{background:var(--soft);color:var(--accent-d)}
+.col{max-width:800px;margin:0 auto;padding:14px 12px calc(40px + env(safe-area-inset-bottom,0px))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-bottom:12px;overflow:hidden}
+.pad{padding:20px 24px}
+h2{margin:0 0 14px;font-size:1.25rem;font-weight:800}
+.profile{position:relative}
+.banner{height:170px;background:linear-gradient(120deg,#6cc3fb,#2f9bec 60%,#1f7fd6);position:relative}
+.banner svg{position:absolute;inset:0;width:100%;height:100%}
+.avatar{position:absolute;left:24px;top:98px;width:136px;height:136px;border-radius:50%;border:5px solid var(--card);background:var(--soft);padding:0;overflow:hidden;cursor:pointer}
+.avatar img,.avatar svg{width:100%;height:100%;object-fit:cover;display:block}
+.info{padding:80px 24px 22px}
+.info h1{margin:0;font-size:1.7rem;line-height:1.2;font-weight:800}
+.info .head{margin:2px 0 0;font-size:1.05rem}
+.info .loc{margin:6px 0 0;color:var(--muted);font-size:.93rem}
+.info .loc a{color:var(--accent-d);font-weight:700;text-decoration:none}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.btn{display:inline-block;padding:9px 20px;border-radius:999px;font-weight:800;text-decoration:none;border:2px solid var(--accent);font-size:.95rem}
+.btn.fill{background:var(--accent);color:#fff}
+.btn.out{color:var(--accent-d)}
+.btn:hover{filter:brightness(.95)}
+.about p{margin:0;max-width:44em}
+.row{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0;padding-top:0}
+.row:last-child{padding-bottom:0}
+.logo{flex:none;width:52px;height:52px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-size:1.5rem}
+.logo img{width:100%;height:100%;object-fit:contain;border-radius:10px}
+.row h3{margin:0;font-size:1rem;font-weight:800;line-height:1.35}
+.row .s{color:var(--ink);font-size:.93rem}
+.row .m{color:var(--muted);font-size:.88rem}
+.row p{margin:6px 0 0;font-size:.93rem;color:var(--sub)}
+.row.feat{background:var(--soft);margin:0 -24px;padding:14px 24px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tags span{border:1px solid var(--line);background:var(--tagbg);padding:2px 12px;border-radius:999px;font-size:.85rem;font-weight:700}
+.link{display:inline-block;margin-top:10px;color:var(--accent-d);font-weight:800;text-decoration:none}
+.link:hover{text-decoration:underline}
+input[type=file]{display:none}
+footer{text-align:center;color:var(--muted);font-size:.88rem;padding:8px}
+.mode{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--soft);cursor:pointer;font-size:1rem;line-height:1}
+.bar nav a.on{background:var(--soft);color:var(--accent-d)}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:-4px 0 14px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font:700 .85rem Nunito,system-ui,sans-serif;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--tagbg);color:var(--muted);cursor:pointer}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.more{display:block;width:100%;margin-top:12px;padding:10px;border:0;border-top:1px solid var(--line);border-radius:0 0 10px 10px;background:none;font:800 .95rem Nunito,system-ui,sans-serif;color:var(--accent-d);cursor:pointer}
+.more:hover{background:var(--soft)}
+.more[hidden]{display:none}
+.stats{display:flex;gap:28px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.stats a{text-decoration:none;color:var(--muted);font-size:.85rem}
+.stats b{display:block;font-size:1.4rem;line-height:1.2;color:var(--accent-d);font-weight:800}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.bar{background:color-mix(in srgb,var(--card) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .2s}
+.bar.sc{box-shadow:0 6px 20px -8px rgba(15,42,71,.25)}
+.card{border-radius:18px;box-shadow:0 1px 2px rgba(15,42,71,.05),0 14px 28px -18px rgba(15,42,71,.25)}
+h2{display:flex;align-items:center;gap:10px;font-size:1.3rem;letter-spacing:-.01em}
+h2::before{content:"";flex:none;width:4px;height:1.1em;border-radius:3px;background:var(--accent)}
+h2 span{color:var(--muted);font-weight:700}
+.banner::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.3) 1.2px,transparent 1.5px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(120deg,transparent 25%,#000);mask-image:linear-gradient(120deg,transparent 25%,#000)}
+.avatar{box-shadow:0 8px 22px -6px rgba(15,42,71,.35)}
+.info h1{font-size:1.9rem;letter-spacing:-.02em}
+.logo{background:linear-gradient(135deg,var(--soft),var(--tagbg));border:1px solid var(--line)}
+.tags span{background:var(--soft);border-color:transparent;color:var(--accent-d)}
+.btn{transition:transform .15s,box-shadow .15s}
+.btn.fill{box-shadow:0 6px 16px -6px rgba(31,143,232,.7)}
+.btn:hover{transform:translateY(-1px);filter:none}
+button.btn{font:inherit;font-weight:800;font-size:.95rem;background:transparent;cursor:pointer}
+.stats{gap:0}
+.stats a{flex:1;text-align:center;padding:0 8px;border-left:1px solid var(--line)}
+.stats a:first-child{border-left:0}
+.contact p{margin:0;color:var(--sub);max-width:40em}
+.top{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9;width:44px;height:44px;border:0;border-radius:50%;background:var(--accent);color:#fff;font-size:1.2rem;font-weight:800;cursor:pointer;box-shadow:0 8px 20px -6px rgba(15,42,71,.45)}
+.top[hidden]{display:none}
+.hd{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.hd h3{min-width:0}
+.badge{flex:none;margin-top:1px;padding:1px 10px;border-radius:6px;background:var(--soft);color:var(--accent-d);font-size:.78rem;font-weight:800;white-space:nowrap}
+.tl{margin-top:10px;padding-left:16px;border-left:2px solid var(--line)}
+.rl{position:relative;padding-bottom:16px}
+.rl:last-child{padding-bottom:0}
+.rl::before{content:"";position:absolute;left:-23px;top:.45em;width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.logo.k{background:#fff}
+.logo.k img{padding:4px}
+.cl-h{margin-top:12px;font-size:.93rem;font-weight:700}
+.cl{list-style:none;margin:4px 0 0;padding:0;font-size:.93rem}
+.cl li{padding:2px 0}
+.cl summary{cursor:pointer;list-style:none}
+.cl summary::-webkit-details-marker{display:none}
+.cl summary::after{content:"+";margin-left:8px;color:var(--accent-d);font-weight:800}
+.cl details[open] summary::after{content:"−"}
+@media print{
+:root[data-theme]{--bg:#fff;--ink:#0f2a47;--muted:#56728f;--line:#d3e5f6;--soft:#d6ecff;--card:#fff;--tagbg:#f4faff;--sub:#2e4764}
+.bar,.mode,.btns,.chips,.more,.top,.contact,.stats{display:none!important}
+.card{box-shadow:none;border:0;margin-bottom:6px}
+.row{break-inside:avoid}
+.banner{height:70px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.avatar{top:34px}
+.tags span,.logo{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media(max-width:560px){
+.banner{height:120px}
+.avatar{width:104px;height:104px;left:16px;top:68px;border-width:4px}
+.info{padding:64px 16px 18px}
+.info h1{font-size:1.45rem}
+.pad{padding:16px}
+.row.feat{margin:0 -16px;padding:14px 16px}
+.btn{flex:1;text-align:center;padding:10px 12px}
+.bar b{display:none}
+}
+</style>
 </head>
 <body>
+<div class="bar"><div class="in"><b>M. GÖLPINAR</b>
+<nav><a href="#hakkinda">Hakkında</a><a href="#deneyim">Deneyim</a><a href="#one-cikanlar">Öne çıkanlar</a><a href="#egitim">Eğitim</a><a href="#sertifikalar">Sertifikalar</a><a href="#basarilar">Başarılar</a><a href="#beceriler">Beceriler</a><a href="#iletisim">İletişim</a></nav><button class="mode" id="mode" type="button"></button></div></div>
 
-    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
-    <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+<main class="col">
+<section class="card profile">
+  <div class="banner"><svg viewBox="0 0 800 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="680" cy="30" r="110" fill="#fff" opacity=".12"/><circle cx="560" cy="150" r="70" fill="#fff" opacity=".1"/><circle cx="90" cy="20" r="60" fill="#fff" opacity=".1"/></svg></div>
+  <button class="avatar" id="avatar" aria-label="Profil fotoğrafı">
+    <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Nunito,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
+  </button>
+  <div class="info">
+    <h1>Muhammet GÖLPINAR</h1>
+    <p class="head">Bilişim Teknolojileri Öğrencisi</p>
+    <p class="loc">İstanbul, Türkiye · <a href="mailto:muhammetgolpinar@gmail.com">İletişim bilgileri</a></p>
+    <div class="btns">
+      <a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">Mesaj gönder</a>
+      <a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn out" href="https://muhammetgolpinar.github.io" target="_blank" rel="noopener">Web sitem</a>
+      <button class="btn out" id="pdf" type="button">PDF kaydet</button>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+</section>
 
-    <nav class="sidebar" id="sidebar">
-        <div class="sidebar-brand">
-            MG<span>.</span> Portfolyo
-            <i class="fas fa-times" onclick="toggleMenu()" style="cursor:pointer; font-size:18px; color:var(--text-muted);"></i>
-        </div>
-        <ul>
-            <li><a href="#iletisim" onclick="toggleMenu()"><i class="fas fa-id-card"></i> İletişim</a></li>
-            <li><a href="#hakkimda" onclick="toggleMenu()"><i class="fas fa-user-graduate"></i> Hakkımda</a></li>
-            <li><a href="#egitim" onclick="toggleMenu()"><i class="fas fa-university"></i> Eğitim</a></li>
-            <li><a href="#basarilar" onclick="toggleMenu()"><i class="fas fa-trophy"></i> Başarılar</a></li>
-            <li><a href="#sertifikalar" onclick="toggleMenu()"><i class="fas fa-certificate"></i> Sertifikalar</a></li>
-            <li><a href="#proje" onclick="toggleMenu()"><i class="fas fa-rocket"></i> Proje</a></li>
-            <li><a href="#kulupler" onclick="toggleMenu()"><i class="fas fa-users"></i> Kulüp Üyelikleri</a></li>
-            <li><a href="#etkinlikler" onclick="toggleMenu()"><i class="fas fa-calendar-check"></i> Etkinlik & Projeler</a></li>
-            <li><a href="#yetenekler" onclick="toggleMenu()"><i class="fas fa-code"></i> Yetenekler</a></li>
-        </ul>
-    </nav>
+<section class="card pad about" id="hakkinda">
+  <h2>Hakkında</h2>
+  <p>Teknolojiyi sadece tüketen değil, üreten tarafta olmayı hedefleyen bir bilişim teknolojileri öğrencisiyim. Yazılım geliştirme, web uygulamaları ve yapay zeka alanlarında kendimi sürekli geliştiriyorum. Disiplinli çalışma alışkanlığım ve meraklı yapım sayesinde yeni teknolojileri hızlıca öğrenir, projelerle pekiştiririm. Amacım, gelecekte kullanıcıların hayatını kolaylaştıran etkili ve yenilikçi çözümler geliştirmektir.</p>
+</section>
 
-    <header class="banner">
-            <!-- Arka plan kanvası -->
-            <canvas id="banner-bg-canvas"></canvas>
-            <!-- Geometrik dekor -->
-            <div class="banner-geo">
-                <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="400" cy="200" r="300" fill="none" stroke="rgba(0,119,182,0.06)" stroke-width="1"/>
-                    <circle cx="400" cy="200" r="220" fill="none" stroke="rgba(0,119,182,0.07)" stroke-width="1"/>
-                    <circle cx="400" cy="200" r="140" fill="none" stroke="rgba(0,119,182,0.08)" stroke-width="1"/>
-                    <line x1="0" y1="0" x2="120" y2="120" stroke="rgba(0,150,199,0.12)" stroke-width="1"/>
-                    <line x1="0" y1="30" x2="90" y2="120" stroke="rgba(0,150,199,0.08)" stroke-width="1"/>
-                    <line x1="30" y1="0" x2="120" y2="90" stroke="rgba(0,150,199,0.08)" stroke-width="1"/>
-                    <line x1="800" y1="400" x2="680" y2="280" stroke="rgba(0,96,199,0.12)" stroke-width="1"/>
-                    <line x1="800" y1="370" x2="690" y2="280" stroke="rgba(0,96,199,0.08)" stroke-width="1"/>
-                    <line x1="770" y1="400" x2="680" y2="310" stroke="rgba(0,96,199,0.08)" stroke-width="1"/>
-                    <line x1="0" y1="80" x2="800" y2="80" stroke="rgba(0,119,182,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
-                    <line x1="0" y1="160" x2="800" y2="160" stroke="rgba(0,119,182,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
-                    <line x1="0" y1="240" x2="800" y2="240" stroke="rgba(0,119,182,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
-                    <line x1="0" y1="320" x2="800" y2="320" stroke="rgba(0,119,182,0.04)" stroke-width="1" stroke-dasharray="4 8"/>
-                    <line x1="100" y1="0" x2="100" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <line x1="200" y1="0" x2="200" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <line x1="300" y1="0" x2="300" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <line x1="500" y1="0" x2="500" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <line x1="600" y1="0" x2="600" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <line x1="700" y1="0" x2="700" y2="400" stroke="rgba(0,119,182,0.03)" stroke-width="1" stroke-dasharray="4 12"/>
-                    <polygon points="750,30 775,17 800,30 800,57 775,70 750,57" fill="none" stroke="rgba(0,119,182,0.18)" stroke-width="1"/>
-                    <polygon points="0,150 18,140 36,150 36,170 18,180 0,170" fill="none" stroke="rgba(0,150,199,0.15)" stroke-width="1"/>
-                    <polygon points="760,340 778,330 796,340 796,360 778,370 760,360" fill="none" stroke="rgba(0,96,199,0.15)" stroke-width="1"/>
-                    <line x1="320" y1="0" x2="480" y2="400" stroke="rgba(0,119,182,0.04)" stroke-width="1"/>
-                    <line x1="480" y1="0" x2="320" y2="400" stroke="rgba(0,119,182,0.04)" stroke-width="1"/>
-                    <rect x="50" y="50" width="4" height="4" fill="rgba(0,119,182,0.35)" rx="1"/>
-                    <rect x="740" y="50" width="4" height="4" fill="rgba(0,119,182,0.35)" rx="1"/>
-                    <rect x="50" y="340" width="4" height="4" fill="rgba(0,96,199,0.35)" rx="1"/>
-                    <rect x="740" y="340" width="4" height="4" fill="rgba(0,96,199,0.35)" rx="1"/>
-                    <rect x="395" y="10" width="4" height="4" fill="rgba(0,119,182,0.45)" rx="1"/>
-                </svg>
-            </div>
-            <div class="img-container">
-                <img id="banner-img" src="" alt="Profil" class="banner-img">
-            </div>
-            <h1 id="banner-name">Yükleniyor...</h1>
-            <div class="banner-badge" style="margin-top:10px;">
-                <div class="banner-badge-dot"></div>
-                <span id="banner-title"></span>
-            </div>
-        </header>
+<section class="card pad" id="deneyim"><h2>Deneyim</h2><div id="deneyim-list"></div></section>
 
-        <main class="container">
-            <div class="bento-column">
+<section class="card pad" id="one-cikanlar">
+  <h2>Öne çıkanlar</h2>
+  <div class="row">
+    <div class="logo"><img src="logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML='🌐'"></div>
+    <div>
+      <h3>MuGöl PORTAL</h3>
+      <div class="m">Kişisel proje · Yapay zeka destekli</div>
+      <p>Kullanıcıların farklı ihtiyaçlarına tek bir platform üzerinden ulaşmasını sağlayan çok yönlü bir web projesi. Haber, oyun, araçlar ve dijital içerikleri sade bir arayüzde bir araya getirir. Tasarım ve geliştirme süreci baştan sona yapay zekanın desteğiyle yürütülmüş olup platform sürekli güncellenerek gelişmeye devam etmektedir.</p>
+      <a class="link" href="https://mugol-portal.github.io" target="_blank" rel="noopener">Projeyi göster ↗</a>
+    </div>
+  </div>
+</section>
 
-                <!-- SAYFA 2: İletişim + Hakkımda (birlikte) -->
-                <div class="page-group">
-                    <div class="page-divider"><span>İletişim & Hakkımda</span></div>
-                    <section class="bento-card" id="iletisim">
-                        <h2 class="card-title"><i class="fas fa-id-card"></i> İletişim Bilgileri</h2>
-                        <div class="contact-list">
-                            <div id="contact-email"></div>
-                            <div id="contact-phone"></div>
-                            <div id="contact-location"></div>
-                            <div id="contact-web"></div>
-                            <div id="contact-linkedin"></div>
-                        </div>
-                    </section>
-                    <section class="bento-card" id="hakkimda">
-                        <h2 class="card-title"><i class="fas fa-user-graduate"></i> Hakkımda</h2>
-                        <p id="about-text"></p>
-                    </section>
-                </div>
+<section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
+<section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
+<section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
+<section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
+<section class="card pad contact" id="iletisim"><h2>İletişim</h2><p>Bir proje, staj ya da iş birliği için bana yazabilirsin.</p><div class="btns"><a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">E-posta gönder</a><a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn'de bağlan</a><button class="btn out" id="kopya" type="button">E-postayı kopyala</button></div></section>
+<footer>© 2026 Muhammet GÖLPINAR</footer>
+</main>
+<button class="top" id="top" type="button" aria-label="Başa dön" hidden>↑</button>
+<input type="file" id="file" accept="image/*">
 
-                <!-- SAYFA 3: Eğitim -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Eğitim</span></div>
-                    <section class="bento-card" id="egitim">
-                        <h2 class="card-title"><i class="fas fa-university"></i> Eğitim Geçmişi</h2>
-                        <div id="education-list"></div>
-                    </section>
-                </div>
-
-                <!-- SAYFA 4: Başarılar -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Başarılar</span></div>
-                    <section class="bento-card" id="basarilar">
-                        <h2 class="card-title"><i class="fas fa-trophy"></i> Başarılar ve Ödüller</h2>
-                        <div id="achievements-list"></div>
-                    </section>
-                </div>
-
-                <!-- SAYFA 5: Sertifikalar -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Sertifikalar</span></div>
-                    <section class="bento-card" id="sertifikalar">
-                        <h2 class="card-title"><i class="fas fa-certificate"></i> Sertifikalar</h2>
-                        <div id="cert-list"></div>
-                    </section>
-                </div>
-
-                <!-- SAYFA 6: Proje -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Proje</span></div>
-                    <section class="bento-card" id="proje">
-                        <h2 class="card-title"><i class="fas fa-rocket"></i> Öne Çıkan Proje</h2>
-                        <div class="project-header">
-                            <img id="project-logo" src="" alt="Logo">
-                            <h3 id="project-title"></h3>
-                        </div>
-                        <p id="project-desc"></p>
-                        <a id="project-link" href="#" target="_blank">
-                            <i class="fas fa-external-link-alt"></i> Dijital Portala Git
-                        </a>
-                    </section>
-                </div>
-
-                <!-- SAYFA 7: Kulüp Üyelikleri -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Kulüp Üyelikleri</span></div>
-                    <section class="bento-card" id="kulupler">
-                        <h2 class="card-title"><i class="fas fa-users"></i> Kulüp Üyelikleri</h2>
-                        <div id="kulupler-list"></div>
-                    </section>
-                </div>
-
-                <!-- SAYFA 8: Etkinlik & Projeler -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Etkinlik & Projeler</span></div>
-                    <section class="bento-card" id="etkinlikler">
-                        <h2 class="card-title"><i class="fas fa-calendar-check"></i> Etkinlik & Projeler</h2>
-                        <div id="etkinlikler-list"></div>
-                        <p id="etkinlikler-aciklama"></p>
-                    </section>
-                </div>
-
-                <!-- SAYFA 9: Yetenekler -->
-                <div class="page-group">
-                    <div class="page-divider"><span>Yetenekler</span></div>
-                    <section class="bento-card" id="yetenekler">
-                        <h2 class="card-title"><i class="fas fa-code"></i> Teknik Yetenekler (Temel&Orta Seviye) </h2>
-                        <div id="skills-grid"></div>
-                    </section>
-                </div>
-
-            </div>
-        </main>
-    <!-- Veri Dosyanız -->
-    <script src="bilgi.js"></script>
-
-    <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
-
-        /* ── YILDIZ KANVASI ───────────────────────── */
-        (function initStars() {
-            const canvas = document.getElementById('banner-bg-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let stars = [], W, H, raf;
-
-            function resize() {
-                const rect = canvas.parentElement.getBoundingClientRect();
-                W = canvas.width  = rect.width  || 800;
-                H = canvas.height = rect.height || 400;
-                buildStars();
-            }
-
-            function buildStars() {
-                stars = [];
-                const count = Math.floor((W * H) / 3200);
-                for (let i = 0; i < count; i++) {
-                    stars.push({
-                        x: Math.random() * W,
-                        y: Math.random() * H,
-                        r: Math.random() * 1.4 + 0.2,
-                        alpha: Math.random() * 0.6 + 0.15,
-                        speed: Math.random() * 0.4 + 0.1,
-                        phase: Math.random() * Math.PI * 2
-                    });
-                }
-            }
-
-            function draw(t) {
-                ctx.clearRect(0, 0, W, H);
-                for (const s of stars) {
-                    const a = s.alpha * (0.55 + 0.45 * Math.sin(t * 0.001 * s.speed + s.phase));
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                    const hue = Math.random() < 0.15 ? '210,150,255' : '0,229,255';
-                    ctx.fillStyle = `rgba(${hue},${a.toFixed(2)})`;
-                    ctx.fill();
-                }
-                raf = requestAnimationFrame(draw);
-            }
-
-            window.addEventListener('resize', resize);
-            resize();
-            raf = requestAnimationFrame(draw);
-        })();
-
-        // cert-item ikonlarını sarmalamak için DOM yüklendikten sonra düzenle
-        document.addEventListener("DOMContentLoaded", () => {
-            // (bilgi.js zaten cert-icon div'ini oluşturuyor, burada ek işlem gerekmez)
-        });
-    </script>
+<script>
+var veri={
+egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"],["Veysel Sacıhan İmam Hatip Ortaokulu","Ortaokul Eğitimi","2019 - 2023"],["Gazi İlköğretim Okulu","İlkokul Eğitimi","2015 - 2019"]],
+sertifikalar:[["Dijital Yaşam Becerileri","ODTÜ Geliştirme Vakfı Okulları","Kasım 2026",[]],
+["Dijital Tehditlerle Başa Çıkma","Enstitü İstanbul İSMEK","Kasım 2026",[]],
+["Yapay Zeka Dünyasına Giriş","BTK Akademi","Ekim 2026",[]],
+["Dijital Okuryazarlık","BTK Akademi","Ekim 2026",[]],
+["Dijital Okuryazarlık","BTK Akademi","Ekim 2026",[]],
+["Dijital Okuryazarlık (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Ekim 2026",[]],
+["201: HTML5 &amp; CSS","Turkcell Geleceği Yazanlar","Ekim 2026",["Web Geliştirme"]],
+["İnternette Güvenliğinizi Arttırın","Bilgeİş","Ekim 2026",[]],
+["101: HTML","Turkcell Geleceği Yazanlar","Ekim 2026",["Web Geliştirme"]],
+["Temel HTML ve CSS","Enstitü İstanbul İSMEK","Ekim 2026",["Web Geliştirme"]],
+["Bilgi Teknolojilerine Giriş","BTK Akademi","Ekim 2026",[]],
+["Yapay Zeka Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Ekim 2026",["Yapay Zeka"]],
+["Bilgi Okuryazarlığı","BTK Akademi","Ekim 2026",[]],
+["Yapay Zeka Uygulamaları","BTK Akademi","Ekim 2026",["Yapay Zeka"]],
+["Herkes İçin Yapay Zeka I","Bilgeİş","Ekim 2026",["Yapay Zeka"]],
+["CSS","Bilgeİş","Ekim 2026",["Web Geliştirme"]],
+["HTML Eğitimi","Bilgeİş","Ekim 2026",["Web Geliştirme"]],
+["Gemini Veo","BTK Akademi","Ekim 2026",["Yapay Zeka"]],
+["Yapay Zekaya Giriş","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
+["Anthropic Claude","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
+["ChatGPT","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
+["CSS Temelleri","BTK Akademi","Nisan 2026",["Web Geliştirme"]],
+["HTML5 İle Web Geliştirme","BTK Akademi","Nisan 2026",["Web Geliştirme"]],
+["Medeniyet Okumaları Projesi Katılım Belgesi","İstanbul Valiliği","Haziran 2025",[]]],
+basarilar:[["Üstün Başarı Belgesi","Lise - Akademik Başarı","Lise eğitimim süresince akademik başarımın bir sonucu olarak Üstün Başarı Belgesi almaya hak kazandım.",1],
+["Ayın Öğrencisi (2025-2026)","Kasım Ayı Öğrencisi","2025-2026 Eğitim Öğretim Yılı kapsamında Kasım Ayı Öğrencisi seçildim. Disiplinli çalışma ve sorumluluk bilincimin takdir edilmesinden gurur duydum."],
+["Ayın Öğrencisi (2024-2025)","Aralık Ayı Öğrencisi","2024-2025 Eğitim Öğretim Yılı kapsamında Aralık Ayı Öğrencisi seçildim. Olumlu tutumum ve çalışma disiplinimle bu başarıyı elde ettim."],
+["9. Sınıf Okul Birinciliği","2023-2024 Eğitim Yılı","9. sınıflar arasında okul birincisi olarak başarılı bir dönem geçirdim. Hedef odaklı yaklaşımım ve öğretmenlerimin desteğiyle bu başarıyı kazandım."],
+["10. Sınıf Sınıf Birinciliği","Akademik Başarı","10. sınıfta da akademik başarımı sürdürerek sınıf birincisi oldum. Disiplinli çalışma anlayışımı istikrarlı bir şekilde devam ettirdim."],
+["Bilişim Teknolojileri Bölüm Birinciliği","9. Sınıftan İtibaren","Şu anda 11. sınıf öğrencisiyim ve 9. sınıftan bu yana bölüm birincisi olarak eğitimimi sürdürmekteyim."],
+["Onur Belgesi","9, 10 ve 11. Sınıflar - Her Dönem","9, 10 ve 11. sınıflarda her dönem istikrarlı bir şekilde onur belgesi alarak akademik başarımı sürdürdüm."]],
+beceriler:[["💻","Programlama",["HTML5","CSS3","JavaScript","Python","Java","C#"]],["🤖","Yapay Zeka",["Claude","Google AI Studio"]],["🛠️","Ortam & Git",["VS Code","Visual Studio","GitHub","IDLE Python"]],["🗄️","Web & Veri Tabanı",["WordPress","SQL","MS Access"]],["🎨","Tasarım & Ofis",["Canva","Photoshop","After Effects"]],["🌍","Yabancı Dil",["İngilizce: A2"]]],
+topluluklar:[["Medeniyet Okumaları Projesi"],
+["Ben Okuyorum İstanbul Okuyor Projesi"],
+["Çevre Koruma Kulübü","Çevre Koruma Kulübü kapsamında sıfır atık, yeşil dönüşüm, doğa ve çevre bilinci üzerine çeşitli çalışmalar gerçekleştirdik. \"Bir Fidanım Olsun\" etkinliği ile fidan dikerek doğaya katkı sağladık. Ayrıca sokak hayvanlarının ihtiyaçlarına destek olmak amacıyla onlar için su bıraktık. Bu çalışmalar sayesinde çevreyi koruma, doğaya duyarlılık ve sosyal sorumluluk bilinci kazandık."],
+["Değerler Kulübü","Değerler Kulübü kapsamında okul mescidimizin temiz ve düzenli kalması için gönüllü olarak çalışmalar yaptık. Mescidin temizliği, düzeni ve hijyenine dikkat ederek öğrencilerin daha temiz ve huzurlu bir ortamda ibadet edebilmesine katkı sağladık. Bu çalışma sayesinde sorumluluk alma, yardımlaşma ve topluma faydalı olma bilinci kazandık."],
+["Kütüphanecilik Kulübü","Kütüphanecilik ve Edebiyat Kulübü bünyesinde yürütülen \"Okulumuzda Okuma Kültürü Oluşturuyoruz\" projesinde aktif görev aldım. Proje kapsamında kitap okuma alışkanlığını teşvik etmeye yönelik etkinliklerin planlanması, içerik hazırlanması ve duyuru çalışmalarında yer aldım. Bu süreçte takım çalışması, iletişim ve organizasyon becerilerimi geliştirdim."],
+["Satranç Kulübü","Satranç Kulübü kapsamında okulda düzenlenen satranç turnuvasında görev aldım. Turnuva sürecinde organizasyon, düzen ve koordinasyon konularında sorumluluk üstlenerek ekip çalışması ve iletişim becerilerimi geliştirdim."],
+["Hayvanları Koruma Kulübü"]],
+programlar:["6 Ekim İstanbul’un İşgalden Kurtuluşu Günü Kutlama Programı","10 Kasım Atatürk’ü Anma Töreni","12 Mart İstiklal Marşı’nın Kabulü Programı","18 Mart Çanakkale Zaferi ve Şehitleri Anma Töreni","19 Mayıs Atatürk’ü Anma, Gençlik ve Spor Bayramı Töreni"]
+};
+function put(id,h){document.getElementById(id).innerHTML=h}
+function clubs(){return '<div class="cl-h">Etkinlik ve topluluklar:</div><ul class="cl">'+veri.topluluklar.map(function(t){return '<li>'+(t[1]?'<details><summary>'+t[0]+'</summary><p>'+t[1]+'</p></details>':t[0])+'</li>'}).join('')+'</ul><div class="cl-h">Tören ve programlar:</div><p>Bu etkinlik ve projelerde aktif görev alarak organizasyon, ekip çalışması ve iletişim becerilerimi geliştirdim. Katıldığım her etkinlik sorumluluk bilincimi ve sosyal yönümü güçlendirdi.</p><ul class="cl">'+veri.programlar.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'}
+put('egitim-list',veri.egitim.map(function(e,i){return '<div class="row"><div class="logo">🎓</div><div><h3>'+e[0]+'</h3><div class="s">'+e[1]+'</div><div class="m">'+e[2]+'</div>'+(i==0?clubs():'')+'</div></div>'}).join(''));
+var AY=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+function sure(b){var n=new Date(),m=(n.getFullYear()-b[0])*12+n.getMonth()+2-b[1],y=Math.floor(m/12),a=m%12;return (y?y+' yıl':'')+(y&&a?' ':'')+(a?a+' ay':'')}
+function tarih(b){return AY[b[1]-1]+' '+b[0]+' - Devam ediyor · '+sure(b)}
+function lg(src,fb,k){return '<div class="logo'+(k?' k':'')+'"><img src="'+src+'" alt="" loading="lazy" onerror="this.outerHTML=\''+fb+'\'"></div>'}
+var deneyim=[
+{logo:'arcelik.png',fb:'💼',k:1,rol:'IT Intern / Bilgi İşlem Stajyeri',kurum:'Arçelik Türkiye · Stajyer',bas:[2026,9],yer:'Kadıköy, İstanbul, Türkiye · Ofiste'},
+{logo:'logo.png',fb:'🌐',kurum:'MuGöl PORTAL',roller:[
+{rol:'Google Play Store Yayıncısı',bas:[2026,10],acik:'MuGöl PORTAL ekosistemini Trusted Web Activity (TWA) mimarisiyle geliştirerek Google Play Store yayın prodüksiyon kanalında kullanıcılarla buluşturduk. ‘Dijital dünya, tek bir portalda’ sloganıyla web ve mobil platformlarda ölçeklenebilir dijital çözümler sunmaya devam ediyorum.'},
+{rol:'Google AdSense Entegrasyonu &amp; Reklam Yönetimi',bas:[2026,1],acik:'Ocak 2026 itibarıyla MuGöl PORTAL ekosistemine Google AdSense reklam altyapısını entegre ederek platformun dijital monetizasyon süreçlerini ve gelir modelini aktif hale getirdim; bu sayede projenin reklam yerleşimlerini optimize ederek sürdürülebilir bir yapı kazandırdım.'},
+{rol:'Kurucu &amp; Geliştirici',kurum:'Kendi işim',bas:[2025,10],acik:'MuGöl PORTAL projesini “Dijital dünya, tek bir portalda.” vizyonuyla 2 Ekim 2025 tarihinde GitHub üzerinde açık kaynaklı olarak yayınladım; bu doğrultuda modern web teknolojilerini ve Progressive Web App (PWA) altyapısını kullanarak kullanıcıların tarayıcı üzerinden hızlı, kesintisiz ve yerel bir uygulama deneyimi yaşamasını sağlayan dinamik bir ekosistem inşa ettim.'}]}
+];
+put('deneyim-list',deneyim.map(function(d){
+if(!d.roller)return '<div class="row">'+lg(d.logo,d.fb,d.k)+'<div style="flex:1;min-width:0"><div class="hd"><h3>'+d.rol+'</h3><span class="badge">Devam ediyor</span></div><div class="s">'+d.kurum+'</div><div class="m">'+tarih(d.bas)+'</div><div class="m">'+d.yer+'</div></div></div>';
+var ilk=d.roller.reduce(function(a,r){return r.bas[0]*12+r.bas[1]<a[0]*12+a[1]?r.bas:a},[9999,1]);
+return '<div class="row">'+lg(d.logo,d.fb,d.k)+'<div style="flex:1;min-width:0"><h3>'+d.kurum+'</h3><div class="m">'+sure(ilk)+'</div><div class="tl">'+d.roller.map(function(r){return '<div class="rl"><div class="hd"><h3>'+r.rol+'</h3><span class="badge">Devam ediyor</span></div>'+(r.kurum?'<div class="s">'+r.kurum+'</div>':'')+'<div class="m">'+tarih(r.bas)+'</div><p>'+r.acik+'</p></div>'}).join('')+'</div></div></div>'}).join(''));
+var logolar={'BTK Akademi':'btk.png','Bilgeİş':'bilgeis.png','Enstitü İstanbul İSMEK':'ismek.png','T.C. Millî Eğitim Bakanlığı':'meb.png','Turkcell Geleceği Yazanlar':'turkcell.png','ODTÜ Geliştirme Vakfı Okulları':'odtu.png','İstanbul Valiliği':'valilik.png'};
+function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
+var flt=[['Tümü',function(){return 1}],['Yapay Zeka',function(c){return c[3].indexOf('Yapay Zeka')>-1}],['Web Geliştirme',function(c){return c[3].indexOf('Web Geliştirme')>-1}],['BTK Akademi',function(c){return c[1]=='BTK Akademi'}]],fi=0,acik=false,LIM=6;
+function sert(){var l=veri.sertifikalar.filter(flt[fi][1]),m=document.getElementById('sert-more');
+put('sertifika-list',(acik?l:l.slice(0,LIM)).map(rowS).join(''));
+put('sertifika-filter',flt.map(function(x,i){return '<button class="chip'+(i==fi?' on':'')+'" type="button" data-i="'+i+'" aria-pressed="'+(i==fi)+'">'+x[0]+' ('+veri.sertifikalar.filter(x[1]).length+')</button>'}).join(''));
+m.hidden=l.length<=LIM;m.textContent=acik?'Daha az göster':'Tümünü göster ('+l.length+')'}
+put('sert-say','('+veri.sertifikalar.length+')');sert();
+document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
+document.getElementById('sert-more').addEventListener('click',function(){acik=!acik;sert();if(!acik)document.getElementById('sertifikalar').scrollIntoView()});
+put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar'],[veri.basarilar.length,'Onur ve ödül','#basarilar'],[veri.topluluklar.filter(function(t){return /Kulübü$/.test(t[0])}).length,'Kulüp','#egitim']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+'</a>'}).join(''));
+var root=document.documentElement,md=document.getElementById('mode');
+function ik(){var d=root.dataset.theme=='dark';md.textContent=d?'☀️':'🌙';md.setAttribute('aria-label',d?'Açık temaya geç':'Koyu temaya geç')}
+ik();md.addEventListener('click',function(){var t=root.dataset.theme=='dark'?'light':'dark';root.dataset.theme=t;try{localStorage.setItem('tema',t)}catch(e){}ik()});
+if('IntersectionObserver' in window){var nav=document.querySelector('.bar nav'),nv=nav.querySelectorAll('a'),io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;nv.forEach(function(a){var on=a.getAttribute('href')=='#'+e.target.id;a.classList.toggle('on',on);if(on)nav.scrollLeft+=a.getBoundingClientRect().left-nav.getBoundingClientRect().left-(nav.clientWidth-a.offsetWidth)/2})})},{rootMargin:'-20% 0px -70% 0px'});document.querySelectorAll('main section[id]').forEach(function(x){io.observe(x)})}
+put('basari-list',veri.basarilar.map(function(b){return '<div class="row'+(b[3]?' feat':'')+'"><div class="logo">'+(b[3]?'🏅':'🏆')+'</div><div><h3>'+b[0]+'</h3><div class="m">'+b[1]+'</div><p>'+b[2]+'</p></div></div>'}).join(''));
+put('beceri-list',veri.beceriler.map(function(b){return '<div class="row"><div class="logo">'+b[0]+'</div><div><h3>'+b[1]+'</h3><div class="tags">'+b[2].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div></div></div>'}).join(''));
+var bar=document.querySelector('.bar'),tp=document.getElementById('top');
+function sc(){var y=window.scrollY||0;bar.classList.toggle('sc',y>8);tp.hidden=y<600}
+window.addEventListener('scroll',sc,{passive:true});sc();
+tp.addEventListener('click',function(){window.scrollTo({top:0})});
+document.getElementById('pdf').addEventListener('click',function(){window.print()});
+var sv;window.addEventListener('beforeprint',function(){sv=[fi,acik];fi=0;acik=true;sert()});
+window.addEventListener('afterprint',function(){if(sv){fi=sv[0];acik=sv[1];sert()}});
+document.getElementById('kopya').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText('muhammetgolpinar@gmail.com').then(function(){b.textContent='Kopyalandı';setTimeout(function(){b.textContent='E-postayı kopyala'},1800)},function(){})}catch(e){}});
+var file=document.getElementById('file');
+document.getElementById('avatar').addEventListener('click',function(){file.click()});
+file.addEventListener('change',function(){var f=file.files[0];if(!f)return;var r=new FileReader();
+r.onload=function(e){var im=document.createElement('img');im.src=e.target.result;im.alt='Profil fotoğrafı';
+var o=document.querySelector('#avatar img,#avatar svg');if(o)o.replaceWith(im)};r.readAsDataURL(f)});
+</script>
 </body>
 </html>
