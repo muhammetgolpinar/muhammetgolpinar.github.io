@@ -224,6 +224,45 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
 .profile .info>:nth-child(2){animation-delay:.06s}.profile .info>:nth-child(3){animation-delay:.12s}.profile .info>:nth-child(4){animation-delay:.18s}.profile .info>:nth-child(5){animation-delay:.24s}.profile .info>:nth-child(6){animation-delay:.3s}
 .dg i{animation:uz .8s cubic-bezier(.2,.7,.2,1) both}
 }
+
+@media screen{
+.profile .info h1{line-height:1.18}
+.profile .btns{gap:6px;margin-top:14px}
+.profile .btn,.profile button.btn{flex:none;padding:6px 14px;font-size:.82rem;border-width:1.5px}
+}
+@media screen and (max-width:720px){
+.card.profile{grid-template-columns:auto 1fr;column-gap:16px;row-gap:16px;align-items:center}
+.profile .info{display:contents}
+.profile .info h1{grid-column:2;grid-row:1;font-size:clamp(1.45rem,7vw,1.9rem);margin:0;min-width:0}
+.profile .info h1 span{display:block}
+.profile .avatar{grid-column:1;grid-row:1}
+.profile .info>:not(h1){grid-column:1/-1;margin-top:0;margin-bottom:0}
+.profile .btns{margin-top:2px}
+}
+
+@media screen{
+.bar{background:color-mix(in srgb,var(--card) 80%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px)}
+.profile{isolation:isolate}
+.profile::after{content:"";position:absolute;z-index:-1;width:380px;height:380px;right:-120px;top:-140px;border-radius:50%;background:radial-gradient(closest-side,rgba(91,115,255,.55),transparent);filter:blur(30px);animation:aur 9s ease-in-out infinite alternate;pointer-events:none}
+.avatar{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.avatar:hover{transform:rotate(-3deg) scale(1.04)}
+.row{transition:background .2s,transform .2s}
+.row:not(.feat):hover{background:color-mix(in srgb,var(--soft) 55%,transparent);transform:translateX(4px);border-radius:12px}
+.tags span{transition:background .2s,color .2s,transform .2s}
+.tags span:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-2px)}
+.btn:active{transform:scale(.96)}
+.card.pad>h2::after{content:"";display:block;width:28px;height:3px;margin-top:8px;border-radius:3px;background:var(--accent)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--card);padding:10px 18px;border-radius:999px;font-weight:700;font-size:.88rem;z-index:60;pointer-events:none;transition:.25s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.kbd{display:inline-block;min-width:1.5em;padding:0 6px;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;background:var(--card);font:700 .78rem ui-monospace,Menlo,Consolas,monospace;text-align:center}
+.hint{display:none}
+@media(hover:hover) and (min-width:900px){.hint{display:block}}
+.js-rv .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.js-rv .rv.in{opacity:1;transform:none}
+}
+@keyframes aur{to{transform:translate(-60px,50px) scale(1.2)}}
+@media print{.rv{opacity:1!important;transform:none!important}.toast,.hint{display:none!important}}
+@media (prefers-reduced-motion:reduce){.profile::after{animation:none}.js-rv .rv{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -238,14 +277,13 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
     <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="var l=['profil.jpeg','profil.png','profil.webp','profil.JPG'],n=+this.dataset.n||0;if(n<l.length){this.dataset.n=n+1;this.src=l[n];return}this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial,Helvetica,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
   </div>
   <div class="info">
-    <h1>Muhammet GÖLPINAR</h1>
+    <h1><span>Muhammet</span> <span>GÖLPINAR</span></h1>
     <p class="head">Bilişim Teknolojileri Öğrencisi</p>
     <p class="now">Şu an: Arçelik Türkiye’de Bilgi İşlem Stajyeri</p>
     <p class="loc">İstanbul, Türkiye · <span id="saat"></span><a href="mailto:muhammetgolpinar@gmail.com">İletişim bilgileri</a></p>
     <div class="btns">
       <a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">Mesaj gönder</a>
       <a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn out" href="https://muhammetgolpinar.github.io" target="_blank" rel="noopener">Web sitem</a>
       <button class="btn out" id="pdf" type="button">PDF kaydet</button>
     </div>
     <div class="stats" id="stats"></div>
@@ -286,7 +324,7 @@ h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
 
 <script>
 var veri={
-egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"],["Veysel Sacıhan İmam Hatip Ortaokulu","Ortaokul Eğitimi","2019 - 2023"],["Gazi İlköğretim Okulu","İlkokul Eğitimi","2015 - 2019"]],
+egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
 sertifikalar:[["Dijital Yaşam Becerileri","ODTÜ Geliştirme Vakfı Okulları","Kasım 2026",[]],
 ["Dijital Tehditlerle Başa Çıkma","Enstitü İstanbul İSMEK","Kasım 2026",[]],
 ["Yapay Zeka Dünyasına Giriş","BTK Akademi","Ekim 2026",[]],
@@ -330,7 +368,7 @@ programlar:["6 Ekim İstanbul’un İşgalden Kurtuluşu Günü Kutlama Program�
 };
 function put(id,h){document.getElementById(id).innerHTML=h}
 function clubs(){return '<div class="ek" id="ek"><div class="cl-h">Etkinlik ve topluluklar:</div><ul class="cl">'+veri.topluluklar.map(function(t){return '<li>'+(t[1]?'<details><summary>'+t[0]+'</summary><p>'+t[1]+'</p></details>':t[0])+'</li>'}).join('')+'</ul><div class="cl-h">Tören ve programlar:</div><p>Bu etkinlik ve projelerde aktif görev alarak organizasyon, ekip çalışması ve iletişim becerilerimi geliştirdim. Katıldığım her etkinlik sorumluluk bilincimi ve sosyal yönümü güçlendirdi.</p><ul class="cl">'+veri.programlar.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul></div><button class="ekb" id="ekb" type="button" aria-expanded="false">Daha fazla göster</button>'}
-put('egitim-list',veri.egitim.map(function(e,i){return '<div class="row"><div class="logo">🎓</div><div><h3>'+e[0]+'</h3><div class="s">'+e[1]+'</div><div class="m">'+e[2]+'</div>'+(i==0?clubs():'')+'</div></div>'}).join(''));
+put('egitim-list',veri.egitim.map(function(e,i){return '<div class="row"><div class="logo k"><img src="lise.png" alt="'+e[0]+'" loading="lazy" onerror="this.outerHTML=\'🎓\'"></div><div><h3>'+e[0]+'</h3><div class="s">'+e[1]+'</div><div class="m">'+e[2]+'</div>'+(i==0?clubs():'')+'</div></div>'}).join(''));
 var eb=document.getElementById('ekb');eb.addEventListener('click',function(){var a=document.getElementById('ek').classList.toggle('open');eb.textContent=a?'Daha az göster':'Daha fazla göster';eb.setAttribute('aria-expanded',a)});
 var AY=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
 function sure(b){var n=new Date(),m=(n.getFullYear()-b[0])*12+n.getMonth()+2-b[1],y=Math.floor(m/12),a=m%12;return (y?y+' yıl':'')+(y&&a?' ':'')+(a?a+' ay':'')}
@@ -393,6 +431,22 @@ function kisalt(){document.querySelectorAll('.rl p,#basarilar .row p').forEach(f
 var b=document.createElement('button');b.type='button';b.className='dfb';b.textContent='Daha fazla göster';b.setAttribute('aria-expanded','false');
 b.addEventListener('click',function(){var a=p.classList.toggle('open');b.textContent=a?'Daha az göster':'Daha fazla göster';b.setAttribute('aria-expanded',a)});p.after(b)})}
 window.addEventListener('load',function(){kisalt();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(kisalt)});
+
+(function(){
+var tt=document.createElement('div');tt.className='toast';tt.setAttribute('role','status');document.body.appendChild(tt);var tm;
+window.toast=function(m){tt.textContent=m;tt.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){tt.classList.remove('on')},2200)};
+['kopya','paylas'].forEach(function(i){var b=document.getElementById(i);if(b)b.addEventListener('click',function(){toast(i=='kopya'?'E-posta kopyalandı':'Bağlantı paylaşılıyor')})});
+var els=document.querySelectorAll('main .card.pad,main .card.profile .info,#stats');
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.documentElement.classList.add('js-rv');
+var ro=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.04,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('main .card.pad').forEach(function(x){x.classList.add('rv');ro.observe(x)})}
+var f=document.querySelector('footer');if(f){var h=document.createElement('p');h.className='hint';h.innerHTML='Kısayollar: <span class="kbd">/</span> sertifika ara · <span class="kbd">D</span> tema · <span class="kbd">T</span> başa dön';f.appendChild(h)}
+document.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey||e.altKey)return;var t=e.target,tg=(t.tagName||'').toLowerCase();if(tg=='input'||tg=='textarea'||t.isContentEditable||document.querySelector('dialog[open]'))return;
+var k=e.key.toLowerCase();
+if(k=='/'){e.preventDefault();var a=document.getElementById('sert-ara');document.getElementById('sertifikalar').scrollIntoView();setTimeout(function(){a.focus()},300)}
+else if(k=='d'){document.getElementById('mode').click();toast(document.documentElement.dataset.theme=='dark'?'Koyu tema':'Açık tema')}
+else if(k=='t'){window.scrollTo({top:0,behavior:'smooth'})}})
+})();
 </script>
 </body>
 </html>
