@@ -83,6 +83,7 @@ h2 span{color:var(--muted);font-weight:700}
 .banner::after{content:"";position:absolute;inset:0;background:radial-gradient(rgba(255,255,255,.3) 1.2px,transparent 1.5px) 0 0/22px 22px;-webkit-mask-image:linear-gradient(120deg,transparent 25%,#000);mask-image:linear-gradient(120deg,transparent 25%,#000)}
 .avatar{box-shadow:0 8px 22px -6px rgba(15,42,71,.35)}
 .info h1{font-size:1.9rem;letter-spacing:-.02em}
+.hi{margin:0 0 2px;color:#c9d2ff;font-size:.95rem;font-weight:700;min-height:1.6em}.hi:empty{visibility:hidden}
 .logo{background:linear-gradient(135deg,var(--soft),var(--tagbg));border:1px solid var(--line)}
 .tags span{background:var(--soft);border-color:transparent;color:var(--accent-d)}
 .btn{transition:transform .15s,box-shadow .15s}
@@ -686,6 +687,7 @@ body{font-size:calc(16px*var(--fs))}
     <img src="profil.jpg" alt="Muhammet Gölpınar" onerror="var l=['profil.jpeg','profil.png','profil.webp','profil.JPG'],n=+this.dataset.n||0;if(n<l.length){this.dataset.n=n+1;this.src=l[n];return}this.outerHTML='<svg viewBox=&quot;0 0 200 200&quot;><rect width=&quot;200&quot; height=&quot;200&quot; fill=&quot;#d6ecff&quot;/><circle cx=&quot;100&quot; cy=&quot;78&quot; r=&quot;36&quot; fill=&quot;#2f9bec&quot;/><path d=&quot;M28 200c0-42 32-68 72-68s72 26 72 68z&quot; fill=&quot;#2f9bec&quot;/><text x=&quot;100&quot; y=&quot;92&quot; text-anchor=&quot;middle&quot; font-family=&quot;Arial,Helvetica,sans-serif&quot; font-weight=&quot;800&quot; font-size=&quot;30&quot; fill=&quot;#fff&quot;>MG</text></svg>'">
   </div>
   <div class="info">
+    <p class="hi" id="hi" aria-hidden="true"></p>
     <h1><span>Muhammet</span> <span>GÖLPINAR</span></h1>
     <p class="head">Bilişim Teknolojileri Öğrencisi</p>
     <p class="now">Şu an: Arçelik Türkiye’de Bilgi İşlem Stajyeri</p>
@@ -731,6 +733,12 @@ body{font-size:calc(16px*var(--fs))}
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
 <section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
 <dialog class="askd" id="sord" aria-label="Muhammet'e sor"><button class="askx" id="askx" type="button" aria-label="Kapat">✕</button><div class="ask" id="sor"><div class="ah"><span class="aic" aria-hidden="true">💬</span><div><h2>Muhammet'e sor</h2><p class="sm">Merak ettiğini yaz; sana hemen yol göstereyim. İstersen mesajını e-postayla da gönder.</p></div></div><div class="ab" id="sorb"><div class="mlab">Hızlı başlangıç</div><div class="sab" id="sab"></div><label class="mf"><span>Adın</span><input type="text" id="msn" autocomplete="name" placeholder="Adın (isteğe bağlı)" maxlength="60"></label><label class="mf"><span>Sorun veya mesajın</span><textarea id="msm" rows="4" maxlength="1000" placeholder="Merhaba Muhammet, ..."></textarea></label><div class="micr" id="micr"><button class="micb" id="micb" type="button" aria-pressed="false">🎤 Sesle yaz</button><span class="mict" id="mict" role="status"></span></div><div class="mmeta"><div class="err" id="mse" role="alert"></div><span class="cnt" id="mcn">0/1000</span></div><div id="soro" class="so" aria-live="polite" hidden></div><div class="msub" id="msub"></div><div class="acts"><button class="kp" id="mkp" type="button">Kopyala</button><button class="send" id="mso" type="button"><span>Mesajı gönder</span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 11.5L21 3l-6.5 18-3.2-7.3L3 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11.3 13.7L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="mhint">Ctrl + Enter ile gönder · taslağın otomatik saklanır</div></div><div class="mok" id="mok" hidden><svg viewBox="0 0 52 52" width="64" height="64" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 27l8 8 14-17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Taslak hazır!</h3><p>E-posta uygulaman açılıyor…</p></div></div></dialog>
+
+<section class="card pad thx" id="tesekkur" aria-labelledby="thxh">
+  <p class="thx-t" id="thxh">Buraya kadar okuduğun için sağ ol <span aria-hidden="true">🙏</span></p>
+  <p class="thx-s">Bir mesaj bırakırsan çok sevinirim.</p>
+  <div class="btns"><button class="btn fill" id="thxm" type="button">Bir merhaba de 👋</button><a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a></div>
+</section>
 
 <footer><button class="btn out" id="pdf" type="button">📄 PDF kaydet</button><br>© 2026 Muhammet GÖLPINAR</footer>
 </main>
@@ -1013,9 +1021,9 @@ mark();
 })();
 
 (function(){
-function selam(){var h=+new Date().toLocaleString('en-GB',{timeZone:'Europe/Istanbul',hour:'2-digit',hour12:false})%24,g=h>=5&&h<12?'Günaydın':h>=12&&h<18?'İyi günler':h>=18&&h<22?'İyi akşamlar':'İyi geceler';
-document.getElementById('hosg').textContent=g+'!'}
-try{selam()}catch(e){}
+function selam(){var h=new Date().getHours(),g=h>=5&&h<12?'Günaydın':h>=12&&h<18?'İyi günler':h>=18&&h<22?'İyi akşamlar':'İyi geceler',e=h>=5&&h<12?'☀️':h>=12&&h<18?'🌤️':h>=18&&h<22?'🌆':'🌙',a=document.getElementById('hosg'),b=document.getElementById('hi');
+if(a)a.textContent=g+'!';if(b)b.textContent=e+' '+g+', ben'}
+try{selam();setInterval(function(){try{selam()}catch(e){}},60000)}catch(e){}
 var hd=document.getElementById('hos'),reduce=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo=='off',ti;
 var yaz=true;function tk(){}
 function kapat(){if(!hd.open)return;try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}if(reduce){hd.close();return}hd.classList.add('cik');setTimeout(function(){hd.classList.remove('cik');hd.close()},320)}
@@ -1344,5 +1352,106 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 .bth{border:2px solid var(--accent-d);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent-d) 22%,transparent)}
 .lv-b tr:not(.g) .vl span{color:var(--gc);font-weight:800}
 </style>
+<style id="thx-css">
+.thx{text-align:center;padding:28px 24px}
+.thx-t{margin:0;font-size:1.2rem;font-weight:800;letter-spacing:-.01em}
+.thx-s{margin:6px 0 0;color:var(--muted)}
+.thx .btns{justify-content:center;margin-top:18px}
+.thx{transition:opacity .6s ease,transform .6s ease}
+.thx.pre{opacity:0;transform:translateY(16px)}
+@media(prefers-reduced-motion:reduce){.thx{transition:none}}
+@media print{.thx{display:none!important}}
+</style>
+<script id="thx-js">
+(function(){
+var c=document.getElementById('tesekkur'),b=document.getElementById('thxm');
+if(!c)return;
+if(b)b.addEventListener('click',function(){var m=document.querySelector('.profile .btn.fill');if(m)m.click();else location.href='mailto:muhammetgolpinar@gmail.com'});
+var rm=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo==='off';
+if(rm||!('IntersectionObserver' in window))return;
+c.classList.add('pre');
+var o=new IntersectionObserver(function(e){if(e[0].isIntersecting){c.classList.remove('pre');o.disconnect()}},{threshold:.35});
+o.observe(c);
+setTimeout(function(){c.classList.remove('pre')},8000);
+})();
+</script>
+<style id="mv-css">
+@media screen and (max-width:720px){.card.profile .info>.hi{grid-column:1/-1;grid-row:1}.card.profile .avatar,.card.profile .info h1{grid-row:2}}
+#mvc{position:fixed;inset:0;width:100%;height:100%;z-index:8;pointer-events:none}
+#mvc[hidden]{display:none}
+.qb{position:fixed;left:max(14px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;align-items:center;max-width:calc(100vw - 92px);background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 28px -10px rgba(15,42,71,.45);opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease;pointer-events:none}
+.qb.on{opacity:1;transform:none;pointer-events:auto}
+.qb[hidden]{display:none}
+.qb button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+.qb .qb-t{padding:10px 6px 10px 16px;font-weight:800;font-size:.9rem;text-align:left}
+.qb .qb-x{width:34px;height:34px;margin-right:4px;border-radius:50%;color:var(--muted);font-weight:800}
+.qb .qb-x:hover{background:var(--soft)}
+@media(prefers-reduced-motion:reduce){.qb{transition:none;transform:none}}
+:root[data-mo=off] .qb{transition:none;transform:none}
+@media print{#mvc,.qb{display:none!important}}
+</style>
+<div class="qb" id="qb" hidden><button class="qb-t" id="qbt" type="button">Merak ettiğin bir şey var mı? 💬</button><button class="qb-x" id="qbx" type="button" aria-label="Kapat">✕</button></div>
+<script id="mv-js">
+(function(){
+var H=document.documentElement;
+function ls(f){try{return f()}catch(e){}}
+
+/* ---------- Mevsimlik dokunuş ---------- */
+var q=(location.search.match(/[?&]mevsim=([a-z]+)/)||[])[1];
+var d=new Date(),m=d.getMonth(),g=d.getDate();
+var sez=q==='kar'?'kar':q==='yaprak'?'yaprak':q==='yok'?null:
+ (m===11||(m===0&&g<=10))?'kar':(m>=2&&m<=4)?'yaprak':null;
+if(sez){
+ var cv=document.createElement('canvas');cv.id='mvc';cv.hidden=true;cv.setAttribute('aria-hidden','true');document.body.appendChild(cv);
+ var x=cv.getContext('2d'),W=0,Hh=0,P=[],raf=0,dpr=Math.min(window.devicePixelRatio||1,1.5);
+ var mq=matchMedia('(prefers-reduced-motion:reduce)');
+ var pc=['#4ade80','#86efac','#22c55e','#f9a8d4','#bbf7d0'];
+ function size(){W=innerWidth;Hh=innerHeight;cv.width=W*dpr;cv.height=Hh*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+ function mk(top){var r=sez==='kar'?1.5+Math.random()*2.6:5+Math.random()*4;
+  return{x:Math.random()*W,y:top?-12-Math.random()*40:Math.random()*Hh,r:r,vy:sez==='kar'?.4+r*.22:.7+Math.random()*.9,vx:(Math.random()-.5)*.3,ph:Math.random()*6.28,sw:sez==='kar'?.35:.9,a:Math.random()*6.28,va:(Math.random()-.5)*.05,c:pc[Math.floor(Math.random()*pc.length)]}}
+ function tick(){x.clearRect(0,0,W,Hh);
+  for(var i=0;i<P.length;i++){var p=P[i];p.ph+=.02;p.x+=p.vx+Math.sin(p.ph)*p.sw;p.y+=p.vy;p.a+=p.va;
+   if(p.y>Hh+14){P[i]=p=mk(true)}if(p.x<-14)p.x=W+14;else if(p.x>W+14)p.x=-14;
+   if(sez==='kar'){x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fillStyle='rgba(255,255,255,.93)';x.fill();x.lineWidth=.8;x.strokeStyle='rgba(47,155,236,.4)';x.stroke()}
+   else{x.save();x.translate(p.x,p.y);x.rotate(p.a);x.beginPath();x.ellipse(0,0,p.r,p.r*.45,0,0,6.283);x.fillStyle=p.c;x.globalAlpha=.85;x.fill();x.restore()}}
+  raf=requestAnimationFrame(tick)}
+ function start(){if(raf)return;size();if(!P.length){var n=Math.max(16,Math.min(60,Math.round(innerWidth/24)));for(var i=0;i<n;i++)P.push(mk(false))}cv.hidden=false;raf=requestAnimationFrame(tick)}
+ function stop(){cancelAnimationFrame(raf);raf=0;cv.hidden=true;x.clearRect(0,0,W,Hh)}
+ function sw(){return ls(function(){return localStorage.getItem('se')})}
+ function upd(){var on=!mq.matches&&H.dataset.mo!=='off'&&sw()!=='off';on?start():stop();
+  [].forEach.call(document.querySelectorAll('[data-se]'),function(b){b.setAttribute('aria-pressed',String(b.dataset.se===(sw()==='off'?'off':'on')))})}
+ addEventListener('resize',function(){if(raf){size()}});
+ if(mq.addEventListener)mq.addEventListener('change',upd);
+ new MutationObserver(upd).observe(H,{attributes:true,attributeFilter:['data-mo']});
+ /* Ayarlar çekmecesine satır */
+ var ayr=document.getElementById('ayr');
+ if(ayr&&ayr.parentNode){
+  var row=document.createElement('div');row.className='dt';
+  row.innerHTML='<span>Mevsim efekti '+(sez==='kar'?'❄️':'🍃')+'</span><div class="seg"><button type="button" data-se="on">Açık</button><button type="button" data-se="off">Kapalı</button></div>';
+  ayr.parentNode.insertBefore(row,ayr);
+  [].forEach.call(row.querySelectorAll('[data-se]'),function(b){b.addEventListener('click',function(){ls(function(){b.dataset.se==='off'?localStorage.setItem('se','off'):localStorage.removeItem('se')});upd()})});
+  ayr.addEventListener('click',function(){ls(function(){localStorage.removeItem('se')});upd()})}
+ upd();
+}
+
+/* ---------- Soru balonu ---------- */
+var b=document.getElementById('qb'),bt=document.getElementById('qbt'),bx=document.getElementById('qbx'),dlg=document.getElementById('sord');
+if(!b||!bt)return;
+function seen(){return ls(function(){return sessionStorage.getItem('qb')})}
+function mark(){ls(function(){sessionStorage.setItem('qb','1')})}
+if(seen())return;
+var tries=0,hideT;
+function hide(){b.classList.remove('on');clearTimeout(hideT);setTimeout(function(){b.hidden=true},450)}
+function busy(){var t=document.getElementById('tesekkur'),r=t&&t.getBoundingClientRect();
+ return document.hidden||document.querySelector('dialog[open]')||document.querySelector('.drawer.open')||(r&&r.top<innerHeight&&r.bottom>0)}
+function show(){if(seen())return;
+ if(busy()){if(++tries<6)setTimeout(show,8000);return}
+ b.hidden=false;void b.offsetWidth;b.classList.add('on');mark();hideT=setTimeout(hide,14000)}
+setTimeout(show,30000);
+bt.addEventListener('click',function(){hide();var m=document.querySelector('.profile .btn.fill');if(m)m.click()});
+bx.addEventListener('click',hide);
+if(dlg)dlg.addEventListener('close',mark);
+})();
+</script>
 </body>
 </html>
