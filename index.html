@@ -826,7 +826,7 @@ var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientW
 function kapat(){ov.hidden=true;document.body.style.overflow='';if(prev)prev.focus()}
 op.addEventListener('click',function(){prev=op;var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf);
 document.getElementById('lv-t').textContent='Sertifikalar ('+l.length+')';
-b.innerHTML=l.map(function(c,i){return '<div><b>'+(i+1)+'. '+c[0]+'</b> <span>— '+c[1]+' · '+c[2]+'</span></div>'}).join('');
+b.innerHTML='<table><thead><tr><th>No</th><th>Sertifika</th><th>Veren</th><th>Tarih</th></tr></thead><tbody>'+l.map(function(c,i){return '<tr><td>'+(l.length-i)+'</td><td>'+c[0]+'</td><td><span class="vl">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="" onerror="this.remove()">':'')+'<span>'+c[1]+'</span></span></td><td>'+c[2]+'</td></tr>'}).join('')+'</tbody></table>';
 ov.hidden=false;document.body.style.overflow='hidden';fit();ov.querySelector('#lv-x').focus()});
 ov.querySelector('#lv-x').addEventListener('click',kapat);
 document.addEventListener('keydown',function(e){if(e.key=='Escape'&&!ov.hidden)kapat()});
@@ -1245,10 +1245,15 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 .lv-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--card)}
 .lv-h b{font-weight:800;font-size:1rem}
 .lv-h button{font:inherit;font-weight:800;font-size:.9rem;border:1px solid var(--line);background:var(--tagbg);color:var(--accent-d);border-radius:999px;padding:6px 14px;cursor:pointer}
-.lv-b{flex:1;min-height:0;overflow:auto;padding:8px 14px;column-width:300px;column-gap:20px;font-size:14px;line-height:1.25}
-.lv-b div{break-inside:avoid;padding:.28em 0;border-bottom:1px solid var(--line)}
-.lv-b b{font-weight:800}
-.lv-b span{color:var(--muted)}
+.lv-b{flex:1;min-height:0;overflow:auto;padding:8px 10px;font-size:14px;line-height:1.25}
+.lv-b table{width:100%;border-collapse:collapse}
+.lv-b th{position:sticky;top:0;background:var(--card);text-align:left;font-weight:800;color:var(--accent-d);padding:.35em .4em;border-bottom:2px solid var(--line);white-space:nowrap}
+.lv-b td{padding:.28em .4em;border-bottom:1px solid var(--line);vertical-align:top}
+.lv-b td:first-child{color:var(--muted);text-align:right;width:1%;white-space:nowrap}
+.lv-b td:nth-child(2){font-weight:800}
+.vl{display:flex;align-items:center;gap:.5em}
+.vl img{flex:none;width:1.9em;height:1.9em;object-fit:contain;border-radius:.4em}
+.lv-b td:nth-child(4){color:var(--muted);white-space:nowrap}
 @media print{.lv,.lst{display:none!important}}
 </style>
 </body>
