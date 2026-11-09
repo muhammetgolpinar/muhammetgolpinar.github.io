@@ -726,7 +726,7 @@ body{font-size:calc(16px*var(--fs))}
 
 <section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
 <section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="dist" id="sert-dag"></div>
-<input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select>
+<input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select><button class="bt lst" id="sert-liste" type="button" aria-haspopup="dialog">📋 Listele</button>
 <div class="bulut" id="sert-bulut"></div><div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
 <section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
@@ -818,6 +818,19 @@ put('sert-say','('+veri.sertifikalar.length+')');sert();
 document.getElementById('sert-ara').addEventListener('input',function(){qq=this.value.trim().toLocaleLowerCase('tr');sert()});
 document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;qq='';document.getElementById('sert-ara').value='';sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
 document.getElementById('sert-more').addEventListener('click',function(){acik=!acik;sert();if(!acik)document.getElementById('sertifikalar').scrollIntoView()});
+(function(){var ov=document.createElement('div');ov.className='lv';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Tüm sertifikalar');
+ov.innerHTML='<div class="lv-h"><b id="lv-t"></b><button type="button" id="lv-x">Kapat ✕</button></div><div class="lv-b" id="lv-b"></div>';document.body.appendChild(ov);
+var b=ov.querySelector('#lv-b'),op=document.getElementById('sert-liste'),prev=null;
+function fit(){var f=15;b.style.fontSize=f+'px';while(f>8&&b.scrollWidth>b.clientWidth+1){f--;b.style.fontSize=f+'px'}
+var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientWidth+1};while(f>8&&h()){f-=.5;b.style.fontSize=f+'px'}}
+function kapat(){ov.hidden=true;document.body.style.overflow='';if(prev)prev.focus()}
+op.addEventListener('click',function(){prev=op;var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf);
+document.getElementById('lv-t').textContent='Sertifikalar ('+l.length+')';
+b.innerHTML=l.map(function(c,i){return '<div><b>'+(i+1)+'. '+c[0]+'</b> <span>— '+c[1]+' · '+c[2]+'</span></div>'}).join('');
+ov.hidden=false;document.body.style.overflow='hidden';fit();ov.querySelector('#lv-x').focus()});
+ov.querySelector('#lv-x').addEventListener('click',kapat);
+document.addEventListener('keydown',function(e){if(e.key=='Escape'&&!ov.hidden)kapat()});
+window.addEventListener('resize',function(){if(!ov.hidden)fit()})})();
 put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar'],[70,'Proje','#projeler','MuGöl PORTAL’ın içinde']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+(a[3]?'<small>'+a[3]+'</small>':'')+'</a>'}).join(''));
 var root=document.documentElement,md=document.getElementById('mode');
 function ik(){var d=root.dataset.theme=='dark';md.textContent=d?'☀️':'🌙';md.setAttribute('aria-label',d?'Açık temaya geç':'Koyu temaya geç')}
@@ -1226,6 +1239,17 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 
 })();
 </script>
-<style id="iq-css">a.dcopy{display:block;text-align:center;text-decoration:none;color:var(--ink)}#iqb{background:var(--accent);border-color:var(--accent);color:#fff}#iqb:hover{filter:brightness(1.08);background:var(--accent)}</style>
+<style id="iq-css">a.dcopy{display:block;text-align:center;text-decoration:none;color:var(--ink)}#iqb{background:var(--accent);border-color:var(--accent);color:#fff}#iqb:hover{filter:brightness(1.08);background:var(--accent)}.lst{display:block;margin:0 0 12px;padding:8px 16px;font-size:.9rem}
+.lv{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lv[hidden]{display:none}
+.lv-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--card)}
+.lv-h b{font-weight:800;font-size:1rem}
+.lv-h button{font:inherit;font-weight:800;font-size:.9rem;border:1px solid var(--line);background:var(--tagbg);color:var(--accent-d);border-radius:999px;padding:6px 14px;cursor:pointer}
+.lv-b{flex:1;min-height:0;overflow:auto;padding:8px 14px;column-width:300px;column-gap:20px;font-size:14px;line-height:1.25}
+.lv-b div{break-inside:avoid;padding:.28em 0;border-bottom:1px solid var(--line)}
+.lv-b b{font-weight:800}
+.lv-b span{color:var(--muted)}
+@media print{.lv,.lst{display:none!important}}
+</style>
 </body>
 </html>
