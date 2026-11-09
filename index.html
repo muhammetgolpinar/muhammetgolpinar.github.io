@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>try{var t=localStorage.getItem('tema');if(!t&&matchMedia('(prefers-color-scheme:dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t;var a=localStorage.getItem('ac'),f=localStorage.getItem('fs'),o=localStorage.getItem('mo'),h=localStorage.getItem('hc');if(o)document.documentElement.dataset.mo=o;if(h)document.documentElement.dataset.hc=h;if(a)document.documentElement.dataset.ac=a;if(f)document.documentElement.style.setProperty('--fs',f)}catch(e){}</script>
 <meta name="theme-color" content="#0b1226">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap">
 <meta name="description" content="Muhammet Gölpınar, Bilişim Teknolojileri öğrencisi. Deneyim, eğitim, sertifikalar ve projeler.">
 <meta property="og:type" content="website"><meta property="og:title" content="Muhammet GÖLPINAR - Bilişim Teknolojileri Öğrencisi"><meta property="og:description" content="Deneyim, eğitim, sertifikalar ve projeler."><meta property="og:url" content="https://muhammetgolpinar.github.io"><meta property="og:image" content="https://muhammetgolpinar.github.io/profil.jpg"><meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f4bff'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial' font-weight='800' font-size='28' fill='white'%3EMG%3C/text%3E%3C/svg%3E">
@@ -14,7 +16,7 @@
 :root[data-theme=dark]{color-scheme:dark;--bg:#0a1829;--ink:#e6f1fc;--muted:#8fa9c4;--line:#1d3450;--accent:#2f9bec;--accent-d:#6cbcff;--soft:#122d49;--card:#0f2237;--tagbg:#0c1f33;--sub:#b5c9de}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:60px}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 Nunito,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
 a{color:inherit}
 a:focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .bar{position:sticky;top:0;z-index:10;background:var(--card);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
@@ -162,7 +164,7 @@ html:not(.ok) body{display:none}
 @media screen{
 :root{--bg:#eef1f7;--ink:#0b1226;--muted:#5b6784;--line:#dde3ef;--accent:#2f4bff;--accent-d:#2338d5;--soft:#e6ebff;--card:#fff;--tagbg:#f3f5fb;--sub:#3a4560;--hero:#0b1226}
 :root[data-theme=dark]{--bg:#070b18;--ink:#e8ecf8;--muted:#8d98b5;--line:#1c2540;--accent:#5b73ff;--accent-d:#9aa9ff;--soft:#141d3d;--card:#0d1428;--tagbg:#0a1022;--sub:#b9c2dc;--hero:#0d1530}
-h1,h2,h3,.bar b,.stats b{font-family:Sora,inherit}
+h1,h2,h3,.bar b,.stats b{font-family:Nunito,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
 .col{max-width:1040px;padding-top:18px}
 .bar .in{max-width:1040px}
 .bar b::before{content:"";display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:2px;background:var(--accent)}
@@ -407,7 +409,7 @@ body{font-size:calc(16px*var(--fs))}
 .hos::backdrop{background:radial-gradient(circle at 50% 30%,rgba(47,75,255,.35),rgba(7,11,24,.85));-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .hosh{position:relative;height:120px;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.18),transparent 45%),linear-gradient(135deg,#2338d5,#2f4bff 55%,#6d5bff)}
 .hosh::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.22) 1.2px,transparent 1.4px);background-size:16px 16px;opacity:.6}
-.hosa{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%);width:96px;height:96px;border-radius:50%;border:5px solid var(--card);background:linear-gradient(135deg,#0b1226,#1c2a6b);color:#fff;display:grid;place-items:center;font:800 1.8rem Sora,inherit;overflow:hidden;box-shadow:0 10px 24px -8px rgba(15,25,90,.6)}
+.hosa{position:absolute;left:50%;bottom:-48px;transform:translateX(-50%);width:96px;height:96px;border-radius:50%;border:5px solid var(--card);background:linear-gradient(135deg,#0b1226,#1c2a6b);color:#fff;display:grid;place-items:center;font:800 1.8rem Nunito,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;overflow:hidden;box-shadow:0 10px 24px -8px rgba(15,25,90,.6)}
 .hosa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hosc{padding:62px 26px 26px}
 .hosr{display:inline-block;padding:4px 12px;border-radius:999px;background:var(--soft);color:var(--accent-d);font-size:.74rem;font-weight:800;letter-spacing:.02em}
@@ -740,7 +742,8 @@ body{font-size:calc(16px*var(--fs))}
 <script>
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Nesnelerin İnterneti (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+sertifikalar:[["Sürdürülebilirlik Okuryazarlığı","BTK Akademi","Kasım 2026",[]],
+["Nesnelerin İnterneti (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Meslek Etiği","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Dijital Becerilerin Geliştirilmesi","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Dijital Yaşam Becerileri","ODTÜ Geliştirme Vakfı Okulları","Kasım 2026",[]],
