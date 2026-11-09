@@ -742,7 +742,8 @@ body{font-size:calc(16px*var(--fs))}
 <script>
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Sürdürülebilirlik Okuryazarlığı","BTK Akademi","Kasım 2026",[]],
+sertifikalar:[["Dijital Okuryazarlık (Orta Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+["Sürdürülebilirlik Okuryazarlığı","BTK Akademi","Kasım 2026",[]],
 ["Nesnelerin İnterneti (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Meslek Etiği","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Dijital Becerilerin Geliştirilmesi","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -819,15 +820,21 @@ document.getElementById('sert-ara').addEventListener('input',function(){qq=this.
 document.getElementById('sertifika-filter').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;fi=+b.dataset.i;acik=false;qq='';document.getElementById('sert-ara').value='';sert();document.querySelector('.chip[data-i="'+fi+'"]').focus()});
 document.getElementById('sert-more').addEventListener('click',function(){acik=!acik;sert();if(!acik)document.getElementById('sertifikalar').scrollIntoView()});
 (function(){var ov=document.createElement('div');ov.className='lv';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Tüm sertifikalar');
-ov.innerHTML='<div class="lv-h"><b id="lv-t"></b><button type="button" id="lv-x">Kapat ✕</button></div><div class="lv-b" id="lv-b"></div>';document.body.appendChild(ov);
-var b=ov.querySelector('#lv-b'),op=document.getElementById('sert-liste'),prev=null;
-function fit(){var f=15;b.style.fontSize=f+'px';while(f>8&&b.scrollWidth>b.clientWidth+1){f--;b.style.fontSize=f+'px'}
+ov.innerHTML='<div class="lv-h"><b id="lv-t"></b><button type="button" id="lv-x">Kapat ✕</button></div><div class="lv-m" role="group" aria-label="Görünüm"><button type="button" data-g="0" aria-pressed="true">Tarihe göre</button><button type="button" data-g="1" aria-pressed="false">Kuruma göre</button></div><div class="lv-b" id="lv-b"></div>';document.body.appendChild(ov);
+var b=ov.querySelector('#lv-b'),op=document.getElementById('sert-liste'),prev=null,grp=0,L=[];
+function fit(){var f=20;b.style.fontSize=f+'px';while(f>8&&b.scrollWidth>b.clientWidth+1){f--;b.style.fontSize=f+'px'}
 var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientWidth+1};while(f>8&&h()){f-=.5;b.style.fontSize=f+'px'}}
+function lg(k){return '<span class="vl">'+(logolar[k]?'<img src="'+logolar[k]+'" alt="" onerror="this.remove()">':'')+'<span>'+k+'</span></span>'}
+function ciz(){var l=L,n=l.length,h;
+if(!grp){h='<table><thead><tr><th>No</th><th>Sertifika</th><th>Veren</th><th>Tarih</th></tr></thead><tbody>'+l.map(function(c,i){return '<tr><td>'+(n-i)+'</td><td>'+c[0]+'</td><td>'+lg(c[1])+'</td><td>'+c[2]+'</td></tr>'}).join('')+'</tbody></table>'}
+else{var g={},o=[];l.forEach(function(c,i){if(!g[c[1]]){g[c[1]]=[];o.push(c[1])}g[c[1]].push([n-i,c])});
+h='<table><thead><tr><th>No</th><th>Sertifika</th><th>Tarih</th></tr></thead>'+o.map(function(k){return '<tbody><tr class="g"><td colspan="3">'+lg(k)+' <em>('+g[k].length+')</em></td></tr>'+g[k].map(function(x){return '<tr><td>'+x[0]+'</td><td>'+x[1][0]+'</td><td>'+x[1][2]+'</td></tr>'}).join('')+'</tbody>'}).join('')+'</table>'}
+b.innerHTML=h;ov.querySelectorAll('.lv-m button').forEach(function(x){x.setAttribute('aria-pressed',String(+x.dataset.g===grp))});fit()}
 function kapat(){ov.hidden=true;document.body.style.overflow='';if(prev)prev.focus()}
-op.addEventListener('click',function(){prev=op;var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf);
-document.getElementById('lv-t').textContent='Sertifikalar ('+l.length+')';
-b.innerHTML='<table><thead><tr><th>No</th><th>Sertifika</th><th>Veren</th><th>Tarih</th></tr></thead><tbody>'+l.map(function(c,i){return '<tr><td>'+(l.length-i)+'</td><td>'+c[0]+'</td><td><span class="vl">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="" onerror="this.remove()">':'')+'<span>'+c[1]+'</span></span></td><td>'+c[2]+'</td></tr>'}).join('')+'</tbody></table>';
-ov.hidden=false;document.body.style.overflow='hidden';fit();ov.querySelector('#lv-x').focus()});
+ov.querySelectorAll('.lv-m button').forEach(function(x){x.addEventListener('click',function(){grp=+x.dataset.g;ciz()})});
+op.addEventListener('click',function(){prev=op;L=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf);
+document.getElementById('lv-t').textContent='Sertifikalar ('+L.length+')';
+ov.hidden=false;document.body.style.overflow='hidden';ciz();ov.querySelector('#lv-x').focus()});
 ov.querySelector('#lv-x').addEventListener('click',kapat);
 document.addEventListener('keydown',function(e){if(e.key=='Escape'&&!ov.hidden)kapat()});
 window.addEventListener('resize',function(){if(!ov.hidden)fit()})})();
@@ -1250,6 +1257,11 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 .lv-b th{position:sticky;top:0;background:var(--card);text-align:left;font-weight:800;color:var(--accent-d);padding:.35em .4em;border-bottom:2px solid var(--line);white-space:nowrap}
 .lv-b td{padding:.28em .4em;border-bottom:1px solid var(--line);vertical-align:top}
 .lv-b td:first-child{color:var(--muted);text-align:right;width:1%;white-space:nowrap}
+.lv-m{display:flex;gap:6px;padding:8px 14px 0}
+.lv-m button{font:inherit;font-weight:800;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 14px;cursor:pointer}
+.lv-m button[aria-pressed="true"]{background:var(--tagbg);color:var(--accent-d);border-color:var(--accent-d)}
+.lv-b tr.g td{background:var(--tagbg);color:var(--ink);padding:.3em .4em;border-bottom:1px solid var(--line);text-align:left;width:auto;white-space:normal;font-weight:800}
+.lv-b tr.g em{font-style:normal;color:var(--muted);font-weight:700}
 .lv-b td:nth-child(2){font-weight:800}
 .vl{display:flex;align-items:center;gap:.5em}
 .vl img{flex:none;width:1.9em;height:1.9em;object-fit:contain;border-radius:.4em}
