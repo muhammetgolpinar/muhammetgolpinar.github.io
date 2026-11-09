@@ -853,11 +853,11 @@ var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientW
 function lg(k){return '<span class="vl">'+(logolar[k]?'<img src="'+logolar[k]+'" alt="" onerror="this.remove()">':'')+'<span>'+k+'</span></span>'}
 var PAL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'];
 function rk(k){var a=[];veri.sertifikalar.forEach(function(c){if(a.indexOf(c[1])<0)a.push(c[1])});return PAL[Math.max(0,a.indexOf(k))%PAL.length]}
-function bb(c){return ' <button type="button" class="bg" data-i="'+veri.sertifikalar.indexOf(c)+'" aria-label="Belgeyi aç">📄</button>'}
+function nm(c){return '<span class="nm" data-i="'+veri.sertifikalar.indexOf(c)+'">'+c[0]+'</span>'}
 function ciz(){var l=L,n=l.length,h;
-if(!grp){h='<table><thead><tr><th>No</th><th>Sertifika</th><th>Veren</th><th>Tarih</th></tr></thead><tbody>'+l.map(function(c,i){return '<tr style="--gc:'+rk(c[1])+'"><td>'+(n-i)+'</td><td>'+c[0]+bb(c)+'</td><td>'+lg(c[1])+'</td><td>'+c[2]+'</td></tr>'}).join('')+'</tbody></table>'}
+if(!grp){h='<table><thead><tr><th>No</th><th>Sertifika</th><th>Veren</th><th>Tarih</th></tr></thead><tbody>'+l.map(function(c,i){return '<tr style="--gc:'+rk(c[1])+'"><td>'+(n-i)+'</td><td>'+nm(c)+'</td><td>'+lg(c[1])+'</td><td>'+c[2]+'</td></tr>'}).join('')+'</tbody></table>'}
 else{var g={},o=[];l.forEach(function(c,i){if(!g[c[1]]){g[c[1]]=[];o.push(c[1])}g[c[1]].push([n-i,c])});
-h='<table>'+o.map(function(k){return '<tbody style="--gc:'+rk(k)+'"><tr class="g"><td colspan="3">'+lg(k)+' <em>('+g[k].length+')</em></td></tr>'+g[k].map(function(x){return '<tr><td>'+x[0]+'</td><td>'+x[1][0]+bb(x[1])+'</td><td>'+x[1][2]+'</td></tr>'}).join('')+'</tbody>'}).join('')+'</table>'}
+h='<table>'+o.map(function(k){return '<tbody style="--gc:'+rk(k)+'"><tr class="g"><td colspan="3">'+lg(k)+' <em>('+g[k].length+')</em></td></tr>'+g[k].map(function(x){return '<tr><td>'+x[0]+'</td><td>'+nm(x[1])+'</td><td>'+x[1][2]+'</td></tr>'}).join('')+'</tbody>'}).join('')+'</table>'}
 b.innerHTML=h;ov.querySelectorAll('.lv-m button').forEach(function(x){x.setAttribute('aria-pressed',String(+x.dataset.g===grp))});fit()}
 function kapat(){ov.hidden=true;document.body.style.overflow='';if(prev)prev.focus()}
 ov.querySelectorAll('.lv-m button').forEach(function(x){x.addEventListener('click',function(){grp=+x.dataset.g;ciz()})});
@@ -865,6 +865,7 @@ op.addEventListener('click',function(){prev=op;L=veri.sertifikalar.filter(flt[fi
 document.getElementById('lv-t').textContent='Sertifikalar ('+L.length+')';
 ov.hidden=false;document.body.style.overflow='hidden';ciz();ov.querySelector('#lv-x').focus()});
 ov.querySelector('#lv-x').addEventListener('click',kapat);
+b.addEventListener('click',function(e){var t=e.target.closest('.nm');if(t)bAc(veri.sertifikalar[+t.dataset.i])});
 document.addEventListener('keydown',function(e){if(e.key=='Escape'&&!ov.hidden)kapat()});
 window.addEventListener('resize',function(){if(!ov.hidden)fit()})})();
 put('stats',[[veri.sertifikalar.length,'Sertifika','#sertifikalar'],[70,'Proje','#projeler','MuGöl PORTAL’ın içinde']].map(function(a){return '<a href="'+a[2]+'"><b>'+a[0]+'</b>'+a[1]+(a[3]?'<small>'+a[3]+'</small>':'')+'</a>'}).join(''));
@@ -1291,6 +1292,9 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 .lv-m button[aria-pressed="true"]{background:var(--tagbg);color:var(--accent-d);border-color:var(--accent-d)}
 .lv-b tr.g td{background:var(--tagbg);color:var(--ink);padding:.3em .4em;border-bottom:1px solid var(--line);text-align:left;width:auto;white-space:normal;font-weight:800}
 .lv-b tr.g em{font-style:normal;color:var(--muted);font-weight:700}
+.lv-b tr.g .vl{display:inline-flex;vertical-align:middle}
+.lv-b tr.g em{margin-left:.4em;vertical-align:middle}
+.lv-b .nm{cursor:pointer}
 .lv-b td:nth-child(2){font-weight:800}
 .vl{display:flex;align-items:center;gap:.5em}
 .vl img{flex:none;width:1.9em;height:1.9em;object-fit:contain;border-radius:.4em}
