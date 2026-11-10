@@ -674,6 +674,18 @@ body{font-size:calc(16px*var(--fs))}
 .oyk h2::before{display:none}
 @media print{#oyun{display:none!important}}
 </style>
+<style id="lv-compact">
+.lv .lv-b{padding:4px 8px 4px;line-height:1.15}
+.lv .lv-b td{padding:.16em .35em}
+.lv .lv-b th{padding:.25em .35em}
+.lv .lv-b .vl img{width:1.35em;height:1.35em}
+.lv .lv-b tr.g td{padding:.3em .45em}
+.lv .lv-b tr.g .vl img{padding:1px}
+.lv .lv-b .no,.lv .lv-b .dp{line-height:1.25}
+.lv .lv-m{margin:4px 12px 0}
+.lv .lv-m button{padding:4px 14px}
+.lv-h{padding:6px 12px!important}
+</style>
 </head>
 <body>
 <div class="prog" id="prog"></div>
@@ -859,8 +871,8 @@ document.getElementById('sert-more').addEventListener('click',function(){acik=!a
 (function(){var ov=document.createElement('div');ov.className='lv';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Tüm sertifikalar');
 ov.innerHTML='<div class="lv-h"><div class="lv-tt"><b id="lv-t"></b><small id="lv-s"></small></div><div class="lv-a"><button type="button" id="lv-p" aria-label="Listeyi PNG olarak kaydet">⬇ PNG</button><button type="button" id="lv-x">Kapat ✕</button></div><div class="lv-bar" id="lv-bar" aria-hidden="true"></div></div><div class="lv-m" role="group" aria-label="Görünüm"><button type="button" data-g="0" aria-pressed="true">Tarihe göre</button><button type="button" data-g="1" aria-pressed="false">Kuruma göre</button></div><div class="lv-b" id="lv-b"></div>';document.body.appendChild(ov);
 var b=ov.querySelector('#lv-b'),op=document.getElementById('sert-liste'),prev=null,grp=0,L=[];
-function fit(){var f=20;b.style.fontSize=f+'px';while(f>8&&b.scrollWidth>b.clientWidth+1){f--;b.style.fontSize=f+'px'}
-var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientWidth+1};while(f>8&&h()){f-=.5;b.style.fontSize=f+'px'}}
+function fit(){var f=22;b.style.fontSize=f+'px';var h=function(){return b.scrollHeight>b.clientHeight+1||b.scrollWidth>b.clientWidth+1};while(f>8&&h()){f-=.25;b.style.fontSize=f+'px'}}
+window.addEventListener('resize',function(){if(!ov.hidden)fit()});
 function lg(k){return '<span class="vl">'+(logolar[k]?'<img src="'+logolar[k]+'" alt="" onerror="this.remove()">':'')+'<span>'+k+'</span></span>'}
 var PAL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'];
 function rk(k){var a=[];veri.sertifikalar.forEach(function(c){if(a.indexOf(c[1])<0)a.push(c[1])});return PAL[Math.max(0,a.indexOf(k))%PAL.length]}
@@ -890,9 +902,9 @@ function ft(x,t,mw,sz,wt,mn){mn=mn||19;t=dc(t);var f=sz;x.font=wt+' '+f+'px Inte
  if(x.measureText(t).width>mw){while(t.length>3&&x.measureText(t+'…').width>mw)t=t.slice(0,-1);t=t+'…'}return t}
 function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S=PW/WL,HL=PH/S,P=44,F='Inter,\"Segoe UI\",system-ui,sans-serif';
  var G=[],o=[];if(grp){var g={};l.forEach(function(c,i){if(!g[c[1]]){g[c[1]]=[];o.push(c[1])}g[c[1]].push([n-i,c])});G=o.map(function(k){return{k:k,r:g[k]}})}
- var T=150,M=40,GH0=72,GP0=16,RH0=56,TH0=56;
+ var T=146,M=26,GH0=72,GP0=16,RH0=56,TH0=56;
  var C=grp?G.reduce(function(a,q){return a+GH0+q.r.length*RH0+GP0},0)-GP0:TH0+n*RH0;
- var k=Math.min(1.12,(HL-T-M)/C),RH=RH0*k,GH=GH0*k,GP=GP0*k,TH=TH0*k;
+ var k=Math.min(1.12,(HL-T-M)/C),RH=RH0*k,GH=GH0*k,GP=GP0*k,TH=TH0*k,kf=k*1.32;
  var cv=document.createElement('canvas');cv.width=PW;cv.height=PH;var x=cv.getContext('2d');x.scale(S,S);
  x.fillStyle='#ffffff';x.fillRect(0,0,WL,HL);
  x.textBaseline='alphabetic';x.fillStyle='#0f2a47';x.font='800 46px '+F;x.fillText('Muhammet GÖLPINAR Sertifikaları',P,66);
@@ -902,19 +914,19 @@ function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S
  x.save();rr(x,P,120,bw,10,5);x.clip();Object.keys(cn).forEach(function(q){var w=bw*cn[q]/n;x.fillStyle=rk(q);x.fillRect(bx,120,w+1,10);bx+=w});x.restore();
  var y=T;x.textBaseline='middle';
  function row(no,c,gc,top,showK){var h=RH,my=top+h/2+1;x.fillStyle=tn(gc,.07);x.fillRect(P,top,WL-2*P,h);x.fillStyle=tn(gc,.14);x.fillRect(P,top+h-1,WL-2*P,1);
-  var bw2=46*k,bh=32*k;x.fillStyle=tn(gc,.16);rr(x,P+18,top+(h-bh)/2,bw2,bh,bh/2);x.fill();
-  x.fillStyle=gc;x.font='800 '+(21*k)+'px '+F;x.textAlign='center';x.fillText(String(no),P+18+bw2/2,my);x.textAlign='left';
+  var bw2=54*k,bh=38*k;x.fillStyle=tn(gc,.16);rr(x,P+18,top+(h-bh)/2,bw2,bh,bh/2);x.fill();
+  x.fillStyle=gc;x.font='800 '+(21*kf)+'px '+F;x.textAlign='center';x.fillText(String(no),P+18+bw2/2,my);x.textAlign='left';
   var dpw=170,nx=P+84,mw=(WL-2*P)-84-dpw-24-(showK?290:0);
-  x.fillStyle='#0f2a47';var t=ft(x,c[0],mw,27*k,'800',Math.max(12,19*k));x.fillText(t,nx,my);
-  if(showK){x.fillStyle=gc;var kt=ft(x,c[1],262,20*k,'800',Math.max(11,17*k));if(/…$/.test(kt)&&AB[c[1]])kt=ft(x,AB[c[1]],262,20*k,'800',Math.max(11,17*k));x.fillText(kt,WL-P-dpw-24-262,my)}
-  var isN=true;x.font='700 '+(21*k)+'px '+F;var dw=x.measureText(c[2]).width+30*k,ph=34*k;
+  x.fillStyle='#0f2a47';var t=ft(x,c[0],mw,27*kf,'800',Math.max(12,19*kf));x.fillText(t,nx,my);
+  if(showK){x.fillStyle=gc;var kt=ft(x,c[1],262,20*kf,'800',Math.max(11,17*kf));if(/…$/.test(kt)&&AB[c[1]])kt=ft(x,AB[c[1]],262,20*kf,'800',Math.max(11,17*kf));x.fillText(kt,WL-P-dpw-24-262,my)}
+  var isN=true;x.font='700 '+(21*kf)+'px '+F;var dw=x.measureText(c[2]).width+30*k,ph=40*k;
   x.fillStyle=isN?tn(gc,.2):tn(gc,.1);rr(x,WL-P-14-dw,top+(h-ph)/2,dw,ph,ph/2);x.fill();
   x.fillStyle=isN?gc:'#56728f';x.textAlign='center';x.fillText(c[2],WL-P-14-dw/2,my);x.textAlign='left'}
- if(!grp){x.fillStyle='#dfe9f7';rr(x,P,y,WL-2*P,TH,14*k);x.fill();x.fillStyle='#1272c4';x.font='800 '+(22*k)+'px '+F;var hy=y+TH/2+1;x.fillText('No',P+20,hy);x.fillText('Sertifika',P+84,hy);x.fillText('Veren',WL-P-170-24-262,hy);x.fillText('Tarih',WL-P-14-110,hy);y+=TH;
+ if(!grp){x.fillStyle='#dfe9f7';rr(x,P,y,WL-2*P,TH,14*k);x.fill();x.fillStyle='#1272c4';x.font='800 '+(22*kf)+'px '+F;var hy=y+TH/2+1;x.fillText('No',P+20,hy);x.fillText('Sertifika',P+84,hy);x.fillText('Veren',WL-P-170-24-262,hy);x.fillText('Tarih',WL-P-14-110,hy);y+=TH;
   l.forEach(function(c,i){row(n-i,c,rk(c[1]),y+i*RH,true)})}
  else{G.forEach(function(q){var gc=rk(q.k);
   x.fillStyle=gc;rr(x,P,y,WL-2*P,GH,16*k);x.fill();
-  x.fillStyle='#fff';x.font='800 '+(30*k)+'px '+F;x.fillText(dc(q.k),P+24,y+GH/2+1);x.font='800 '+(22*k)+'px '+F;var ct='('+q.r.length+')';x.fillStyle='rgba(255,255,255,.85)';x.fillText(ct,WL-P-24-x.measureText(ct).width,y+GH/2+1);
+  x.fillStyle='#fff';x.font='800 '+(30*kf)+'px '+F;x.fillText(dc(q.k),P+24,y+GH/2+1);x.font='800 '+(22*kf)+'px '+F;var ct='('+q.r.length+')';x.fillStyle='rgba(255,255,255,.85)';x.fillText(ct,WL-P-24-x.measureText(ct).width,y+GH/2+1);
   q.r.forEach(function(r,i){row(r[0],r[1],gc,y+GH+i*RH,false)});y+=GH+q.r.length*RH+GP})}
  return cv}
 var pb=ov.querySelector('#lv-p');
@@ -1341,7 +1353,7 @@ var tp;function ipucu(m){if(!tp){tp=document.createElement('div');tp.className='
 .lv-b{flex:1;min-height:0;overflow:auto;padding:8px 10px;font-size:14px;line-height:1.25}
 .lv-b table{width:100%;border-collapse:collapse}
 .lv-b th{position:sticky;top:0;background:var(--card);text-align:left;font-weight:800;color:var(--accent-d);padding:.35em .4em;border-bottom:2px solid var(--line);white-space:nowrap}
-.lv-b td{padding:.28em .4em;border-bottom:1px solid var(--line);vertical-align:top}
+.lv-b td{padding:.4em .4em;border-bottom:1px solid var(--line);vertical-align:top}
 .lv-b td:first-child{color:var(--muted);text-align:right;width:1%;white-space:nowrap}
 .lv-m{display:flex;gap:6px;padding:8px 14px 0}
 .lv-m button{font:inherit;font-weight:800;font-size:.85rem;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;padding:5px 14px;cursor:pointer}
