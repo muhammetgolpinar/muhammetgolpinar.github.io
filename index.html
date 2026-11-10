@@ -727,7 +727,7 @@ body{font-size:calc(16px*var(--fs))}
 </section>
 
 <section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
-<section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="dist" id="sert-dag"></div>
+<section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="chm" id="sert-grf" role="group" aria-label="Grafik türü"><button type="button" data-v="d" aria-pressed="false">◔ Daire</button><button type="button" data-v="b" aria-pressed="true">▬ Çubuk</button><button type="button" data-v="a" aria-pressed="false">▮ Aylık</button></div><div class="dist" id="sert-dag"></div><div class="dnt" id="sert-dnt" hidden></div><div class="ayl" id="sert-ay" hidden></div>
 <input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select><button class="bt lst" id="sert-liste" type="button" aria-haspopup="dialog">📋 Listele</button>
 <div class="bulut" id="sert-bulut"></div><div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
@@ -897,7 +897,7 @@ function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S
  x.fillStyle='#ffffff';x.fillRect(0,0,WL,HL);
  x.textBaseline='alphabetic';x.fillStyle='#0f2a47';x.font='800 46px '+F;x.fillText('Muhammet GÖLPINAR Sertifikaları',P,66);
  var ks=[],mn=l[0],mx=l[0];l.forEach(function(c){if(ks.indexOf(c[1])<0)ks.push(c[1]);if(dsk(c)<dsk(mn))mn=c;if(dsk(c)>dsk(mx))mx=c});
- x.fillStyle='#56728f';x.font='700 24px '+F;x.fillText(n+' sertifika · '+ks.length+' kurum · '+(mn[2]==mx[2]?mn[2]:mn[2]+' – '+mx[2]),P,104);
+ x.fillStyle='#56728f';x.font='700 24px '+F;x.fillText(n+' sertifika · '+ks.length+' kurum',P,104);
  var bx=P,bw=WL-2*P,cn={};l.forEach(function(c){cn[c[1]]=(cn[c[1]]||0)+1});
  x.save();rr(x,P,120,bw,10,5);x.clip();Object.keys(cn).forEach(function(q){var w=bw*cn[q]/n;x.fillStyle=rk(q);x.fillRect(bx,120,w+1,10);bx+=w});x.restore();
  var y=T;x.textBaseline='middle';
@@ -1503,5 +1503,77 @@ if(dlg)dlg.addEventListener('close',mark);
 :root[data-mo=off] .lv-b tr{animation:none}
 @media(max-width:360px){.lv-h #lv-p{display:none}}
 </style>
+<style id="grf-css">
+.chm{display:inline-flex;gap:2px;margin:0 0 12px;padding:3px;border-radius:999px;background:var(--tagbg);border:1px solid var(--line)}
+.chm button{border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:.82rem;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.chm button[aria-pressed="true"]{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;box-shadow:0 4px 12px -5px var(--accent-d)}
+.dist[hidden],.dnt[hidden],.ayl[hidden]{display:none!important}
+.dnt{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:0 0 16px}
+.dnt .dsv{flex:0 0 auto;width:150px}
+.dnt svg,.ayl svg{display:block;width:100%;height:auto;overflow:visible}
+.dnt svg.anim{animation:dpop .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes dpop{from{opacity:0;transform:rotate(-50deg) scale(.82)}}
+.dnt .sg{cursor:pointer;transition:opacity .2s,stroke-width .2s}
+.dnt svg.has .sg:not(.on){opacity:.28}
+.dnt .d1{font-family:inherit;font-size:26px;font-weight:800;fill:var(--ink)}
+.dnt .d2{font-family:inherit;font-size:9.5px;font-weight:700;fill:var(--muted)}
+.dnt .dlg{flex:1 1 170px;min-width:0;display:grid;gap:2px}
+.lgi{display:grid;grid-template-columns:10px minmax(0,1fr) auto 2.5rem;gap:8px;align-items:center;padding:5px 6px;border:0;border-radius:8px;background:none;color:var(--ink);font-family:inherit;font-size:.8rem;font-weight:600;text-align:left;cursor:pointer}
+.lgi i{width:10px;height:10px;border-radius:50%}
+.lgi span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lgi b{font-weight:800}
+.lgi em{font-style:normal;color:var(--muted);font-size:.74rem;text-align:right}
+.lgi:hover,.lgi.on{background:var(--soft)}
+.ayl{margin:0 0 16px}
+.ayl svg{max-width:440px;margin:0 auto}
+.ayl .d3{font-family:inherit;font-size:13px;font-weight:800;fill:var(--ink)}
+.ayl .d4{font-family:inherit;font-size:11.5px;font-weight:700;fill:var(--ink)}
+.ayl .d5{font-family:inherit;font-size:9.5px;font-weight:600;fill:var(--muted)}
+.ayl .bs{transform-box:fill-box;transform-origin:bottom;animation:yk .6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes yk{from{transform:scaleY(0)}}
+.ayl .alg{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:center;margin-top:8px;font-size:.72rem;font-weight:600;color:var(--muted)}
+.ayl .alg span{display:inline-flex;align-items:center;gap:5px}
+.ayl .alg i{width:8px;height:8px;border-radius:50%}
+@media(prefers-reduced-motion:reduce){.dnt svg.anim,.ayl .bs,.chm button,.dnt .sg{animation:none;transition:none}}
+:root[data-mo=off] .dnt svg.anim,:root[data-mo=off] .ayl .bs{animation:none}
+@media print{.chm{display:none!important}}
+</style>
+<script id="grf-js">
+(function(){
+var sec=document.getElementById('sertifikalar'),bars=document.getElementById('sert-dag'),dn=document.getElementById('sert-dnt'),ay=document.getElementById('sert-ay'),sw=document.getElementById('sert-grf'),inp=document.getElementById('sert-ara');
+if(!sec||!bars||!dn||!ay||!sw||typeof veri==='undefined')return;
+var PL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'],MN=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+var S=veri.sertifikalar,n=S.length,ord=[],m={};
+S.forEach(function(c){if(ord.indexOf(c[1])<0)ord.push(c[1]);m[c[1]]=(m[c[1]]||0)+1});
+var ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]});
+function col(k){return PL[Math.max(0,ord.indexOf(k))%PL.length]}
+function act(){var a=((inp&&inp.value)||'').toLocaleLowerCase('tr');return ks.filter(function(k){return k.toLocaleLowerCase('tr')===a})[0]}
+function filt(k){var b=[].slice.call(bars.querySelectorAll('.dg')).filter(function(x){return x.dataset.k===k})[0];if(b)b.click()}
+function rd(anim){var R=46,C=2*Math.PI*R,on=act(),acc=0,g=ks.length>1?1.6:0;
+ var seg=ks.map(function(k){var L=m[k]/n*C,o=-acc;acc+=L;return '<circle class="sg'+(k===on?' on':'')+'" data-k="'+k+'" cx="66" cy="66" r="'+R+'" fill="none" stroke="'+col(k)+'" stroke-width="'+(k===on?25:21)+'" stroke-dasharray="'+(L-g).toFixed(2)+' '+(C-L+g).toFixed(2)+'" stroke-dashoffset="'+o.toFixed(2)+'" transform="rotate(-90 66 66)"><title>'+k+' ('+m[k]+')</title></circle>'}).join('');
+ var big=on?m[on]:n,lab=on?(on.length>16?on.slice(0,15)+'…':on):'sertifika';
+ var svg='<svg viewBox="0 0 132 132" class="'+(on?'has ':'')+(anim?'anim':'')+'" role="img" aria-label="Kurumlara göre sertifika dağılımı"><circle cx="66" cy="66" r="46" fill="none" stroke="var(--soft)" stroke-width="21"/>'+seg+'<text x="66" y="68" text-anchor="middle" class="d1">'+big+'</text><text x="66" y="84" text-anchor="middle" class="d2">'+lab+'</text></svg>';
+ var lg=ks.map(function(k){return '<button type="button" class="lgi'+(k===on?' on':'')+'" data-k="'+k+'"><i style="background:'+col(k)+'"></i><span>'+k+'</span><b>'+m[k]+'</b><em>'+Math.round(m[k]/n*100)+'%</em></button>'}).join('');
+ dn.innerHTML='<div class="dsv">'+svg+'</div><div class="dlg">'+lg+'</div>'}
+function ra(){var mm={};S.forEach(function(c){var p=String(c[2]).split(' '),key=(+p[1]||0)*12+Math.max(0,MN.indexOf(p[0]));var o=mm[key]=mm[key]||{p:p,t:0,k:{}};o.t++;o.k[c[1]]=(o.k[c[1]]||0)+1});
+ var keys=Object.keys(mm).map(Number).sort(function(a,b){return a-b}),mx=Math.max.apply(null,keys.map(function(k){return mm[k].t})),W=320,base=150,hh=124,sl=(W-20)/keys.length,bw=Math.min(54,sl*.62),cum=0,out='';
+ keys.forEach(function(key,i){var d=mm[key],cx=10+sl*i+sl/2,y=base;cum+=d.t;
+  ord.forEach(function(k){var v=d.k[k];if(!v)return;var h=Math.max(5,v/mx*hh);y-=h;out+='<rect class="bs" x="'+(cx-bw/2).toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(h-1).toFixed(1)+'" rx="3" fill="'+col(k)+'" style="animation-delay:'+(i*90)+'ms"><title>'+k+' ('+v+')</title></rect>'});
+  out+='<text x="'+cx.toFixed(1)+'" y="'+(y-6).toFixed(1)+'" text-anchor="middle" class="d3">'+d.t+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+16)+'" text-anchor="middle" class="d4">'+d.p[0]+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+29)+'" text-anchor="middle" class="d5">'+(d.p[1]||'')+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+45)+'" text-anchor="middle" class="d5">Toplam: '+cum+'</text>'});
+ var lg=ks.map(function(k){return '<span><i style="background:'+col(k)+'"></i>'+k+'</span>'}).join('');
+ ay.innerHTML='<svg viewBox="0 0 '+W+' 205" role="img" aria-label="Aylara göre alınan sertifikalar"><line x1="10" x2="'+(W-10)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/>'+out+'</svg><div class="alg">'+lg+'</div>'}
+var v='d';try{var sv=localStorage.getItem('grf');if(sv==='b'||sv==='d'||sv==='a')v=sv}catch(e){}
+function show(nv,save){v=nv;bars.hidden=v!=='b';dn.hidden=v!=='d';ay.hidden=v!=='a';
+ [].forEach.call(sw.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v))});
+ if(v==='d')rd(true);if(v==='a')ra();
+ if(save){try{localStorage.setItem('grf',v)}catch(e){}}}
+sw.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&b.dataset.v&&b.dataset.v!==v)show(b.dataset.v,true)});
+dn.addEventListener('click',function(e){var t=e.target.closest('.sg,.lgi');if(t)filt(t.dataset.k)});
+function sync(){if(v==='d')rd(false)}
+sec.addEventListener('click',function(){setTimeout(sync,0)});
+if(inp)inp.addEventListener('input',sync);
+show(v,false);
+})();
+</script>
 </body>
 </html>
