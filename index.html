@@ -775,7 +775,8 @@ body{font-size:calc(16px*var(--fs))}
 <script>
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Copilot","BTK Akademi","Kasım 2026",[]],
+sertifikalar:[["Geri Dönüşüm ve Sıfır Atık","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+["Copilot","BTK Akademi","Kasım 2026",[]],
 ["Sosyal Medya İçerik Üretimi (Hedef Kitle Analizi ve Stratejik İletişim)","BTK Akademi","Kasım 2026",[]],
 ["Sağlıklı Yaşam - Teknoloji ve Kumar Bağımlılığı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["İş Sağlığı ve Güvenliği","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -1678,29 +1679,6 @@ var tt=document.createElement('div');tt.className='ux-toast';tt.setAttribute('ro
 function toast(m){tt.textContent=m;tt.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){tt.classList.remove('on')},2000)}
 var bt=document.querySelector('.info .btns');
 if(bt){var c=document.createElement('button');c.type='button';c.className='ux-cp';c.textContent='✉️ E-postayı kopyala';c.onclick=function(){var m='muhammetgolpinar@gmail.com';(navigator.clipboard?navigator.clipboard.writeText(m):Promise.reject()).then(function(){toast('E-posta kopyalandı ✓')},function(){toast(m)})};bt.appendChild(c)}
-})();
-</script>
-<style id="wx-css">
-.wx{position:absolute;right:16px;top:14px;z-index:2;display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:16px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.25);line-height:1.2}
-.wx .e{font-size:1.9rem;line-height:1}
-.wx b{display:block;font-size:1.35rem;font-weight:800}
-.wx small{display:block;font-size:.72rem;font-weight:700;opacity:.95;white-space:nowrap}
-.wx .sk{width:90px;height:34px;border-radius:8px;background:rgba(255,255,255,.25);animation:wxs 1.2s ease-in-out infinite}
-@keyframes wxs{50%{opacity:.4}}
-@media(max-width:420px){.wx{right:10px;top:10px;padding:6px 10px}.wx .e{font-size:1.5rem}.wx b{font-size:1.1rem}}
-@media(prefers-reduced-motion:reduce){.wx .sk{animation:none}}
-@media print{.wx{display:none!important}}
-</style>
-<script id="wx-js">
-(function(){
-var bn=document.querySelector('.banner');if(!bn)return;
-var w=document.createElement('div');w.className='wx';w.setAttribute('role','status');w.setAttribute('aria-live','polite');w.innerHTML='<span class="sk"></span>';bn.appendChild(w);
-var C={0:['☀️','Açık'],1:['🌤️','Çoğunlukla açık'],2:['⛅','Parçalı bulutlu'],3:['☁️','Bulutlu'],45:['🌫️','Sisli'],48:['🌫️','Sisli'],51:['🌦️','Çiseleme'],53:['🌦️','Çiseleme'],55:['🌦️','Çiseleme'],61:['🌧️','Yağmurlu'],63:['🌧️','Yağmurlu'],65:['🌧️','Şiddetli yağmur'],66:['🌧️','Dondurucu yağmur'],67:['🌧️','Dondurucu yağmur'],71:['🌨️','Karlı'],73:['🌨️','Karlı'],75:['❄️','Yoğun kar'],77:['🌨️','Kar taneleri'],80:['🌦️','Sağanak'],81:['🌧️','Sağanak'],82:['⛈️','Şiddetli sağanak'],85:['🌨️','Kar sağanağı'],86:['🌨️','Kar sağanağı'],95:['⛈️','Gök gürültülü'],96:['⛈️','Dolu ihtimali'],99:['⛈️','Dolu ihtimali']};
-function draw(d){var c=d.current,k=C[c.weather_code]||['🌡️','—'],n=d.daily;
- w.innerHTML='<span class="e" aria-hidden="true">'+k[0]+'</span><span><b>'+Math.round(c.temperature_2m)+'°C</b><small>İstanbul · '+k[1]+'</small><small>↑'+Math.round(n.temperature_2m_max[0])+'° ↓'+Math.round(n.temperature_2m_min[0])+'° · 💨 '+Math.round(c.wind_speed_10m)+' km/s</small></span>'}
-function load(){var K='wx1',t=0;try{var o=JSON.parse(localStorage.getItem(K)||'null');if(o&&Date.now()-o.t<6e5){draw(o.d);return}}catch(e){}
- fetch('https://api.open-meteo.com/v1/forecast?latitude=41.01&longitude=28.98&current=temperature_2m,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FIstanbul&forecast_days=1').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){draw(d);try{localStorage.setItem(K,JSON.stringify({t:Date.now(),d:d}))}catch(e){}}).catch(function(){w.innerHTML='<span class="e" aria-hidden="true">🌡️</span><span><small>İstanbul</small><small>Hava durumu alınamadı</small></span>'})}
-load();setInterval(load,6e5);
 })();
 </script>
 <style id="f5-css">
