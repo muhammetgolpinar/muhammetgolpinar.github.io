@@ -919,14 +919,16 @@ function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);
 function tn(hx,al){var n=parseInt(hx.slice(1),16);return 'rgba('+(n>>16)+','+((n>>8)&255)+','+(n&255)+','+al+')'}
 function dc(t){var e=document.createElement('textarea');e.innerHTML=t;return e.value}
 var AB={'ODTÜ Geliştirme Vakfı Okulları':'ODTÜ Vakfı Okulları','Turkcell Geleceği Yazanlar':'Turkcell Yazanlar'};
-function ft(x,t,mw,sz,wt,mn){mn=mn||19;t=dc(t);var f=sz;x.font=wt+' '+f+'px Inter,\"Segoe UI\",system-ui,sans-serif';while(f>mn&&x.measureText(t).width>mw){f--;x.font=wt+' '+f+'px Inter,\"Segoe UI\",system-ui,sans-serif'}
+function ft(x,t,mw,sz,wt,mn){mn=mn||19;t=dc(t);var f=sz;x.font=wt+' '+f+'px Nunito,\"Segoe UI\",system-ui,sans-serif';while(f>mn&&x.measureText(t).width>mw){f--;x.font=wt+' '+f+'px Nunito,\"Segoe UI\",system-ui,sans-serif'}
  if(x.measureText(t).width>mw){while(t.length>3&&x.measureText(t+'…').width>mw)t=t.slice(0,-1);t=t+'…'}return t}
-function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S=PW/WL,HL=PH/S,P=44,F='Inter,\"Segoe UI\",system-ui,sans-serif';
+var IMG={},useL=true;
+function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S=PW/WL,HL=PH/S,P=44,F='Nunito,\"Segoe UI\",system-ui,sans-serif';
  var G=[],o=[];if(grp){var g={};l.forEach(function(c,i){if(!g[c[1]]){g[c[1]]=[];o.push(c[1])}g[c[1]].push([n-i,c])});G=o.map(function(k){return{k:k,r:g[k]}})}
  var T=146,M=26,GH0=72,GP0=16,RH0=56,TH0=56;
  var C=grp?G.reduce(function(a,q){return a+GH0+q.r.length*RH0+GP0},0)-GP0:TH0+n*RH0;
  var k=Math.min(1.12,(HL-T-M)/C),RH=RH0*k,GH=GH0*k,GP=GP0*k,TH=TH0*k,kf=k*1.32;
  var cv=document.createElement('canvas');cv.width=PW;cv.height=PH;var x=cv.getContext('2d');x.scale(S,S);
+function ld(kk,cx,cy,sz,bc){var im=useL&&IMG[kk];if(!im||!im.naturalWidth)return;x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1.5;x.strokeStyle=bc?tn(bc,.35):'rgba(0,0,0,.12)';x.stroke();x.clip();var p=sz*.14,bw=sz-2*p,sc=Math.min(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h);x.restore()}
  x.fillStyle='#ffffff';x.fillRect(0,0,WL,HL);
  x.textBaseline='alphabetic';x.fillStyle='#0f2a47';x.font='800 46px '+F;x.fillText('Muhammet GÖLPINAR Sertifikaları',P,66);
  var ks=[],mn=l[0],mx=l[0];l.forEach(function(c){if(ks.indexOf(c[1])<0)ks.push(c[1]);if(dsk(c)<dsk(mn))mn=c;if(dsk(c)>dsk(mx))mx=c});
@@ -937,22 +939,28 @@ function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S
  function row(no,c,gc,top,showK){var h=RH,my=top+h/2+1;x.fillStyle=tn(gc,.07);x.fillRect(P,top,WL-2*P,h);x.fillStyle=tn(gc,.14);x.fillRect(P,top+h-1,WL-2*P,1);
   var bw2=54*k,bh=38*k;x.fillStyle=tn(gc,.16);rr(x,P+18,top+(h-bh)/2,bw2,bh,bh/2);x.fill();
   x.fillStyle=gc;x.font='800 '+(21*kf)+'px '+F;x.textAlign='center';x.fillText(String(no),P+18+bw2/2,my);x.textAlign='left';
-  var dpw=170,nx=P+84,mw=(WL-2*P)-84-dpw-24-(showK?290:0);
+  var dpw=170,nx=P+84,ls=h*.8,mw=(WL-2*P)-84-dpw-24-(showK?290+ls+8:0);
   x.fillStyle='#0f2a47';var t=ft(x,c[0],mw,27*kf,'800',Math.max(12,19*kf));x.fillText(t,nx,my);
-  if(showK){x.fillStyle=gc;var kt=ft(x,c[1],262,20*kf,'800',Math.max(11,17*kf));if(/…$/.test(kt)&&AB[c[1]])kt=ft(x,AB[c[1]],262,20*kf,'800',Math.max(11,17*kf));x.fillText(kt,WL-P-dpw-24-262,my)}
+  if(showK){x.fillStyle=gc;var kt=ft(x,c[1],262,20*kf,'800',Math.max(11,17*kf));if(/…$/.test(kt)&&AB[c[1]])kt=ft(x,AB[c[1]],262,20*kf,'800',Math.max(11,17*kf));x.fillText(kt,WL-P-dpw-24-262,my);ld(c[1],WL-P-dpw-24-262-8-ls/2,my,ls,gc)}
   var isN=true;x.font='700 '+(21*kf)+'px '+F;var dw=x.measureText(c[2]).width+30*k,ph=40*k;
   x.fillStyle=isN?tn(gc,.2):tn(gc,.1);rr(x,WL-P-14-dw,top+(h-ph)/2,dw,ph,ph/2);x.fill();
   x.fillStyle=isN?gc:'#56728f';x.textAlign='center';x.fillText(c[2],WL-P-14-dw/2,my);x.textAlign='left'}
- if(!grp){x.fillStyle='#dfe9f7';rr(x,P,y,WL-2*P,TH,14*k);x.fill();x.fillStyle='#1272c4';x.font='800 '+(22*kf)+'px '+F;var hy=y+TH/2+1;x.fillText('No',P+20,hy);x.fillText('Sertifika',P+84,hy);x.fillText('Veren',WL-P-170-24-262,hy);x.fillText('Tarih',WL-P-14-110,hy);y+=TH;
+ if(!grp){x.fillStyle='#dfe9f7';rr(x,P,y,WL-2*P,TH,14*k);x.fill();x.fillStyle='#1272c4';x.font='800 '+(22*kf)+'px '+F;var hy=y+TH/2+1;x.fillText('No',P+20,hy);x.fillText('Sertifika',P+84,hy);x.fillText('Veren',WL-P-170-24-262-(RH*.8+8),hy);x.fillText('Tarih',WL-P-14-110,hy);y+=TH;
   l.forEach(function(c,i){row(n-i,c,rk(c[1]),y+i*RH,true)})}
  else{G.forEach(function(q){var gc=rk(q.k);
   x.fillStyle=gc;rr(x,P,y,WL-2*P,GH,16*k);x.fill();
-  x.fillStyle='#fff';x.font='800 '+(30*kf)+'px '+F;x.fillText(dc(q.k),P+24,y+GH/2+1);x.font='800 '+(22*kf)+'px '+F;var ct='('+q.r.length+')';x.fillStyle='rgba(255,255,255,.85)';x.fillText(ct,WL-P-24-x.measureText(ct).width,y+GH/2+1);
+  var gs=GH*.66,gl=useL&&IMG[q.k]&&IMG[q.k].naturalWidth;if(gl)ld(q.k,P+24+gs/2,y+GH/2+1,gs,null);x.fillStyle='#fff';x.font='800 '+(30*kf)+'px '+F;x.fillText(dc(q.k),P+24+(gl?gs+12:0),y+GH/2+1);x.font='800 '+(22*kf)+'px '+F;var ct='('+q.r.length+')';x.fillStyle='rgba(255,255,255,.85)';x.fillText(ct,WL-P-24-x.measureText(ct).width,y+GH/2+1);
   q.r.forEach(function(r,i){row(r[0],r[1],gc,y+GH+i*RH,false)});y+=GH+q.r.length*RH+GP})}
  return cv}
 var pb=ov.querySelector('#lv-p');
-pb.addEventListener('click',function(){try{var cv=png();cv.toBlob(function(bl){if(!bl)return;var u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='sertifikalar-a4.png';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);
- pb.textContent='✓ Kaydedildi';setTimeout(function(){pb.textContent='⬇ PNG'},1800)},'image/png')}catch(e){pb.textContent='Hata'}});
+function dlp(cv){cv.toBlob(function(bl){if(!bl){pb.textContent='Hata';return}var u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='sertifikalar-a4.png';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000);
+ pb.textContent='✓ Kaydedildi';setTimeout(function(){pb.textContent='⬇ PNG'},1800)},'image/png')}
+function yap(){try{useL=true;dlp(png())}catch(e){try{useL=false;dlp(png())}catch(e2){pb.textContent='Hata'}}}
+pb.addEventListener('click',function(){pb.textContent='…';
+ var LGO=(typeof logolar!=='undefined')?logolar:{},ks=[];L.forEach(function(c){if(ks.indexOf(c[1])<0)ks.push(c[1])});
+ var fl=['700','800'].map(function(w){return document.fonts&&document.fonts.load?document.fonts.load(w+' 20px Nunito','ĞÜŞİÖÇığüşöç Aa'):Promise.resolve()});
+ var pr=ks.map(function(k){return new Promise(function(r){if(IMG[k]||!LGO[k])return r();var im=new Image();im.onload=function(){IMG[k]=im;r()};im.onerror=function(){r()};im.src=LGO[k]})});
+ Promise.all(fl.concat(pr)).then(yap,yap)});
 ov.querySelector('#lv-x').addEventListener('click',kapat);
 b.addEventListener('click',function(e){var t=e.target.closest('.nm');if(t)bAc(veri.sertifikalar[+t.dataset.i])});
 document.addEventListener('keydown',function(e){if(e.key=='Escape'&&!ov.hidden)kapat()});
@@ -1238,7 +1246,7 @@ dlg.addEventListener('close',function(){stop();msg('')});
 <script>
 (function(){
 var b=document.getElementById('kartb');if(!b)return;
-var W=1200,H=675,FF='-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+var W=1200,H=675,FF='Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',LI={};
 function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function rr(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()}
 function fit(c,t,w,px,wt){do{c.font=wt+' '+px+'px '+FF;px-=2}while(c.measureText(t).width>w&&px>20);return px}
@@ -1270,10 +1278,12 @@ var X=450,mw=W-X-60;
 var px=80,w1,w2;do{px-=2;c.font='500 '+px+'px '+FF;w1=c.measureText('Muhammet ').width;c.font='800 '+px+'px '+FF;w2=c.measureText('GÖLPINAR').width}while(w1+w2>mw&&px>30);
 c.font='500 '+px+'px '+FF;c.fillStyle='rgba(255,255,255,.92)';c.fillText('Muhammet ',X,152);c.font='800 '+px+'px '+FF;c.fillStyle='#fff';c.fillText('GÖLPINAR',X+w1,152);
 c.font='600 32px '+FF;c.fillStyle='rgba(255,255,255,.9)';c.fillText('Bilişim Teknolojileri Öğrencisi',X,204);
-c.beginPath();c.arc(X+7,246,6,0,7);c.fillStyle='#4ade80';c.fill();
-c.font='500 24px '+FF;c.fillStyle='rgba(255,255,255,.8)';c.fillText('Arçelik Türkiye · Bilgi İşlem Stajyeri',X+24,254);
-c.beginPath();c.arc(X+7,288,6,0,7);c.fillStyle='#fff';c.fill();
-c.font='700 24px '+FF;c.fillStyle='#fff';c.fillText('MuGöl PORTAL’ın Kurucusu & Geliştiricisi',X+24,296);
+function lgo(im,cx,cy,d){c.save();c.beginPath();c.arc(cx,cy,d/2,0,7);c.fillStyle='#fff';c.fill();c.clip();var p=d*.14,bw=d-2*p,sc=Math.min(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;c.drawImage(im,cx-w/2,cy-h/2,w,h);c.restore()}
+var la=foto&&LI.a&&LI.a.naturalWidth>0?LI.a:null,lm=foto&&LI.m&&LI.m.naturalWidth>0?LI.m:null;
+if(la)lgo(la,X+17,246,34);else{c.beginPath();c.arc(X+7,246,6,0,7);c.fillStyle='#4ade80';c.fill()}
+c.font='500 24px '+FF;c.fillStyle='rgba(255,255,255,.8)';c.fillText('Arçelik Türkiye · Bilgi İşlem Stajyeri',X+(la?46:24),254);
+if(lm)lgo(lm,X+17,288,34);else{c.beginPath();c.arc(X+7,288,6,0,7);c.fillStyle='#fff';c.fill()}
+c.font='700 24px '+FF;c.fillStyle='#fff';c.fillText('MuGöl PORTAL’ın Kurucusu & Geliştiricisi',X+(lm?46:24),296);
 /* iletişim paneli */
 var PY=346,PH=234;rr(c,X,PY,mw,PH,26);c.fillStyle='rgba(255,255,255,.12)';c.fill();c.strokeStyle='rgba(255,255,255,.24)';c.lineWidth=1.5;c.stroke();
 var L=[['m','muhammetgolpinar@gmail.com'],['i','Muhammet Gölpınar'],['w','muhammetgolpinar.github.io']];
@@ -1290,7 +1300,9 @@ function indir(k,ok,hata){k.toBlob(function(bl){if(!bl){hata();return}var u=URL.
 b.addEventListener('click',function(){
 var done=function(){if(window.toast)toast('Dijital kart indirildi')};
 var fail=function(){if(window.toast)toast('Kart oluşturulamadı')};var yedek=function(){try{indir(ciz(false),done,fail)}catch(x){fail()}};var go=function(){try{indir(ciz(true),done,yedek)}catch(e){yedek()}};
-if(document.fonts&&document.fonts.ready)document.fonts.ready.then(go);else go()});
+var lim=function(k,src){return new Promise(function(r){var im=new Image();im.onload=function(){LI[k]=im;r()};im.onerror=function(){r()};im.src=src})};
+var fl=document.fonts&&document.fonts.load?['400','600','700','800'].map(function(w){return document.fonts.load(w+' 20px Nunito','ĞÜŞİÖÇığüşöç Aa')}):[];
+Promise.all(fl.concat([lim('a','arcelik.png'),lim('m','logo.png')])).then(go,go)});
 })();
 </script>
 <style id="etk-css">
