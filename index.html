@@ -715,7 +715,7 @@ body{font-size:calc(16px*var(--fs))}
     <p class="hi" id="hi" aria-hidden="true"></p>
     <h1><span>Muhammet</span> <span>GÖLPINAR</span></h1>
     <p class="head">Bilişim Teknolojileri Öğrencisi</p>
-    <p class="now">Şu an: Arçelik Türkiye’de Bilgi İşlem Stajyeri</p>
+    <p class="now"><img class="ux-lg" src="arcelik.png" alt="" onerror="this.remove()"><span>Şu an: Arçelik Türkiye’de Bilgi İşlem Stajyeri</span></p>
     <div class="btns">
       <a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">Mesaj gönder</a>
       <a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a>
@@ -754,7 +754,7 @@ body{font-size:calc(16px*var(--fs))}
 <section class="card pad" id="egitim"><h2>Eğitim</h2><div id="egitim-list"></div></section>
 <section class="card pad" id="sertifikalar"><h2>Lisanslar ve sertifikalar <span id="sert-say"></span></h2><div class="chm" id="sert-grf" role="group" aria-label="Grafik türü"><button type="button" data-v="d" aria-pressed="false">◔ Daire</button><button type="button" data-v="b" aria-pressed="true">▬ Çubuk</button><button type="button" data-v="a" aria-pressed="false">▮ Aylık</button></div><div class="dist" id="sert-dag"></div><div class="dnt" id="sert-dnt" hidden></div><div class="ayl" id="sert-ay" hidden></div>
 <input class="srch" id="sert-ara" type="search" placeholder="Sertifika ara" aria-label="Sertifika ara" autocomplete="off"><select class="srch srt" id="sert-sirala" aria-label="Sırala"><option value="o">Sıralama: Varsayılan</option><option value="y">En yeni önce</option><option value="e">En eski önce</option><option value="a">A–Z</option></select><button class="bt lst" id="sert-liste" type="button" aria-haspopup="dialog">📋 Listele</button>
-<div class="bulut" id="sert-bulut"></div><div class="chips" id="sertifika-filter"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
+<div class="bulut" id="sert-bulut" style="display:none"></div><div class="chips" id="sertifika-filter" style="display:none"></div><div id="sertifika-list"></div><button class="more" id="sert-more" type="button" hidden></button></section>
 <section class="card pad" id="basarilar"><h2>Onur ve ödüller</h2><div id="basari-list"></div></section>
 <section class="card pad" id="beceriler"><h2>Beceriler</h2><div id="beceri-list"></div></section>
 <dialog class="askd" id="sord" aria-label="Muhammet'e sor"><button class="askx" id="askx" type="button" aria-label="Kapat">✕</button><div class="ask" id="sor"><div class="ah"><span class="aic" aria-hidden="true">💬</span><div><h2>Muhammet'e sor</h2><p class="sm">Merak ettiğini yaz; sana hemen yol göstereyim. İstersen mesajını e-postayla da gönder.</p></div></div><div class="ab" id="sorb"><div class="mlab">Hızlı başlangıç</div><div class="sab" id="sab"></div><label class="mf"><span>Adın</span><input type="text" id="msn" autocomplete="name" placeholder="Adın (isteğe bağlı)" maxlength="60"></label><label class="mf"><span>Sorun veya mesajın</span><textarea id="msm" rows="4" maxlength="1000" placeholder="Merhaba Muhammet, ..."></textarea></label><div class="micr" id="micr"><button class="micb" id="micb" type="button" aria-pressed="false">🎤 Sesle yaz</button><span class="mict" id="mict" role="status"></span></div><div class="mmeta"><div class="err" id="mse" role="alert"></div><span class="cnt" id="mcn">0/1000</span></div><div id="soro" class="so" aria-live="polite" hidden></div><div class="msub" id="msub"></div><div class="acts"><button class="kp" id="mkp" type="button">Kopyala</button><button class="send" id="mso" type="button"><span>Mesajı gönder</span><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M3 11.5L21 3l-6.5 18-3.2-7.3L3 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11.3 13.7L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="mhint">Ctrl + Enter ile gönder · taslağın otomatik saklanır</div></div><div class="mok" id="mok" hidden><svg viewBox="0 0 52 52" width="64" height="64" aria-hidden="true"><circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 27l8 8 14-17" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Taslak hazır!</h3><p>E-posta uygulaman açılıyor…</p></div></div></dialog>
@@ -775,7 +775,8 @@ body{font-size:calc(16px*var(--fs))}
 <script>
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Geri Dönüşüm ve Sıfır Atık","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+sertifikalar:[["Sürdürülebilir Yaşam ve Kentsel Ekoloji","Enstitü İstanbul İSMEK","Kasım 2026",[]],
+["Geri Dönüşüm ve Sıfır Atık","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Copilot","BTK Akademi","Kasım 2026",[]],
 ["Sosyal Medya İçerik Üretimi (Hedef Kitle Analizi ve Stratejik İletişim)","BTK Akademi","Kasım 2026",[]],
 ["Sağlıklı Yaşam - Teknoloji ve Kumar Bağımlılığı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -878,7 +879,7 @@ ov._l=l;ov._p=document.activeElement;ov.hidden=false;document.body.style.overflo
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.bg');if(t){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 document.addEventListener('keydown',function(e){var t=e.target;if((e.key==='Enter'||e.key===' ')&&t.classList&&t.classList.contains('bth')){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div><div class="bw">'+th(c)+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
-var flt=[['Tümü',function(){return 1}],['Yapay Zeka',function(c){return c[3].indexOf('Yapay Zeka')>-1}],['Web Geliştirme',function(c){return c[3].indexOf('Web Geliştirme')>-1}],['BTK Akademi',function(c){return c[1]=='BTK Akademi'}]],fi=0,acik=false,LIM=6;
+var flt=[['Tümü',function(){return 1}],],fi=0,acik=false,LIM=6;
 var qq='';function ara(c){return !qq||c.join(' ').toLocaleLowerCase('tr').indexOf(qq)>-1}
 function sert(){var l=veri.sertifikalar.filter(flt[fi][1]).filter(ara).sort(srtf),m=document.getElementById('sert-more');
 put('sertifika-list',l.length?(acik||qq?l:l.slice(0,LIM)).map(rowS).join(''):'<p class="bos">Eşleşen sertifika bulunamadı.</p>');
@@ -1071,13 +1072,10 @@ document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key
 (function(){
 var inp=document.getElementById('sert-ara'),bl=document.getElementById('sert-bulut');
 var m={};veri.sertifikalar.forEach(function(c){c[3].forEach(function(t){m[t]=(m[t]||0)+1})});
-var ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]}).slice(0,10);
+var ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]}).slice(0,0);
 function mk(){bl.querySelectorAll('.bt[data-t]').forEach(function(b){b.setAttribute('aria-pressed',qq==b.dataset.t.toLocaleLowerCase('tr'))})}
 function filt(v){fi=0;acik=false;var k=v.toLocaleLowerCase('tr');if(qq==k){qq='';inp.value=''}else{qq=k;inp.value=v}sert();mk()}
 ks.forEach(function(t){var b=document.createElement('button');b.type='button';b.className='bt';b.dataset.t=t;b.textContent=t+' ('+m[t]+')';b.setAttribute('aria-pressed','false');b.addEventListener('click',function(){filt(t)});bl.appendChild(b)});
-var r=document.createElement('button');r.type='button';r.className='bt rnd';r.textContent='🎲 Rastgele sertifika';
-r.addEventListener('click',function(){var c=veri.sertifikalar[Math.floor(Math.random()*veri.sertifikalar.length)];fi=0;acik=true;qq=c[0].toLocaleLowerCase('tr');inp.value=c[0];sert();mk();toast(c[0]);document.getElementById('sertifika-list').scrollIntoView({block:'center',behavior:'smooth'})});
-bl.insertBefore(r,bl.firstChild);
 ['sertifika-filter','sert-dag'].forEach(function(i){document.getElementById(i).addEventListener('click',function(){setTimeout(mk,0)})});
 var x0=0,y0=0,ed=false,dr=document.getElementById('drawer');
 document.addEventListener('touchstart',function(e){var t=e.touches[0];x0=t.clientX;y0=t.clientY;ed=x0<28},{passive:true});
@@ -1667,7 +1665,7 @@ var rm=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentE
 document.addEventListener('pointermove',function(e){var c=e.target.closest&&e.target.closest('.card');if(!c)return;var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true});
 /* yazan unvan satırı */
 var h=document.querySelector('.info .head');
-if(h){var p=document.createElement('p');p.className='ux-role';p.innerHTML='<i></i><b></b>';h.after(p);var b=p.querySelector('b');b.textContent='MuGöl PORTAL’ın Kurucusu & Geliştiricisi';b.style.border=0;b.style.padding=0;b.style.animation='none'}
+if(h){var p=document.createElement('p');p.className='ux-role';p.innerHTML='<img class="ux-lg" src="logo.png" alt="" onerror="this.remove()"><b></b>';h.after(p);var b=p.querySelector('b');b.textContent='MuGöl PORTAL’ın Kurucusu & Geliştiricisi';b.style.border=0;b.style.padding=0;b.style.animation='none'}
 /* bölüm noktaları */
 var secs=[].slice.call(document.querySelectorAll('main section[id],section.card[id]')).filter(function(s){return s.id!=='tesekkur'});
 if(secs.length){var n=document.createElement('nav');n.className='ux-dots';n.setAttribute('aria-label','Bölümler');
@@ -1677,8 +1675,7 @@ if(secs.length){var n=document.createElement('nav');n.className='ux-dots';n.setA
 /* e-posta kopyala + bildirim */
 var tt=document.createElement('div');tt.className='ux-toast';tt.setAttribute('role','status');document.body.appendChild(tt);
 function toast(m){tt.textContent=m;tt.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){tt.classList.remove('on')},2000)}
-var bt=document.querySelector('.info .btns');
-if(bt){var c=document.createElement('button');c.type='button';c.className='ux-cp';c.textContent='✉️ E-postayı kopyala';c.onclick=function(){var m='muhammetgolpinar@gmail.com';(navigator.clipboard?navigator.clipboard.writeText(m):Promise.reject()).then(function(){toast('E-posta kopyalandı ✓')},function(){toast(m)})};bt.appendChild(c)}
+
 })();
 </script>
 <style id="f5-css">
@@ -1742,7 +1739,7 @@ if(bn){var g=D.createElement('div');g.className='ux-hi';g.innerHTML='<span class
 /* 4 proje vitrini */
 var ps=D.getElementById('projeler');
 if(ps){var h2=ps.querySelector('h2'),v=D.createElement('div');v.className='pv';
- v.innerHTML='<div class="pv-h"><div class="pv-l"><img src="logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML=\'🌐\'"></div><div><h3>MuGöl PORTAL</h3><p>Tek platformda haber, oyun ve araçlar</p></div></div><div class="pv-b"><a href="https://mugol-portal.github.io" target="_blank" rel="noopener">Web sitesini aç ↗</a><a href="https://play.google.com/store/apps/details?id=com.mugol.portal2" target="_blank" rel="noopener">▶ Google Play</a></div>';
+ v.innerHTML='<div class="pv-h"><div class="pv-l"><img src="logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML=\'🌐\'"></div><div><h3>MuGöl PORTAL</h3><p>Dijital Dünyan Tek Bir Portalda!</p></div></div><div class="pv-b"><a href="https://mugol-portal.github.io" target="_blank" rel="noopener">Web sitesini aç ↗</a><a href="https://play.google.com/store/apps/details?id=com.mugol.portal2" target="_blank" rel="noopener">▶ Google Play</a></div>';
  var rw=ps.querySelector('.row'),dp=rw&&rw.querySelector('p'),so=rw&&rw.querySelector('.sosyal');
  if(dp){dp.className='pv-d';v.querySelector('.pv-h').after(dp)}
  if(so){v.appendChild(so)}
@@ -1751,7 +1748,6 @@ if(ps){var h2=ps.querySelector('h2'),v=D.createElement('div');v.className='pv';
 var items=[];
 [].forEach.call(D.querySelectorAll('section.card[id]'),function(s){if(s.id==='tesekkur')return;var h=s.querySelector('h2');if(h)items.push({i:'📍',t:h.textContent.replace(/\s*\d+.*$/,'').trim(),s:'Bölüme git',f:function(){s.scrollIntoView({behavior:rm?'auto':'smooth',block:'start'})}})});
 items.push({i:'🌗',t:'Temayı değiştir',s:'Açık / Koyu',f:function(){var m=D.getElementById('mode');if(m)m.click()}},
-{i:'✉️',t:'E-postayı kopyala',s:'Eylem',f:function(){var m='muhammetgolpinar@gmail.com';try{navigator.clipboard.writeText(m)}catch(e){}}},
 {i:'🌐',t:'MuGöl PORTAL web sitesi',s:'Bağlantı',f:function(){open('https://mugol-portal.github.io','_blank','noopener')}},
 {i:'▶️',t:'MuGöl PORTAL · Google Play',s:'Bağlantı',f:function(){open('https://play.google.com/store/apps/details?id=com.mugol.portal2','_blank','noopener')}},
 {i:'☰',t:'Yan menüyü aç',s:'Ayarlar',f:function(){if(window.menuAc)window.menuAc(1)}},
@@ -1778,5 +1774,10 @@ if(!rm){var cs=[].slice.call(D.querySelectorAll('main .card,section.card'));
   cs.forEach(function(c,i){if(c.getBoundingClientRect().top<innerHeight*.9){c.style.setProperty('--d',(.9+i*.08)+'s')}c.classList.add('ux-r');o.observe(c)})}}
 })();
 </script>
+<style id="rol-css">
+.profile .now,.profile .ux-role{display:flex;width:fit-content;max-width:100%;box-sizing:border-box;align-items:center;gap:10px;margin:12px 0 0;padding:6px 16px 6px 6px;border-radius:999px;background:var(--soft);border:1px solid var(--line);color:var(--accent-d);font-weight:800;font-size:.88rem;line-height:1.25}
+.profile .now::before{display:none}
+.profile .ux-lg{width:30px;height:30px;flex:none;border-radius:50%;background:#fff;object-fit:contain;padding:3px;box-sizing:border-box;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+</style>
 </body>
 </html>
