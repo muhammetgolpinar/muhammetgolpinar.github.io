@@ -799,23 +799,23 @@ sertifikalar:[["Sürdürülebilir Yaşam ve Kentsel Ekoloji","Enstitü İstanbul
 ["Dijital Okuryazarlık","BTK Akademi","Ekim 2026",[]],
 ["Dijital Okuryazarlık (YEĞİTEK)","BTK Akademi","Ekim 2026",[]],
 ["Dijital Okuryazarlık (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Ekim 2026",[]],
-["201: HTML5 &amp; CSS","Turkcell Geleceği Yazanlar","Ekim 2026",["Web Geliştirme"]],
+["201: HTML5 &amp; CSS","Turkcell Geleceği Yazanlar","Ekim 2026",[]],
 ["İnternette Güvenliğinizi Arttırın","Bilgeİş","Ekim 2026",[]],
-["101: HTML","Turkcell Geleceği Yazanlar","Ekim 2026",["Web Geliştirme"]],
-["Temel HTML ve CSS","Enstitü İstanbul İSMEK","Ekim 2026",["Web Geliştirme"]],
+["101: HTML","Turkcell Geleceği Yazanlar","Ekim 2026",[]],
+["Temel HTML ve CSS","Enstitü İstanbul İSMEK","Ekim 2026",[]],
 ["Bilgi Teknolojilerine Giriş","BTK Akademi","Ekim 2026",[]],
-["Yapay Zeka Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Ekim 2026",["Yapay Zeka"]],
+["Yapay Zeka Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Ekim 2026",[]],
 ["Bilgi Okuryazarlığı","BTK Akademi","Ekim 2026",[]],
-["Yapay Zeka Uygulamaları","BTK Akademi","Ekim 2026",["Yapay Zeka"]],
-["Herkes İçin Yapay Zeka I","Bilgeİş","Ekim 2026",["Yapay Zeka"]],
-["CSS","Bilgeİş","Ekim 2026",["Web Geliştirme"]],
-["HTML Eğitimi","Bilgeİş","Ekim 2026",["Web Geliştirme"]],
-["Gemini Veo","BTK Akademi","Ekim 2026",["Yapay Zeka"]],
-["Yapay Zekaya Giriş","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
-["Anthropic Claude","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
-["ChatGPT","BTK Akademi","Nisan 2026",["Yapay Zeka"]],
-["CSS Temelleri","BTK Akademi","Nisan 2026",["Web Geliştirme"]],
-["HTML5 İle Web Geliştirme","BTK Akademi","Nisan 2026",["Web Geliştirme"]],
+["Yapay Zeka Uygulamaları","BTK Akademi","Ekim 2026",[]],
+["Herkes İçin Yapay Zeka I","Bilgeİş","Ekim 2026",[]],
+["CSS","Bilgeİş","Ekim 2026",[]],
+["HTML Eğitimi","Bilgeİş","Ekim 2026",[]],
+["Gemini Veo","BTK Akademi","Ekim 2026",[]],
+["Yapay Zekaya Giriş","BTK Akademi","Nisan 2026",[]],
+["Anthropic Claude","BTK Akademi","Nisan 2026",[]],
+["ChatGPT","BTK Akademi","Nisan 2026",[]],
+["CSS Temelleri","BTK Akademi","Nisan 2026",[]],
+["HTML5 İle Web Geliştirme","BTK Akademi","Nisan 2026",[]],
 ["Medeniyet Okumaları Projesi Katılım Belgesi","İstanbul Valiliği","Haziran 2025",[]]],
 basarilar:[["Üstün Başarı Belgesi","Lise - Akademik Başarı","Lise eğitimim süresince akademik başarımın bir sonucu olarak Üstün Başarı Belgesi almaya hak kazandım.",1],
 ["Ayın Öğrencisi (2025-2026)","Kasım Ayı Öğrencisi","2025-2026 Eğitim Öğretim Yılı kapsamında Kasım Ayı Öğrencisi seçildim. Disiplinli çalışma ve sorumluluk bilincimin takdir edilmesinden gurur duydum."],
@@ -1020,7 +1020,7 @@ function dsk(c){var p=String(c[2]).split(' ');return (+p[1]||0)*12+Math.max(0,AY
 function srtf(a,b){return srm=='y'?dsk(b)-dsk(a):srm=='e'?dsk(a)-dsk(b):srm=='a'?a[0].localeCompare(b[0],'tr'):0}
 document.getElementById('sert-sirala').addEventListener('change',function(){srm=this.value;sert()});
 (function(){
-var box=document.getElementById('sor'),n=document.getElementById('msn'),t=document.getElementById('msm'),e=document.getElementById('mse'),cn=document.getElementById('mcn'),sub=document.getElementById('msub'),okp=document.getElementById('mok'),mb=document.getElementById('sorb'),KEY='msgTaslak',MAIL='muhammetgolpinar@gmail.com',red=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo=='off';
+var box=document.getElementById('sor'),n=document.getElementById('msn'),t=document.getElementById('msm'),e=document.getElementById('mse'),cn=document.getElementById('mcn'),sub=document.getElementById('msub'),okp=document.getElementById('mok'),mb=document.getElementById('sorb'),KEY='msgTaslak',MAIL='muhammete.soru.sor@gmail.com',red=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo=='off';
 function ls(f){try{return f()}catch(x){}}
 function konu(){var ad=n.value.trim();return (window.msgKonu||'Portfolyo sitesinden mesaj')+(ad?' - '+ad:'')}
 function upd(){cn.textContent=t.value.length+'/1000';cn.classList.toggle('lim',t.value.length>900);t.style.height='auto';t.style.height=Math.min(t.scrollHeight,180)+'px';sub.textContent='Konu: '+konu();if(e.textContent&&t.value.trim().length>=5)e.textContent='';if(window.ipucu)ipucu(t.value);ls(function(){if(t.value||n.value)localStorage.setItem(KEY,JSON.stringify({n:n.value,m:t.value}));else localStorage.removeItem(KEY)})}
