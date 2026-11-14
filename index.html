@@ -795,7 +795,7 @@ sertifikalar:[["Ekolojik Bilinç Yaklaşımı","Enstitü İstanbul İSMEK","Kas�
 ["Nesnelerin İnterneti (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Meslek Etiği","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Dijital Becerilerin Geliştirilmesi","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
-["Dijital Yaşam Becerileri","ODTÜ Geliştirme Vakfı Okulları","Kasım 2026",[]],
+["Dijital Yaşam Becerileri","Bilgeİş","Kasım 2026",[],"odtu"],
 ["Dijital Tehditlerle Başa Çıkma","Enstitü İstanbul İSMEK","Kasım 2026",[]],
 ["Yapay Zeka Dünyasına Giriş","BTK Akademi","Ekim 2026",[]],
 ["Dijital Okuryazarlık","BTK Akademi","Ekim 2026",[]],
@@ -859,8 +859,8 @@ var logolar={'BTK Akademi':'btk.png','Bilgeİş':'bilgeis.png','Enstitü İstanb
 var KL={'T.C. Millî Eğitim Bakanlığı':'meb','BTK Akademi':'btk','Bilgeİş':'bilgeis','Turkcell Geleceği Yazanlar':'turkcell','Enstitü İstanbul İSMEK':'ismek','ODTÜ Geliştirme Vakfı Okulları':'odtu','İstanbul Valiliği':'istanbul-valiligi'};
 function slug(t){return t.replace(/[ÇçĞğİıÖöŞşÜü]/g,function(m){return 'CcGgIiOoSsUu'['ÇçĞğİıÖöŞşÜü'.indexOf(m)]}).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
 function klasor(k){return KL[k]||slug(k)}
-function bYol(c,e){return klasor(c[1])+'/'+slug(c[0])+'.'+e}
-function th(c){var b=klasor(c[1])+'/'+slug(c[0]);return '<img class="bth bg" tabindex="0" role="button" aria-label="Belgeyi aç" data-i="'+veri.sertifikalar.indexOf(c)+'" data-b="'+b+'" data-n="1" src="'+b+'.png" alt="Belge önizleme" loading="lazy" onerror="var e=[\'png\',\'jpg\',\'jpeg\',\'webp\'],n=+this.dataset.n;if(n<4){this.dataset.n=n+1;this.src=this.dataset.b+\'.\'+e[n]}else this.remove()">'}
+function bYol(c,e){return (c[4]||klasor(c[1]))+'/'+slug(c[0])+'.'+e}
+function th(c){var b=(c[4]||klasor(c[1]))+'/'+slug(c[0]);return '<img class="bth bg" tabindex="0" role="button" aria-label="Belgeyi aç" data-i="'+veri.sertifikalar.indexOf(c)+'" data-b="'+b+'" data-n="1" src="'+b+'.png" alt="Belge önizleme" loading="lazy" onerror="var e=[\'png\',\'jpg\',\'jpeg\',\'webp\'],n=+this.dataset.n;if(n<4){this.dataset.n=n+1;this.src=this.dataset.b+\'.\'+e[n]}else this.remove()">'}
 function bMsg(t){var x=document.getElementById('bgt');if(!x){x=document.createElement('div');x.id='bgt';x.setAttribute('role','status');document.body.appendChild(x)}x.textContent=t;x.classList.add('on');clearTimeout(x._t);x._t=setTimeout(function(){x.classList.remove('on')},4200)}
 function bAc(c){var ex=['png','jpg','jpeg','webp'],ov=document.getElementById('bov'),l;
 if(!ov){ov=document.createElement('div');ov.id='bov';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Belge görünümü');
