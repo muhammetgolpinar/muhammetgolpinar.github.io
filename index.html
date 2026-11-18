@@ -904,8 +904,9 @@ var flt=[['Tümü',function(){return 1}]].concat(TOP.map(function(t){return [t[0
 window.sertFilt=function(){return veri.sertifikalar.filter(flt[fi][1])};
 window.__gk='k';try{if(localStorage.getItem('sertgk')==='t')window.__gk='t'}catch(e){}
 window.sertTopNames=TOP.map(function(t){return t[0]});
-window.sertKey=function(c){return window.__gk==='t'?topOf(c):c[1]};
-window.sertGrf=function(){return window.__gk==='t'?veri.sertifikalar:window.sertFilt()};
+window.sertTopLevel=function(){return window.__gk==='t'&&!window.sertActive()};
+window.sertKey=function(c){return window.sertTopLevel()?topOf(c):c[1]};
+window.sertGrf=function(){return window.sertTopLevel()?veri.sertifikalar:window.sertFilt()};
 window.sertActive=function(){return fi>0?flt[fi][0]:''};
 window.sertPick=function(k){var x=0;for(var q=0;q<flt.length;q++)if(flt[q][0]===k)x=q;var t=fi===x?0:x;var b=document.querySelector('.chip[data-i="'+t+'"]');if(b)b.click()};
 (function(){var b=document.getElementById('sert-gsync');if(!b)return;function u(){var t=window.__gk==='t';b.setAttribute('aria-pressed',t);b.textContent=t?'🏷️ Grafik: konulara göre':'🏛️ Grafik: kurumlara göre'}u();b.addEventListener('click',function(){window.__gk=window.__gk==='t'?'k':'t';try{localStorage.setItem('sertgk',window.__gk)}catch(e){}u();document.dispatchEvent(new Event('sertchg'))})})();
@@ -1018,7 +1019,7 @@ window.addEventListener('afterprint',function(){root.classList.remove('ok');if(s
 function dag(){var m={};(window.sertGrf?window.sertGrf():veri.sertifikalar).forEach(function(c){var g=window.sertKey?window.sertKey(c):c[1];m[g]=(m[g]||0)+1});var k=Object.keys(m).sort(function(a,b){return m[b]-m[a]}),mx=m[k[0]];
 put('sert-dag',k.map(function(x){return '<button type="button" class="dg" data-k="'+x+'"><span class="dn">'+x+'</span><span class="db"><i style="width:'+(m[x]/mx*100)+'%"></i></span><b>'+m[x]+'</b></button>'}).join(''))}
 dag();document.addEventListener('sertchg',dag);
-document.getElementById('sert-dag').addEventListener('click',function(e){var b=e.target.closest('.dg');if(!b)return;if(window.__gk==='t'){window.sertPick(b.dataset.k);return}var a=document.getElementById('sert-ara');var kk=b.dataset.k.toLocaleLowerCase('tr');if(qq==kk){qq='';a.value=''}else{qq=kk;a.value=b.dataset.k}sert()});
+document.getElementById('sert-dag').addEventListener('click',function(e){var b=e.target.closest('.dg');if(!b)return;if(window.sertTopLevel()){window.sertPick(b.dataset.k);return}var a=document.getElementById('sert-ara');var kk=b.dataset.k.toLocaleLowerCase('tr');if(qq==kk){qq='';a.value=''}else{qq=kk;a.value=b.dataset.k}sert()});
 function saat(){var e=document.getElementById('saat');try{e.textContent=new Date().toLocaleTimeString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}catch(x){}}
 saat();setInterval(saat,30000);
 (function(){if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;document.querySelectorAll('#stats b').forEach(function(b){var n=+b.textContent,t0=null;b.textContent='0';function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/900);b.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)}requestAnimationFrame(f)})})();
@@ -1617,14 +1618,14 @@ if(!sec||!bars||!dn||!ay||!sw||typeof veri==='undefined')return;
 var PL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'],MN=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 var ALL=veri.sertifikalar,S=ALL,n=S.length,ord=[],m={},ks=[];
 function gk(c){return window.sertKey?window.sertKey(c):c[1]}
-function rc(){S=window.sertGrf?window.sertGrf():ALL;n=S.length;m={};ord=window.__gk==='t'&&window.sertTopNames?window.sertTopNames.slice():[];ALL.forEach(function(c){var g=gk(c);if(ord.indexOf(g)<0)ord.push(g)});S.forEach(function(c){var g=gk(c);m[g]=(m[g]||0)+1});ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]})}
+function rc(){S=window.sertGrf?window.sertGrf():ALL;n=S.length;m={};ord=window.sertTopLevel&&window.sertTopLevel()&&window.sertTopNames?window.sertTopNames.slice():[];ALL.forEach(function(c){var g=gk(c);if(ord.indexOf(g)<0)ord.push(g)});S.forEach(function(c){var g=gk(c);m[g]=(m[g]||0)+1});ks=Object.keys(m).sort(function(a,b){return m[b]-m[a]})}
 rc();
 function col(k){return PL[Math.max(0,ord.indexOf(k))%PL.length]}
-function act(){if(window.__gk==='t'){var t=window.sertActive?window.sertActive():'';return ks.filter(function(k){return k===t})[0]}var a=((inp&&inp.value)||'').toLocaleLowerCase('tr');return ks.filter(function(k){return k.toLocaleLowerCase('tr')===a})[0]}
-function filt(k){if(window.__gk==='t'){window.sertPick(k);return}var b=[].slice.call(bars.querySelectorAll('.dg')).filter(function(x){return x.dataset.k===k})[0];if(b)b.click()}
+function act(){if(window.sertTopLevel&&window.sertTopLevel())return;var a=((inp&&inp.value)||'').toLocaleLowerCase('tr');return ks.filter(function(k){return k.toLocaleLowerCase('tr')===a})[0]}
+function filt(k){if(window.sertTopLevel&&window.sertTopLevel()){window.sertPick(k);return}var b=[].slice.call(bars.querySelectorAll('.dg')).filter(function(x){return x.dataset.k===k})[0];if(b)b.click()}
 function rd(anim){var R=46,C=2*Math.PI*R,on=act(),acc=0,g=ks.length>1?1.6:0;
  var seg=ks.map(function(k){var L=m[k]/n*C,o=-acc;acc+=L;return '<circle class="sg'+(k===on?' on':'')+'" data-k="'+k+'" cx="66" cy="66" r="'+R+'" fill="none" stroke="'+col(k)+'" stroke-width="'+(k===on?25:21)+'" stroke-dasharray="'+(L-g).toFixed(2)+' '+(C-L+g).toFixed(2)+'" stroke-dashoffset="'+o.toFixed(2)+'" transform="rotate(-90 66 66)"><title>'+k+' ('+m[k]+')</title></circle>'}).join('');
- var big=on?m[on]:n,lab=on?(on.length>16?on.slice(0,15)+'…':on):'sertifika';
+ var big=on?m[on]:n,lab=on?(on.length>16?on.slice(0,15)+'…':on):((window.__gk==='t'&&window.sertActive&&window.sertActive())||'sertifika');
  var svg='<svg viewBox="0 0 132 132" class="'+(on?'has ':'')+(anim?'anim':'')+'" role="img" aria-label="Sertifika dağılımı"><circle cx="66" cy="66" r="46" fill="none" stroke="var(--soft)" stroke-width="21"/>'+seg+'<text x="66" y="68" text-anchor="middle" class="d1">'+big+'</text><text x="66" y="84" text-anchor="middle" class="d2">'+lab+'</text></svg>';
  var lg=ks.map(function(k){return '<button type="button" class="lgi'+(k===on?' on':'')+'" data-k="'+k+'"><i style="background:'+col(k)+'"></i><span>'+k+'</span><b>'+m[k]+'</b><em>'+Math.round(m[k]/n*100)+'%</em></button>'}).join('');
  dn.innerHTML='<div class="dsv">'+svg+'</div><div class="dlg">'+lg+'</div>'}
