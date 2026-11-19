@@ -728,6 +728,7 @@ body{font-size:calc(16px*var(--fs))}
       <a class="btn fill" href="mailto:muhammetgolpinar@gmail.com">Mesaj gönder</a>
       <a class="btn out" href="https://www.linkedin.com/in/muhammet-g%C3%B6lpinar-10875a379" target="_blank" rel="noopener">LinkedIn</a>
       <button class="btn out" id="pdf" type="button">📄 PDF kaydet</button>
+      <button class="btn out" id="cvbtn" type="button" aria-label="Özgeçmişi (CV) PDF olarak indir">📥 CV indir</button>
     </div>
     <div class="stats" id="stats"></div>
   </div>
@@ -787,7 +788,7 @@ body{font-size:calc(16px*var(--fs))}
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
 sertifikalar:[["İşletim Sistemlerine Giriş","BTK Akademi","Kasım 2026",[]],
-["Aile İçi Teknoloji Okuryazarlığı","BTK Akademi","Kasım 2026",["Bilişim"]],
+["Aile İçi Teknoloji Okuryazarlığı","BTK Akademi","Kasım 2026",[]],
 ["Microsoft Word Temelleri","BTK Akademi","Kasım 2026",[]],
 ["Su Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Kuraklıkla Mücadele","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -902,7 +903,7 @@ ov._l=l;ov._p=document.activeElement;ov.hidden=false;document.body.style.overflo
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.bg');if(t){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 document.addEventListener('keydown',function(e){var t=e.target;if((e.key==='Enter'||e.key===' ')&&t.classList&&t.classList.contains('bth')){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div><div class="bw">'+th(c)+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
-var TOP=[['Bilişim','yapay zeka|chatgpt|claude|copilot|microsoft word|gemini|prompt|html|css|dijital|bilgi teknolojileri|nesnelerin|internet|sosyal medya|medya okuryazarl|bilgi okuryazarl'],['Çevre','çevre|ekolo|sürdürülebil|geri dönüşüm|sıfır atık|kuraklık|iklim|su okuryazarl'],['Sağlık ve Gelişim','iş sağlığı|sağlıklı yaşam|kumar|öğrenmeyi öğrenme|meslek etiği|bireysel gelişim'],['Kültür ve Toplum','kültür|vatandaşlık|istanbul|medeniyet|aile|farkındalık']];
+var TOP=[['Bilişim','yapay zeka|chatgpt|claude|copilot|microsoft word|gemini|prompt|html|css|dijital|bilgi teknolojileri|nesnelerin|internet|sosyal medya|medya okuryazarl|bilgi okuryazarl|teknoloji okuryazarl'],['Çevre','çevre|ekolo|sürdürülebil|geri dönüşüm|sıfır atık|kuraklık|iklim|su okuryazarl'],['Sağlık ve Gelişim','iş sağlığı|sağlıklı yaşam|kumar|öğrenmeyi öğrenme|meslek etiği|bireysel gelişim'],['Kültür ve Toplum','kültür|vatandaşlık|istanbul|medeniyet|aile|farkındalık']];
 function topOf(c){var t=(c[3]||[]).filter(function(x){return TOP.some(function(y){return y[0]===x})})[0];if(t)return t;var a=c[0].toLocaleLowerCase('tr');for(var i=0;i<TOP.length;i++)if(new RegExp(TOP[i][1]).test(a))return TOP[i][0];return ''}
 function topF(n){return function(c){return topOf(c)===n}}
 var flt=[['Tümü',function(){return 1}]].concat(TOP.map(function(t){return [t[0],topF(t[0])]}).filter(function(x){return veri.sertifikalar.some(x[1])})),fi=0,acik=false,LIM=6;
@@ -1012,6 +1013,88 @@ function sc(){var y=window.scrollY||0,h=document.documentElement.scrollHeight-wi
 window.addEventListener('scroll',sc,{passive:true});sc();
 tp.addEventListener('click',function(){window.scrollTo({top:0})});
 try{var cs=document.getElementById('cv-sert');if(cs)cs.textContent=veri.sertifikalar.length}catch(e){}
+(function(){try{
+var btn=document.getElementById('cvbtn');if(!btn)return;
+var S=1654/794,F='Nunito,"Segoe UI",system-ui,sans-serif',BL='#1e3a7c',AC='#2f4bff',INK='#0f2a47',GR='#56728f';
+var PAL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'];
+function dc(t){var e=document.createElement('textarea');e.innerHTML=t;return e.value}
+function loadImg(srcs){return new Promise(function(res){var i=0,im=new Image();im.onload=function(){res(im)};im.onerror=function(){i++;if(i<srcs.length)im.src=srcs[i];else res(null)};im.src=srcs[0]})}
+function build(I,Z){var W=794*Z,H=1123*Z,PX=34,BOT=H-40,P=[],x,y,cv,ox,cw;
+function np(){cv=document.createElement('canvas');cv.width=1654;cv.height=Math.round(1654*Math.SQRT2);x=cv.getContext('2d');x.scale(S/Z,S/Z);x.fillStyle='#fff';x.fillRect(0,0,W,H);x.textBaseline='alphabetic';P.push(cv)}
+function wr(t,font,mw,max){x.font=font;t=dc(String(t));var w=t.split(/\s+/),l=[],c='';w.forEach(function(q){var tt=c?c+' '+q:q;if(x.measureText(tt).width>mw&&c){l.push(c);c=q}else c=tt});if(c)l.push(c);if(max&&l.length>max){l=l.slice(0,max);var s=l[max-1];while(s.length>1&&x.measureText(s+'…').width>mw)s=s.slice(0,-1);l[max-1]=s+'…'}return l}
+function tx(t,a,b,font,col,al){x.font=font;x.fillStyle=col;x.textAlign=al||'left';x.fillText(dc(String(t)),a,b);x.textAlign='left'}
+function logo(k,cx,cy,sz){var im=I&&I[k];x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1;x.strokeStyle='rgba(15,42,71,.2)';x.stroke();if(im&&im.naturalWidth){x.clip();var p=sz*.14,bw=sz-2*p,sc=Math.min(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h)}x.restore()}
+function sec(t){y+=6;x.fillStyle=AC;x.fillRect(ox,y,4,16);tx(t,ox+11,y+13,'800 14px '+F,BL);x.fillStyle='rgba(30,58,124,.22)';x.fillRect(ox,y+21,cw,1.2);y+=30}
+var n=veri.sertifikalar.length;
+np();var g=x.createLinearGradient(0,0,W,118);g.addColorStop(0,'#1e3a7c');g.addColorStop(1,'#2f4bff');x.fillStyle=g;x.fillRect(0,0,W,118);
+x.fillStyle='rgba(255,255,255,.08)';x.beginPath();x.arc(W-30,5,80,0,7);x.fill();x.beginPath();x.arc(150,130,55,0,7);x.fill();
+tx('Muhammet GÖLPINAR',PX,48,'800 30px '+F,'#fff');
+tx('Bilişim Teknolojileri Öğrencisi',PX,70,'700 15px '+F,'#e6ebff');
+tx('MuGöl PORTAL Kurucusu ve Geliştiricisi',PX,88,'600 12px '+F,'#c9d2ff');
+tx('muhammetgolpinar@gmail.com  ·  muhammetgolpinar.github.io  ·  LinkedIn: Muhammet Gölpınar',PX,107,'600 11px '+F,'#fff');
+var pcx=W-PX-38,pcy=59,r=36;x.save();x.beginPath();x.arc(pcx,pcy,r+3,0,7);x.fillStyle='#fff';x.fill();x.beginPath();x.arc(pcx,pcy,r,0,7);x.clip();
+if(I&&I.foto&&I.foto.naturalWidth){var im=I.foto,sc=Math.max(2*r/im.naturalWidth,2*r/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,pcx-w/2,pcy-h/2,w,h)}else{x.fillStyle='#16214a';x.fillRect(pcx-r,pcy-r,2*r,2*r);tx('MG',pcx,pcy+9,'800 24px '+F,'#fff','center')}
+x.restore();
+var Y0=128,cwL=Math.round((W-2*PX)*.6),oxR=PX+cwL+22,cwR=W-PX-oxR,yL,yR;
+ox=PX;cw=cwL;y=Y0;
+sec('Hakkımda');
+wr('Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi Bilişim Teknolojileri Alanı öğrencisiyim (2023 - Günümüz). MuGöl PORTAL’ın kurucusu ve geliştiricisiyim; proje hem web sitesi hem de Google Play Store uygulaması olarak yayında. Şu an Arçelik Türkiye’de Bilgi İşlem Stajyeri olarak görev yapıyorum.','500 11px '+F,cw).forEach(function(l){tx(l,ox,y+10,'500 11px '+F,INK);y+=15});
+sec('Deneyim');
+deneyim.forEach(function(d){
+if(!d.roller){logo(d.logo,ox+14,y+14,28);tx(d.rol,ox+38,y+10,'800 12px '+F,INK);tx(d.kurum,ox+38,y+24,'600 10.5px '+F,GR);tx(tarih(d.bas)+'  ·  '+d.yer,ox+38,y+37,'500 10px '+F,GR);y+=48;return}
+logo(d.logo,ox+14,y+14,28);tx(d.kurum,ox+38,y+11,'800 12px '+F,INK);var ilk=d.roller.reduce(function(a,q){return q.bas[0]*12+q.bas[1]<a[0]*12+a[1]?q.bas:a},[9999,1]);tx(AY[ilk[1]-1]+' '+ilk[0]+' - Devam ediyor  ·  '+sure(ilk),ox+38,y+25,'500 10px '+F,GR);y+=36;
+d.roller.forEach(function(q){var ls=wr(q.acik,'500 10px '+F,cw-38,3);x.fillStyle='rgba(47,75,255,.35)';x.fillRect(ox+14,y-3,2,28+ls.length*12.5);x.fillStyle=AC;x.beginPath();x.arc(ox+15,y+5,3.5,0,7);x.fill();
+tx(q.rol,ox+38,y+9,'800 11px '+F,INK);tx((q.kurum?q.kurum+'  ·  ':'')+tarih(q.bas),ox+38,y+21,'500 9.5px '+F,GR);y+=33;ls.forEach(function(l){tx(l,ox+38,y,'500 10px '+F,INK);y+=12.5});y+=7});y+=2});
+sec('Eğitim');
+veri.egitim.forEach(function(e){var ls=wr(e[0],'800 11.5px '+F,cw-42,2);logo('lise.png',ox+14,y+14,28);ls.forEach(function(l,i){tx(l,ox+38,y+10+i*14,'800 11.5px '+F,INK)});var by=y+10+(ls.length-1)*14;tx(e[1],ox+38,by+14,'600 10.5px '+F,GR);tx(e[2],ox+38,by+27,'500 10px '+F,GR);y=by+34});
+yL=y;
+ox=oxR;cw=cwR;y=Y0;
+sec('Beceriler');
+veri.beceriler.forEach(function(b){tx(b[1],ox,y+10,'800 11px '+F,INK);y+=13;wr(b[2].join('  ·  '),'500 10.5px '+F,cw).forEach(function(l){tx(l,ox,y+10,'500 10.5px '+F,INK);y+=13});y+=5});
+sec('Başarılar');
+veri.basarilar.forEach(function(b){var ls=wr(b[0],'800 10.5px '+F,cw-12,2);x.fillStyle=AC;x.beginPath();x.arc(ox+3,y+7,2.4,0,7);x.fill();ls.forEach(function(l){tx(l,ox+12,y+10,'800 10.5px '+F,INK);y+=13});y+=4});
+sec('Topluluk ve Etkinlikler');
+wr(veri.topluluklar.map(function(t){return t[0]}).join('  ·  '),'500 10.5px '+F,cw).forEach(function(l){tx(l,ox,y+10,'500 10.5px '+F,INK);y+=13});
+y+=3;wr('Ayrıca '+veri.programlar.length+' farklı okul tören ve programında aktif görev aldım.','500 10px '+F,cw).forEach(function(l){tx(l,ox,y+10,'500 10px '+F,GR);y+=12.5});
+yR=y;
+ox=PX;cw=W-2*PX;y=Math.max(yL,yR)+4;
+sec('Sertifikalar ('+n+')');
+var gr={},ord=[];veri.sertifikalar.forEach(function(c){if(!gr[c[1]]){gr[c[1]]=[];ord.push(c[1])}gr[c[1]].push(c)});
+var ai=ord.slice();ord.sort(function(a,b){return gr[b].length-gr[a].length||ai.indexOf(a)-ai.indexOf(b)});
+var gp=12,cc=(cw-2*gp)/3;
+ord.forEach(function(k){var col=PAL[ai.indexOf(k)%PAL.length];x.fillStyle=col;x.globalAlpha=.1;x.fillRect(ox,y,cw,20);x.globalAlpha=1;x.fillStyle=col;x.fillRect(ox,y,3,20);logo(k,ox+17,y+10,15);tx(k,ox+30,y+14,'800 11px '+F,col);tx('('+gr[k].length+')',ox+cw-8,y+14,'800 10.5px '+F,col,'right');y+=26;
+for(var i=0;i<gr[k].length;i+=3){var it=gr[k].slice(i,i+3),ls=it.map(function(c){return wr(c[0]+'  ·  '+c[2].replace(/^(\S{3})\S*/,'$1'),'500 9.5px '+F,cc-12,2)}),rh=Math.max.apply(null,ls.map(function(a){return a.length}))*11.5+3;
+it.forEach(function(c,j){var cx0=ox+j*(cc+gp);x.fillStyle=col;x.beginPath();x.arc(cx0+3,y+6,2.2,0,7);x.fill();ls[j].forEach(function(l,q){tx(l,cx0+11,y+9+q*11.5,'500 9.5px '+F,INK)})});y+=rh}
+y+=4});
+P.forEach(function(c){var z=c.getContext('2d');z.fillStyle='rgba(15,42,71,.18)';z.fillRect(PX,H-30,W-2*PX,1);z.textBaseline='alphabetic';z.font='600 9.5px '+F;z.fillStyle=GR;z.textAlign='left';z.fillText('Muhammet GÖLPINAR · CV',PX,H-15);z.textAlign='right';z.fillText('muhammetgolpinar.github.io',W-PX,H-15);z.textAlign='left'});
+return {P:P,over:y>BOT,y:y}}
+function mk(I){var r;for(var i=0;i<7;i++){r=build(I,[1,1.05,1.1,1.16,1.24,1.34,1.46][i]);if(!r.over)break}return r.P}
+function pdf(cs){var enc=new TextEncoder(),ch=[],off=[],pos=0,N=cs.length;
+function put(d){if(typeof d==='string')d=enc.encode(d);ch.push(d);pos+=d.length}
+function obj(k,fn){off[k]=pos;put(k+' 0 obj\n');fn();put('\nendobj\n')}
+put('%PDF-1.4\n');
+obj(1,function(){put('<< /Type /Catalog /Pages 2 0 R >>')});
+var kids=[];for(var i=0;i<N;i++)kids.push((3+3*i)+' 0 R');
+obj(2,function(){put('<< /Type /Pages /Kids ['+kids.join(' ')+'] /Count '+N+' >>')});
+cs.forEach(function(c,i){var b=atob(c.toDataURL('image/jpeg',.92).split(',')[1]),jb=new Uint8Array(b.length);for(var q=0;q<b.length;q++)jb[q]=b.charCodeAt(q);
+obj(3+3*i,function(){put('<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im0 '+(4+3*i)+' 0 R >> >> /Contents '+(5+3*i)+' 0 R >>')});
+obj(4+3*i,function(){put('<< /Type /XObject /Subtype /Image /Width '+c.width+' /Height '+c.height+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jb.length+' >>\nstream\n');put(jb);put('\nendstream')});
+var s='q 595.28 0 0 841.89 0 0 cm /Im0 Do Q';
+obj(5+3*i,function(){put('<< /Length '+s.length+' >>\nstream\n'+s+'\nendstream')})});
+var tot=3*N+3,xo=pos;put('xref\n0 '+tot+'\n0000000000 65535 f \n');
+for(var k=1;k<tot;k++)put(('0000000000'+off[k]).slice(-10)+' 00000 n \n');
+put('trailer\n<< /Size '+tot+' /Root 1 0 R >>\nstartxref\n'+xo+'\n%%EOF');
+return new Blob(ch,{type:'application/pdf'})}
+function ver(bl){var u=URL.createObjectURL(bl),a=document.createElement('a');a.href=u;a.download='Muhammet-Golpinar-CV.pdf';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},5000)}
+btn.addEventListener('click',function(){var t0=btn.textContent;btn.disabled=true;btn.textContent='Hazırlanıyor…';
+function bit(s){btn.textContent=s;btn.disabled=false;setTimeout(function(){btn.textContent=t0},2200)}
+var fl=['500','600','700','800'].map(function(w){return document.fonts&&document.fonts.load?document.fonts.load(w+' 20px Nunito','ĞÜŞİÖÇığüşöç Aa'):Promise.resolve()});
+var src={'arcelik.png':'arcelik.png','logo.png':'logo.png','lise.png':'lise.png'};try{Object.keys(logolar).forEach(function(k){src[k]=logolar[k]})}catch(e){}
+var I={};var pr=Object.keys(src).map(function(k){return loadImg([src[k]]).then(function(im){if(im)I[k]=im})});
+pr.push(loadImg(['profil.jpg','profil.jpeg','profil.png','profil.webp','profil.JPG']).then(function(im){if(im)I.foto=im}));
+Promise.all(fl.concat(pr)).catch(function(){}).then(function(){var bl;try{bl=pdf(mk(I))}catch(e){try{bl=pdf(mk({}))}catch(e2){bit('Hata, tekrar dene');return}}ver(bl);bit('✓ İndirildi')})});
+}catch(e){}})();
+
 document.getElementById('pdf').addEventListener('click',function(){root.classList.add('ok');window.print()});
 var sv;window.addEventListener('beforeprint',function(){sv=[fi,acik];fi=0;acik=true;sert()});
 window.addEventListener('afterprint',function(){root.classList.remove('ok');if(sv){fi=sv[0];acik=sv[1];sert()}});
