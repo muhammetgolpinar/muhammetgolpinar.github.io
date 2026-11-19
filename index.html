@@ -784,7 +784,8 @@ body{font-size:calc(16px*var(--fs))}
 <script>
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Su Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+sertifikalar:[["Microsoft Word Temelleri","BTK Akademi","Kasım 2026",[]],
+["Su Okuryazarlığı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Kuraklıkla Mücadele","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Türk Sosyal Hayatında Aile","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Bireysel Gelişim ve Kültürel Farkındalık Eğitimi","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -897,7 +898,7 @@ ov._l=l;ov._p=document.activeElement;ov.hidden=false;document.body.style.overflo
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.bg');if(t){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 document.addEventListener('keydown',function(e){var t=e.target;if((e.key==='Enter'||e.key===' ')&&t.classList&&t.classList.contains('bth')){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div><div class="bw">'+th(c)+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
-var TOP=[['Bilişim','yapay zeka|chatgpt|claude|copilot|gemini|prompt|html|css|dijital|bilgi teknolojileri|nesnelerin|internet|sosyal medya|medya okuryazarl|bilgi okuryazarl'],['Çevre','çevre|ekolo|sürdürülebil|geri dönüşüm|sıfır atık|kuraklık|iklim|su okuryazarl'],['Sağlık ve Gelişim','iş sağlığı|sağlıklı yaşam|kumar|öğrenmeyi öğrenme|meslek etiği|bireysel gelişim'],['Kültür ve Toplum','kültür|vatandaşlık|istanbul|medeniyet|aile|farkındalık']];
+var TOP=[['Bilişim','yapay zeka|chatgpt|claude|copilot|microsoft word|gemini|prompt|html|css|dijital|bilgi teknolojileri|nesnelerin|internet|sosyal medya|medya okuryazarl|bilgi okuryazarl'],['Çevre','çevre|ekolo|sürdürülebil|geri dönüşüm|sıfır atık|kuraklık|iklim|su okuryazarl'],['Sağlık ve Gelişim','iş sağlığı|sağlıklı yaşam|kumar|öğrenmeyi öğrenme|meslek etiği|bireysel gelişim'],['Kültür ve Toplum','kültür|vatandaşlık|istanbul|medeniyet|aile|farkındalık']];
 function topOf(c){var t=(c[3]||[]).filter(function(x){return TOP.some(function(y){return y[0]===x})})[0];if(t)return t;var a=c[0].toLocaleLowerCase('tr');for(var i=0;i<TOP.length;i++)if(new RegExp(TOP[i][1]).test(a))return TOP[i][0];return ''}
 function topF(n){return function(c){return topOf(c)===n}}
 var flt=[['Tümü',function(){return 1}]].concat(TOP.map(function(t){return [t[0],topF(t[0])]}).filter(function(x){return veri.sertifikalar.some(x[1])})),fi=0,acik=false,LIM=6;
