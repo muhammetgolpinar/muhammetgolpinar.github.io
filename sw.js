@@ -1,6 +1,6 @@
 /* Servis çalışanı – HTML/CSS/JS: önce ağ (hep güncel), çevrimdışıysa önbellek;
    görseller ve yazı tipleri: önbellekten hemen göster, arkada yenile. */
-const V='mugol-v2', SHELL=['./','index.html','styles.css','app.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png'];
+const V='mugol-v3', SHELL=['./','index.html','styles.css','app.js','cv-fonts.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png'];
 const MAX_RUNTIME=80;
 
 self.addEventListener('install',e=>{
