@@ -71,12 +71,12 @@ programlar:["6 Ekim İstanbul’un İşgalden Kurtuluşu Günü Kutlama Program�
 };
 function put(id,h){document.getElementById(id).innerHTML=h}
 function clubs(){return '<div class="ek" id="ek"><div class="cl-h">Etkinlik ve topluluklar:</div><ul class="cl">'+veri.topluluklar.map(function(t){return '<li>'+(t[1]?'<details><summary>'+t[0]+'</summary><p>'+t[1]+'</p></details>':t[0])+'</li>'}).join('')+'</ul><div class="cl-h">Tören ve programlar:</div><p>Bu etkinlik ve projelerde aktif görev alarak organizasyon, ekip çalışması ve iletişim becerilerimi geliştirdim. Katıldığım her etkinlik sorumluluk bilincimi ve sosyal yönümü güçlendirdi.</p><ul class="cl">'+veri.programlar.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul></div><button class="ekb" id="ekb" type="button" aria-expanded="false">Daha fazla göster</button>'}
-put('egitim-list',veri.egitim.map(function(e,i){return '<div class="row"><div class="logo k"><img src="lise.png" alt="'+e[0]+'" loading="lazy" onerror="this.outerHTML=\'🎓\'"></div><div><h3>'+e[0]+'</h3><div class="s">'+e[1]+'</div><div class="m">'+e[2]+'</div>'+(i==0?clubs():'')+'</div></div>'}).join(''));
+put('egitim-list',veri.egitim.map(function(e,i){return '<div class="row"><div class="logo k"><img src="logolar/lise.png" alt="'+e[0]+'" loading="lazy" decoding="async" onerror="this.outerHTML=\'🎓\'"></div><div><h3>'+e[0]+'</h3><div class="s">'+e[1]+'</div><div class="m">'+e[2]+'</div>'+(i==0?clubs():'')+'</div></div>'}).join(''));
 var eb=document.getElementById('ekb');eb.addEventListener('click',function(){var a=document.getElementById('ek').classList.toggle('open');eb.textContent=a?'Daha az göster':'Daha fazla göster';eb.setAttribute('aria-expanded',a)});
 var AY=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
 function sure(b){var n=new Date(),m=(n.getFullYear()-b[0])*12+n.getMonth()+2-b[1],y=Math.floor(m/12),a=m%12;return (y?y+' yıl':'')+(y&&a?' ':'')+(a?a+' ay':'')}
 function tarih(b){return AY[b[1]-1]+' '+b[0]+' - Devam ediyor · '+sure(b)}
-function lg(src,fb,k){return '<div class="logo'+(k?' k':'')+'"><img src="'+src+'" alt="" loading="lazy" onerror="this.outerHTML=\''+fb+'\'"></div>'}
+function lg(src,fb,k){return '<div class="logo'+(k?' k':'')+'"><img src="logolar/'+src+'" alt="" loading="lazy" decoding="async" onerror="this.outerHTML=\''+fb+'\'"></div>'}
 var deneyim=[
 {logo:'arcelik.png',fb:'💼',k:1,rol:'IT Intern / Bilgi İşlem Stajyeri',kurum:'Arçelik Türkiye · Stajyer',bas:[2026,9],yer:'Kadıköy, İstanbul, Türkiye · Ofiste'},
 {logo:'logo.png',fb:'🌐',kurum:'MuGöl PORTAL',roller:[
@@ -88,12 +88,12 @@ put('deneyim-list',deneyim.map(function(d){
 if(!d.roller)return '<div class="row">'+lg(d.logo,d.fb,d.k)+'<div style="flex:1;min-width:0"><div class="hd"><h3>'+d.rol+'</h3><span class="badge">Devam ediyor</span></div><div class="s">'+d.kurum+'</div><div class="m">'+tarih(d.bas)+'</div><div class="m">'+d.yer+'</div></div></div>';
 var ilk=d.roller.reduce(function(a,r){return r.bas[0]*12+r.bas[1]<a[0]*12+a[1]?r.bas:a},[9999,1]);
 return '<div class="row">'+lg(d.logo,d.fb,d.k)+'<div style="flex:1;min-width:0"><h3>'+d.kurum+'</h3><div class="m">'+sure(ilk)+'</div><div class="tl">'+d.roller.map(function(r){return '<div class="rl"><div class="hd"><h3>'+r.rol+'</h3><span class="badge">Devam ediyor</span></div>'+(r.kurum?'<div class="s">'+r.kurum+'</div>':'')+'<div class="m">'+tarih(r.bas)+'</div><p>'+r.acik+'</p></div>'}).join('')+'</div></div></div>'}).join(''));
-var logolar={'BTK Akademi':'btk.png','Bilgeİş':'bilgeis.png','Enstitü İstanbul İSMEK':'ismek.png','T.C. Millî Eğitim Bakanlığı':'meb.png','Turkcell Geleceği Yazanlar':'turkcell.png','ODTÜ Geliştirme Vakfı Okulları':'odtu.png','İstanbul Valiliği':'valilik.png'};
+var logolar={'BTK Akademi':'logolar/btk.png','Bilgeİş':'logolar/bilgeis.png','Enstitü İstanbul İSMEK':'logolar/ismek.png','T.C. Millî Eğitim Bakanlığı':'logolar/meb.png','Turkcell Geleceği Yazanlar':'logolar/turkcell.png','ODTÜ Geliştirme Vakfı Okulları':'logolar/odtu.png','İstanbul Valiliği':'logolar/valilik.png'};
 var KL={'T.C. Millî Eğitim Bakanlığı':'meb','BTK Akademi':'btk','Bilgeİş':'bilgeis','Turkcell Geleceği Yazanlar':'turkcell','Enstitü İstanbul İSMEK':'ismek','ODTÜ Geliştirme Vakfı Okulları':'odtu','İstanbul Valiliği':'istanbul-valiligi'};
 function slug(t){return t.replace(/[ÇçĞğİıÖöŞşÜü]/g,function(m){return 'CcGgIiOoSsUu'['ÇçĞğİıÖöŞşÜü'.indexOf(m)]}).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')}
 function klasor(k){return KL[k]||slug(k)}
 function bYol(c,e){return (c[4]||klasor(c[1]))+'/'+slug(c[0])+'.'+e}
-function th(c){var b=(c[4]||klasor(c[1]))+'/'+slug(c[0]);return '<img class="bth bg" tabindex="0" role="button" aria-label="Belgeyi aç" data-i="'+veri.sertifikalar.indexOf(c)+'" data-b="'+b+'" data-n="1" src="'+b+'.png" alt="Belge önizleme" loading="lazy" onerror="var e=[\'png\',\'jpg\',\'jpeg\',\'webp\'],n=+this.dataset.n;if(n<4){this.dataset.n=n+1;this.src=this.dataset.b+\'.\'+e[n]}else this.remove()">'}
+function th(c){var b=(c[4]||klasor(c[1]))+'/'+slug(c[0]);return '<img class="bth bg" tabindex="0" role="button" aria-label="Belgeyi aç" data-i="'+veri.sertifikalar.indexOf(c)+'" data-b="'+b+'" data-n="1" src="'+b+'.png" alt="Belge önizleme" loading="lazy" decoding="async" onerror="var e=[\'png\',\'jpg\',\'jpeg\',\'webp\'],n=+this.dataset.n;if(n<4){this.dataset.n=n+1;this.src=this.dataset.b+\'.\'+e[n]}else this.remove()">'}
 function bMsg(t){var x=document.getElementById('bgt');if(!x){x=document.createElement('div');x.id='bgt';x.setAttribute('role','status');document.body.appendChild(x)}x.textContent=t;x.classList.add('on');clearTimeout(x._t);x._t=setTimeout(function(){x.classList.remove('on')},4200)}
 function bAc(c){var ex=['png','jpg','jpeg','webp'],ov=document.getElementById('bov'),l;
 if(!ov){ov=document.createElement('div');ov.id='bov';ov.hidden=true;ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Belge görünümü');
@@ -115,7 +115,7 @@ if(l.indexOf(c)<0)l=veri.sertifikalar.slice();
 ov._l=l;ov._p=document.activeElement;ov.hidden=false;document.body.style.overflow='hidden';ov._g(l.indexOf(c));ov.querySelector('.bx').focus()}
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.bg');if(t){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
 document.addEventListener('keydown',function(e){var t=e.target;if((e.key==='Enter'||e.key===' ')&&t.classList&&t.classList.contains('bth')){e.preventDefault();bAc(veri.sertifikalar[+t.dataset.i])}});
-function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div><div class="bw">'+th(c)+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
+function rowS(c){return '<div class="row"><div class="logo k">'+(logolar[c[1]]?'<img src="'+logolar[c[1]]+'" alt="'+c[1]+'" loading="lazy" decoding="async" onerror="this.outerHTML=\'📜\'">':'📜')+'</div><div><h3>'+c[0]+'</h3><div class="s">'+c[1]+'</div><div class="m">'+c[2]+'</div><div class="bw">'+th(c)+'</div>'+(c[3].length?'<div class="tags">'+c[3].map(function(t){return '<span>'+t+'</span>'}).join('')+'</div>':'')+'</div></div>'}
 var TOP=[['Bilişim','yapay zeka|chatgpt|claude|copilot|microsoft word|gemini|prompt|html|css|dijital|bilgi teknolojileri|nesnelerin|internet|sosyal medya|medya okuryazarl|bilgi okuryazarl|teknoloji okuryazarl|işletim sistem'],['Çevre','çevre|ekolo|sürdürülebil|geri dönüşüm|sıfır atık|kuraklık|iklim|su okuryazarl'],['Sağlık ve Gelişim','iş sağlığı|sağlıklı yaşam|kumar|öğrenmeyi öğrenme|meslek etiği|bireysel gelişim'],['Kültür ve Toplum','kültür|vatandaşlık|istanbul|medeniyet|aile|farkındalık']];
 function topOf(c){var t=(c[3]||[]).filter(function(x){return TOP.some(function(y){return y[0]===x})})[0];if(t)return t;var a=c[0].toLocaleLowerCase('tr');for(var i=0;i<TOP.length;i++)if(new RegExp(TOP[i][1]).test(a))return TOP[i][0];return ''}
 function topF(n){return function(c){return topOf(c)===n}}
@@ -336,7 +336,7 @@ function ver(bl){var u=URL.createObjectURL(bl),a=document.createElement('a');a.h
 btn.addEventListener('click',function(){var t0=btn.textContent;btn.disabled=true;btn.textContent='Hazırlanıyor…';
 function bit(s){btn.textContent=s;btn.disabled=false;setTimeout(function(){btn.textContent=t0},2200)}
 var fl=['500','600','700','800'].map(function(w){return document.fonts&&document.fonts.load?document.fonts.load(w+' 20px Nunito','ĞÜŞİÖÇığüşöç Aa'):Promise.resolve()});
-var src={'arcelik.png':'arcelik.png','logo.png':'logo.png','lise.png':'lise.png'};try{Object.keys(logolar).forEach(function(k){src[k]=logolar[k]})}catch(e){}
+var src={'arcelik.png':'logolar/arcelik.png','logo.png':'logolar/logo.png','lise.png':'logolar/lise.png'};try{Object.keys(logolar).forEach(function(k){src[k]=logolar[k]})}catch(e){}
 var I={};var pr=Object.keys(src).map(function(k){return loadImg([src[k]]).then(function(im){if(im)I[k]=im})});
 pr.push(loadImg(['profil.jpg','profil.jpeg','profil.png','profil.webp','profil.JPG']).then(function(im){if(im)I.foto=im}));
 Promise.all(fl.concat(pr)).catch(function(){}).then(function(){var bl,cs;try{cs=mk(I);bl=pdf(cs)}catch(e){try{cs=mk({});bl=pdf(cs)}catch(e2){bit('Hata, tekrar dene');return}}bit('✓ Önizleme hazır');window.onizle({title:'CV önizleme',info:cs.length+' sayfa · A4 · PDF',pages:cs.map(function(c){return c.toDataURL('image/jpeg',.9)}),dl:function(){ver(bl)}})})});
@@ -656,7 +656,7 @@ var done=function(){if(window.toast)toast('Dijital kart indirildi')};
 var fail=function(){if(window.toast)toast('Kart oluşturulamadı')};var yedek=function(){try{indir(ciz(false),done,fail)}catch(x){fail()}};var go=function(){try{indir(ciz(true),done,yedek)}catch(e){yedek()}};
 var lim=function(k,src){return new Promise(function(r){var im=new Image();im.onload=function(){LI[k]=im;r()};im.onerror=function(){r()};im.src=src})};
 var fl=document.fonts&&document.fonts.load?['400','600','700','800'].map(function(w){return document.fonts.load(w+' 20px Nunito','ĞÜŞİÖÇığüşöç Aa')}):[];
-Promise.all(fl.concat([lim('a','arcelik.png'),lim('m','logo.png')])).then(go,go)});
+Promise.all(fl.concat([lim('a','logolar/arcelik.png'),lim('m','logolar/logo.png')])).then(go,go)});
 })();
 ;
 (function(){
@@ -784,7 +784,7 @@ var rm=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentE
 document.addEventListener('pointermove',function(e){var c=e.target.closest&&e.target.closest('.card');if(!c)return;var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true});
 /* yazan unvan satırı */
 var h=document.querySelector('.info .head');
-if(h){var p=document.createElement('p');p.className='ux-role';p.innerHTML='<img class="ux-lg" src="logo.png" alt="" onerror="this.remove()"><b></b>';h.after(p);var b=p.querySelector('b');b.textContent='MuGöl PORTAL’ın Kurucusu & Geliştiricisi';b.style.border=0;b.style.padding=0;b.style.animation='none'}
+if(h){var p=document.createElement('p');p.className='ux-role';p.innerHTML='<img class="ux-lg" src="logolar/logo.png" alt="" onerror="this.remove()"><b></b>';h.after(p);var b=p.querySelector('b');b.textContent='MuGöl PORTAL’ın Kurucusu & Geliştiricisi';b.style.border=0;b.style.padding=0;b.style.animation='none'}
 /* bölüm noktaları */
 var secs=[].slice.call(document.querySelectorAll('main section[id],section.card[id]')).filter(function(s){return s.id!=='tesekkur'});
 if(secs.length){var n=document.createElement('nav');n.className='ux-dots';n.setAttribute('aria-label','Bölümler');
@@ -809,13 +809,13 @@ if(bn){var g=D.createElement('div');g.className='ux-hi';g.innerHTML='<span class
 /* 4 proje vitrini */
 var ps=D.getElementById('projeler');
 if(ps){var h2=ps.querySelector('h2'),v=D.createElement('div');v.className='pv';
- v.innerHTML='<div class="pv-h"><div class="pv-l"><img src="logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML=\'🌐\'"></div><div><h3>MuGöl PORTAL</h3><p>Dijital Dünyan Tek Bir Portalda!</p></div></div><div class="pv-b"><a href="https://mugol-portal.github.io" target="_blank" rel="noopener">Web sitesini aç ↗</a><a href="https://play.google.com/store/apps/details?id=com.mugol.portal2" target="_blank" rel="noopener">▶ Google Play</a></div>';
+ v.innerHTML='<div class="pv-h"><div class="pv-l"><img src="logolar/logo.png" alt="MuGöl PORTAL" onerror="this.outerHTML=\'🌐\'"></div><div><h3>MuGöl PORTAL</h3><p>Dijital Dünyan Tek Bir Portalda!</p></div></div><div class="pv-b"><a href="https://mugol-portal.github.io" target="_blank" rel="noopener">Web sitesini aç ↗</a><a href="https://play.google.com/store/apps/details?id=com.mugol.portal2" target="_blank" rel="noopener">▶ Google Play</a></div>';
  var rw=ps.querySelector('.row'),dp=rw&&rw.querySelector('p'),so=rw&&rw.querySelector('.sosyal');
  if(dp){dp.className='pv-d';v.querySelector('.pv-h').after(dp)}
  var yz=rw&&rw.querySelector('.yzb');if(yz){v.appendChild(yz)}
 var EKRANLAR=['portal1.png','portal2.png','portal3.png','portal4.png','portal5.png']; /* istersen mugol klasöründeki dosya adlarını yaz; boş bırakırsan 1.png, 2.png, 3.png... otomatik bulunur */
 var yzd=D.getElementById('yzd'),yzg=D.getElementById('yzg');
-if(yzd){if(yzg&&EKRANLAR.length){yzg.hidden=false;yzg.innerHTML=EKRANLAR.map(function(f){return '<img src="mugol/'+f+'" alt="MuGöl PORTAL ekran görüntüsü" loading="lazy">'}).join('')}
+if(yzd){if(yzg&&EKRANLAR.length){yzg.hidden=false;yzg.innerHTML=EKRANLAR.map(function(f){return '<img src="mugol/'+f+'" alt="MuGöl PORTAL ekran görüntüsü" loading="lazy" decoding="async">'}).join('')}
  var yzy=0;function yzbul(){if(yzy||!yzg||EKRANLAR.length)return;yzy=1;var ex=['png','jpg','jpeg','webp'];
   function sayi(i){if(i>20)return;tur(i,0)}
   function tur(i,k){if(k>=ex.length)return;var im=new Image();im.onload=function(){im.alt='MuGöl PORTAL ekran görüntüsü';yzg.hidden=false;yzg.appendChild(im);sayi(i+1)};im.onerror=function(){tur(i,k+1)};im.src='mugol/'+i+'.'+ex[k]}
@@ -854,7 +854,7 @@ if(!rm){var cs=[].slice.call(D.querySelectorAll('main .card,section.card'));
   cs.forEach(function(c,i){if(c.getBoundingClientRect().top<innerHeight*.9){c.style.setProperty('--d',(.9+i*.08)+'s')}c.classList.add('ux-r');o.observe(c)})}}
 })();
 ;
-(function(){var b=document.getElementById('qrb'),d=document.getElementById('qrd'),i=document.getElementById('qri');if(!b||!d)return;var E=['png','jpg','jpeg','webp'],n=0;i.addEventListener('error',function(){if(n<E.length-1){n++;i.hidden=false;i.src='qr.'+E[n];document.getElementById('qra').href='qr.'+E[n];document.getElementById('qrh').hidden=true}});b.addEventListener('click',function(){if(!i.getAttribute('src'))i.src='qr.png';var m=document.getElementById('mnc');if(m)m.click();if(!d.open)d.showModal()});document.getElementById('qrx').addEventListener('click',function(){d.close()});d.addEventListener('click',function(e){if(e.target===d)d.close()})})();
+(function(){var b=document.getElementById('qrb'),d=document.getElementById('qrd'),i=document.getElementById('qri');if(!b||!d)return;var E=['png','jpg','jpeg','webp'],n=0;i.addEventListener('error',function(){if(n<E.length-1){n++;i.hidden=false;i.src='qr.'+E[n];document.getElementById('qra').href='qr.'+E[n];document.getElementById('qrh').hidden=true}});b.addEventListener('click',function(){if(!i.getAttribute('src'))i.src='logolar/qr.png';var m=document.getElementById('mnc');if(m)m.click();if(!d.open)d.showModal()});document.getElementById('qrx').addEventListener('click',function(){d.close()});d.addEventListener('click',function(e){if(e.target===d)d.close()})})();
 ;
 (function(){var D=document;
 /* öğretmen görüşleri: [isim, ders/unvan, görüş] */
