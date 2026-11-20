@@ -1,3 +1,20 @@
+/* İndirilen görsellerde kare/düz zeminli logoları yuvarlak çerçeveye tam oturtmak için:
+   görselin dört köşesi opak ve beyaz değilse "kare logo" sayılır. */
+window.logoKare=function(im){
+  if(im.__kare!==undefined)return im.__kare;
+  var r=false;
+  try{
+    var c=document.createElement('canvas');c.width=c.height=16;
+    var g=c.getContext('2d');g.drawImage(im,0,0,16,16);
+    var n=0;[[1,1],[14,1],[1,14],[14,14]].forEach(function(p){
+      var d=g.getImageData(p[0],p[1],1,1).data;
+      if(d[3]>200&&(d[0]*.299+d[1]*.587+d[2]*.114)<235)n++;
+    });
+    r=n>=3;
+  }catch(e){r=false}
+  try{im.__kare=r}catch(e){}
+  return r;
+};
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
 sertifikalar:[["İşletim Sistemlerine Giriş","BTK Akademi","Kasım 2026",[]],
@@ -179,7 +196,7 @@ function png(){var l=L,n=l.length,WL=1080,PW=1654,PH=Math.round(PW*Math.SQRT2),S
  var C=grp?G.reduce(function(a,q){return a+GH0+q.r.length*RH0+GP0},0)-GP0:TH0+n*RH0;
  var k=Math.min(1.12,(HL-T-M)/C),RH=RH0*k,GH=GH0*k,GP=GP0*k,TH=TH0*k,kf=k*1.32;
  var cv=document.createElement('canvas');cv.width=PW;cv.height=PH;var x=cv.getContext('2d');x.scale(S,S);
-function ld(kk,cx,cy,sz,bc){var im=useL&&IMG[kk];if(!im||!im.naturalWidth)return;x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1.5;x.strokeStyle=bc?tn(bc,.35):'rgba(0,0,0,.12)';x.stroke();x.clip();var p=sz*.14,bw=sz-2*p,sc=Math.min(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h);x.restore()}
+function ld(kk,cx,cy,sz,bc){var im=useL&&IMG[kk];if(!im||!im.naturalWidth)return;x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1.5;x.strokeStyle=bc?tn(bc,.35):'rgba(0,0,0,.12)';x.stroke();x.clip();var kr=logoKare(im),p=kr?0:sz*.14,bw=sz-2*p,sc=(kr?Math.max:Math.min)(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h);x.restore();if(kr){x.beginPath();x.arc(cx,cy,sz/2,0,7);x.lineWidth=1.5;x.strokeStyle=bc?tn(bc,.35):'rgba(0,0,0,.12)';x.stroke()}}
  x.fillStyle='#ffffff';x.fillRect(0,0,WL,HL);
  x.textBaseline='alphabetic';x.fillStyle='#0f2a47';x.font='800 46px '+F;x.fillText('Muhammet GÖLPINAR Sertifikaları',P,66);
  var ks=[],mn=l[0],mx=l[0];l.forEach(function(c){if(ks.indexOf(c[1])<0)ks.push(c[1]);if(dsk(c)<dsk(mn))mn=c;if(dsk(c)>dsk(mx))mx=c});
@@ -244,7 +261,7 @@ function tx(t,a,b,font,col,al){x.font=font;x.fillStyle=col;x.textAlign=al||'left
 function tl(t,a,b,font,col,ls){x.font=font;x.fillStyle=col;try{x.letterSpacing=ls+'px'}catch(e){}x.fillText(t,a,b);try{x.letterSpacing='0px'}catch(e){}}
 function rr(a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
 function tn(hx,al){var v=parseInt(hx.slice(1),16);return 'rgba('+(v>>16)+','+((v>>8)&255)+','+(v&255)+','+al+')'}
-function logo(k,cx,cy,sz){var im=I&&I[k];x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1;x.strokeStyle='rgba(30,58,124,.22)';x.stroke();if(im&&im.naturalWidth){x.clip();var p=sz*.14,bw=sz-2*p,sc=Math.min(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h)}x.restore()}
+function logo(k,cx,cy,sz){var im=I&&I[k];x.save();x.beginPath();x.arc(cx,cy,sz/2,0,7);x.fillStyle='#fff';x.fill();x.lineWidth=1;x.strokeStyle='rgba(30,58,124,.22)';x.stroke();if(im&&im.naturalWidth){x.clip();var kr=logoKare(im),p=kr?0:sz*.14,bw=sz-2*p,sc=(kr?Math.max:Math.min)(bw/im.naturalWidth,bw/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h)}x.restore();if(im&&im.naturalWidth&&logoKare(im)){x.beginPath();x.arc(cx,cy,sz/2,0,7);x.lineWidth=1;x.strokeStyle='rgba(30,58,124,.22)';x.stroke()}}
 function foto(cx,cy,r,ring){x.fillStyle=ring;x.beginPath();x.arc(cx,cy,r+10,0,7);x.fill();x.save();x.beginPath();x.arc(cx,cy,r+3,0,7);x.fillStyle='#fff';x.fill();x.beginPath();x.arc(cx,cy,r,0,7);x.clip();
 if(I&&I.foto&&I.foto.naturalWidth){var im=I.foto,sc=Math.max(2*r/im.naturalWidth,2*r/im.naturalHeight),w=im.naturalWidth*sc,h=im.naturalHeight*sc;x.drawImage(im,cx-w/2,cy-h/2,w,h)}else{x.fillStyle='#16214a';x.fillRect(cx-r,cy-r,2*r,2*r);tx('MG',cx,cy+r*.2,'800 '+Math.round(r*.6)+'px '+F,'#fff','center')}x.restore()}
 function sec(t){y+=14;x.font='800 13.5px '+F;var w=x.measureText(t).width;tx(t,ox,y+11,'800 13.5px '+F,BL);x.fillStyle=AC;rr(ox,y+17,22,2.6,1.3);x.fill();x.fillStyle='rgba(47,75,255,.16)';x.fillRect(ox+w+10,y+8,mw-w-10,1.2);y+=28}
