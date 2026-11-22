@@ -17,7 +17,8 @@ window.logoKare=function(im){
 };
 var veri={
 egitim:[["Şehit Büyükelçi İsmail Erez Mesleki ve Teknik Anadolu Lisesi","Bilişim Teknolojileri Alanı","2023 - Günümüz"]],
-sertifikalar:[["Kent Yaşamı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+sertifikalar:[["Çalışanların Temel İş Sağlığı ve Güvenliği Eğitimi","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
+["Kent Yaşamı","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Sağlıklı Beslenme","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Çevrim İçi Toplantı Uygulaması: Microsoft Teams Kullanımı","Enstitü İstanbul İSMEK","Kasım 2026",[]],
 ["Microsoft Word Kullanımı","Enstitü İstanbul İSMEK","Kasım 2026",[]],
