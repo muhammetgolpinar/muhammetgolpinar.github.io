@@ -940,13 +940,15 @@ function rd(anim){var R=46,C=2*Math.PI*R,on=act(),acc=0,g=ks.length>1?1.6:0;
  var svg='<svg viewBox="0 0 132 132" class="'+(on?'has ':'')+(anim?'anim':'')+'" role="img" aria-label="Sertifika dağılımı"><circle cx="66" cy="66" r="46" fill="none" stroke="var(--soft)" stroke-width="21"/>'+seg+'<text x="66" y="68" text-anchor="middle" class="d1">'+big+'</text><text x="66" y="84" text-anchor="middle" class="d2">'+lab+'</text></svg>';
  var lg=ks.map(function(k){return '<button type="button" class="lgi'+(k===on?' on':'')+'" data-k="'+k+'"><i style="background:'+col(k)+'"></i><span>'+k+'</span><b>'+m[k]+'</b><em>'+Math.round(m[k]/n*100)+'%</em></button>'}).join('');
  dn.innerHTML='<div class="dsv">'+svg+'</div><div class="dlg">'+lg+'</div>'}
-function rt(){var tl=window.sertTopLevel&&window.sertTopLevel(),sub={};
+function rt(){var tl=window.sertTopLevel&&window.sertTopLevel(),sub={},io=[],tn=window.sertTopNames||[];
+ ALL.forEach(function(c){if(io.indexOf(c[1])<0)io.push(c[1])});
+ function sc(x){var i=tl?io.indexOf(x):tn.indexOf(x);return i<0?'#64748b':PL[i%PL.length]}
  S.forEach(function(c){var g=gk(c),o=tl?c[1]:window.sertTopOf(c);(sub[g]=sub[g]||{})[o]=(sub[g][o]||0)+1});
- var rows=ks.map(function(k,i){var sk=Object.keys(sub[k]||{}).sort(function(a,b){return sub[k][b]-sub[k][a]});
-  var r='<tr data-k="'+k+'"><td>'+(i+1)+'</td><th scope="row"><i style="background:'+col(k)+'"></i>'+k+'</th><td>'+m[k]+'</td><td>%'+Math.round(m[k]/n*100)+'</td></tr>';
-  if(sk.length>0)r+=sk.map(function(x){return '<tr class="sb" data-k="'+k+'"><td></td><th scope="row">'+x+'</th><td>'+sub[k][x]+'</td><td>%'+Math.round(sub[k][x]/m[k]*100)+'</td></tr>'}).join('');
+ var rows=ks.map(function(k,i){var sk=Object.keys(sub[k]||{}).sort(function(a,b){return sub[k][b]-sub[k][a]}),p=Math.round(m[k]/n*100);
+  var r=(i?'<tr class="gp" aria-hidden="true"><td colspan="4"></td></tr>':'')+'<tr class="mn" data-k="'+k+'" style="--c:'+col(k)+';--p:'+p+'%"><td>'+(i+1)+'</td><th scope="row">'+k+'</th><td><span class="pl">'+m[k]+'</span></td><td class="pc">%'+p+'</td></tr>';
+  r+=sk.map(function(x,xi){var q=Math.round(sub[k][x]/m[k]*100);return '<tr class="sb'+(xi===sk.length-1?' ls':'')+'" data-k="'+k+'" style="--c:'+sc(x)+';--p:'+q+'%"><td></td><th scope="row"><i></i>'+x+'</th><td>'+sub[k][x]+'</td><td class="pc">%'+q+'</td></tr>'}).join('');
   return r}).join('');
- tb.innerHTML='<table><thead><tr><th>#</th><th>'+(tl?'Konu':'Kurum')+' / '+(tl?'kurum':'konu')+'</th><th>Sertifika</th><th>Oran</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr><td></td><th scope="row">Toplam</th><td>'+n+'</td><td>%100</td></tr></tfoot></table>'}
+ tb.innerHTML='<table><thead><tr><th>#</th><th>'+(tl?'Konu':'Kurum')+' / '+(tl?'kurum':'konu')+'</th><th>Sertifika</th><th>Oran</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr class="tt"><td></td><th scope="row">Toplam</th><td><span class="pl tot">'+n+'</span></td><td class="pc">%100</td></tr></tfoot></table>'}
 var v='d';try{var sv=localStorage.getItem('grf');if(sv==='b'||sv==='d'||sv==='t')v=sv}catch(e){}
 function show(nv,save){v=nv;bars.hidden=v!=='b';dn.hidden=v!=='d';tb.hidden=v!=='t';
  [].forEach.call(sw.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v))});
