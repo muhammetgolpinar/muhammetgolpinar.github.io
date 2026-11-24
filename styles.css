@@ -862,10 +862,10 @@ a.dcopy{display:block;text-align:center;text-decoration:none;color:var(--ink)}#i
 .chm{display:inline-flex;gap:2px;margin:0 0 12px;padding:3px;border-radius:999px;background:var(--tagbg);border:1px solid var(--line)}
 .chm button{border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:.82rem;font-weight:700;padding:7px 14px;border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
 .chm button[aria-pressed="true"]{background:linear-gradient(135deg,var(--accent),var(--accent-d));color:#fff;box-shadow:0 4px 12px -5px var(--accent-d)}
-.dist[hidden],.dnt[hidden],.ayl[hidden]{display:none!important}
+.dist[hidden],.dnt[hidden],.stb[hidden]{display:none!important}
 .dnt{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:0 0 16px}
 .dnt .dsv{flex:0 0 auto;width:150px}
-.dnt svg,.ayl svg{display:block;width:100%;height:auto;overflow:visible}
+.dnt svg{display:block;width:100%;height:auto;overflow:visible}
 .dnt svg.anim{animation:dpop .7s cubic-bezier(.2,.7,.2,1) both}
 @keyframes dpop{from{opacity:0;transform:rotate(-50deg) scale(.82)}}
 .dnt .sg{cursor:pointer;transition:opacity .2s,stroke-width .2s}
@@ -879,18 +879,9 @@ a.dcopy{display:block;text-align:center;text-decoration:none;color:var(--ink)}#i
 .lgi b{font-weight:800}
 .lgi em{font-style:normal;color:var(--muted);font-size:.74rem;text-align:right}
 .lgi:hover,.lgi.on{background:var(--soft)}
-.ayl{margin:0 0 16px}
-.ayl svg{max-width:440px;margin:0 auto}
-.ayl .d3{font-family:inherit;font-size:13px;font-weight:800;fill:var(--ink)}
-.ayl .d4{font-family:inherit;font-size:11.5px;font-weight:700;fill:var(--ink)}
-.ayl .d5{font-family:inherit;font-size:9.5px;font-weight:600;fill:var(--muted)}
-.ayl .bs{transform-box:fill-box;transform-origin:bottom;animation:yk .6s cubic-bezier(.2,.7,.2,1) both}
 @keyframes yk{from{transform:scaleY(0)}}
-.ayl .alg{display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:center;margin-top:8px;font-size:.72rem;font-weight:600;color:var(--muted)}
-.ayl .alg span{display:inline-flex;align-items:center;gap:5px}
-.ayl .alg i{width:8px;height:8px;border-radius:50%}
-@media(prefers-reduced-motion:reduce){.dnt svg.anim,.ayl .bs,.chm button,.dnt .sg{animation:none;transition:none}}
-:root[data-mo=off] .dnt svg.anim,:root[data-mo=off] .ayl .bs{animation:none}
+@media(prefers-reduced-motion:reduce){.dnt svg.anim,.chm button,.dnt .sg{animation:none;transition:none}}
+:root[data-mo=off] .dnt svg.anim{animation:none}
 @media print{.chm{display:none!important}}
 ::selection{background:var(--accent);color:#fff}
 body{background:radial-gradient(900px 500px at 12% -5%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 60%),radial-gradient(800px 500px at 100% 20%,color-mix(in srgb,var(--accent-d) 10%,transparent),transparent 60%),var(--bg);background-attachment:fixed}
@@ -1074,3 +1065,19 @@ footer{margin-top:8px!important;padding:0!important;font-size:.75rem!important;t
 .onz-b figure{margin:0;width:min(100%,820px)}
 .onz-b img{display:block;width:100%;height:auto;background:#fff;border-radius:6px;box-shadow:0 10px 30px -12px rgba(15,42,71,.45),0 0 0 1px rgba(15,42,71,.08)}
 .onz-b figcaption{text-align:center;font-size:.72rem;font-weight:700;color:var(--muted,#56728f);margin-top:6px}
+
+.stb{margin:0 0 16px;overflow-x:auto}
+.stb table{width:100%;border-collapse:collapse;font-size:.84rem;color:var(--ink)}
+.stb th,.stb td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);font-weight:600}
+.stb thead th{font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.stb th:nth-child(2),.stb td:nth-child(1){text-align:left}
+.stb td:nth-child(1){width:2rem;color:var(--muted)}
+.stb tbody th{font-weight:700}
+.stb tbody th i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.stb tbody tr{cursor:pointer}
+.stb tbody tr:hover{background:var(--soft)}
+.stb tfoot th,.stb tfoot td{font-weight:800;border-bottom:0;border-top:2px solid var(--line)}
+
+.stb tbody tr.sb th{padding-left:26px;font-weight:600;font-size:.8rem;color:var(--muted)}
+.stb tbody tr.sb td{font-size:.8rem;color:var(--muted)}
+.stb tbody tr.sb th,.stb tbody tr.sb td{border-bottom:1px dashed var(--line)}

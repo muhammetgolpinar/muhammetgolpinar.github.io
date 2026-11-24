@@ -46,6 +46,7 @@ sertifikalar:[["Çalışanların Temel İş Sağlığı ve Güvenliği Eğitimi"
 ["Öğrenmeyi Öğrenme","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Üretken Yapay Zekaya Giriş","BTK Akademi","Kasım 2026",[]],
 ["Prompt Mühendisliği","BTK Akademi","Kasım 2026",[]],
+["Araştırmada Üretken Yapay Zeka Kullanımı","BTK Akademi","Kasım 2026",[]],
 ["Dijital Okuryazarlık (Orta Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
 ["Sürdürülebilirlik Okuryazarlığı","BTK Akademi","Kasım 2026",[]],
 ["Nesnelerin İnterneti (Temel Seviye)","T.C. Millî Eğitim Bakanlığı","Kasım 2026",[]],
@@ -145,7 +146,7 @@ function topF(n){return function(c){return topOf(c)===n}}
 var flt=[['Tümü',function(){return 1}]].concat(TOP.map(function(t){return [t[0],topF(t[0])]}).filter(function(x){return veri.sertifikalar.some(x[1])})),fi=0,acik=false,LIM=6;
 window.sertFilt=function(){return veri.sertifikalar.filter(flt[fi][1])};
 window.__gk='k';try{if(localStorage.getItem('sertgk')==='t')window.__gk='t'}catch(e){}
-window.sertTopNames=TOP.map(function(t){return t[0]});
+window.sertTopOf=function(c){return topOf(c)||'Diğer'};window.sertTopNames=TOP.map(function(t){return t[0]});
 window.sertTopLevel=function(){return window.__gk==='t'&&!window.sertActive()};
 window.sertKey=function(c){return window.sertTopLevel()?topOf(c):c[1]};
 window.sertGrf=function(){return window.sertTopLevel()?veri.sertifikalar:window.sertFilt()};
@@ -923,8 +924,8 @@ if(dlg)dlg.addEventListener('close',mark);
 })();
 ;
 (function(){
-var sec=document.getElementById('sertifikalar'),bars=document.getElementById('sert-dag'),dn=document.getElementById('sert-dnt'),ay=document.getElementById('sert-ay'),sw=document.getElementById('sert-grf'),inp=document.getElementById('sert-ara');
-if(!sec||!bars||!dn||!ay||!sw||typeof veri==='undefined')return;
+var sec=document.getElementById('sertifikalar'),bars=document.getElementById('sert-dag'),dn=document.getElementById('sert-dnt'),tb=document.getElementById('sert-tbl'),sw=document.getElementById('sert-grf'),inp=document.getElementById('sert-ara');
+if(!sec||!bars||!dn||!tb||!sw||typeof veri==='undefined')return;
 var PL=['#c62828','#1d4ed8','#7c3aed','#0b7f86','#c2410c','#15803d','#be185d','#a16207'],MN=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 var ALL=veri.sertifikalar,S=ALL,n=S.length,ord=[],m={},ks=[];
 function gk(c){return window.sertKey?window.sertKey(c):c[1]}
@@ -939,25 +940,26 @@ function rd(anim){var R=46,C=2*Math.PI*R,on=act(),acc=0,g=ks.length>1?1.6:0;
  var svg='<svg viewBox="0 0 132 132" class="'+(on?'has ':'')+(anim?'anim':'')+'" role="img" aria-label="Sertifika dağılımı"><circle cx="66" cy="66" r="46" fill="none" stroke="var(--soft)" stroke-width="21"/>'+seg+'<text x="66" y="68" text-anchor="middle" class="d1">'+big+'</text><text x="66" y="84" text-anchor="middle" class="d2">'+lab+'</text></svg>';
  var lg=ks.map(function(k){return '<button type="button" class="lgi'+(k===on?' on':'')+'" data-k="'+k+'"><i style="background:'+col(k)+'"></i><span>'+k+'</span><b>'+m[k]+'</b><em>'+Math.round(m[k]/n*100)+'%</em></button>'}).join('');
  dn.innerHTML='<div class="dsv">'+svg+'</div><div class="dlg">'+lg+'</div>'}
-function ra(){var mm={};S.forEach(function(c){var p=String(c[2]).split(' '),key=(+p[1]||0)*12+Math.max(0,MN.indexOf(p[0]));var o=mm[key]=mm[key]||{p:p,t:0,k:{}};o.t++;o.k[gk(c)]=(o.k[gk(c)]||0)+1});
- var keys=Object.keys(mm).map(Number).sort(function(a,b){return a-b}),mx=Math.max.apply(null,keys.map(function(k){return mm[k].t})),W=320,base=150,hh=124,sl=(W-20)/keys.length,bw=Math.min(54,sl*.62),cum=0,out='';
- keys.forEach(function(key,i){var d=mm[key],cx=10+sl*i+sl/2,y=base;cum+=d.t;
-  ord.forEach(function(k){var v=d.k[k];if(!v)return;var h=Math.max(5,v/mx*hh);y-=h;out+='<rect class="bs" x="'+(cx-bw/2).toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(h-1).toFixed(1)+'" rx="3" fill="'+col(k)+'" style="animation-delay:'+(i*90)+'ms"><title>'+k+' ('+v+')</title></rect>'});
-  out+='<text x="'+cx.toFixed(1)+'" y="'+(y-6).toFixed(1)+'" text-anchor="middle" class="d3">'+d.t+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+16)+'" text-anchor="middle" class="d4">'+d.p[0]+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+29)+'" text-anchor="middle" class="d5">'+(d.p[1]||'')+'</text><text x="'+cx.toFixed(1)+'" y="'+(base+45)+'" text-anchor="middle" class="d5">Toplam: '+cum+'</text>'});
- var lg=ks.map(function(k){return '<span><i style="background:'+col(k)+'"></i>'+k+'</span>'}).join('');
- ay.innerHTML='<svg viewBox="0 0 '+W+' 205" role="img" aria-label="Aylara göre alınan sertifikalar"><line x1="10" x2="'+(W-10)+'" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/>'+out+'</svg><div class="alg">'+lg+'</div>'}
-var v='d';try{var sv=localStorage.getItem('grf');if(sv==='b'||sv==='d'||sv==='a')v=sv}catch(e){}
-function show(nv,save){v=nv;bars.hidden=v!=='b';dn.hidden=v!=='d';ay.hidden=v!=='a';
+function rt(){var tl=window.sertTopLevel&&window.sertTopLevel(),sub={};
+ S.forEach(function(c){var g=gk(c),o=tl?c[1]:window.sertTopOf(c);(sub[g]=sub[g]||{})[o]=(sub[g][o]||0)+1});
+ var rows=ks.map(function(k,i){var sk=Object.keys(sub[k]||{}).sort(function(a,b){return sub[k][b]-sub[k][a]});
+  var r='<tr data-k="'+k+'"><td>'+(i+1)+'</td><th scope="row"><i style="background:'+col(k)+'"></i>'+k+'</th><td>'+m[k]+'</td><td>%'+Math.round(m[k]/n*100)+'</td></tr>';
+  if(sk.length>0)r+=sk.map(function(x){return '<tr class="sb" data-k="'+k+'"><td></td><th scope="row">'+x+'</th><td>'+sub[k][x]+'</td><td>%'+Math.round(sub[k][x]/m[k]*100)+'</td></tr>'}).join('');
+  return r}).join('');
+ tb.innerHTML='<table><thead><tr><th>#</th><th>'+(tl?'Konu':'Kurum')+' / '+(tl?'kurum':'konu')+'</th><th>Sertifika</th><th>Oran</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr><td></td><th scope="row">Toplam</th><td>'+n+'</td><td>%100</td></tr></tfoot></table>'}
+var v='d';try{var sv=localStorage.getItem('grf');if(sv==='b'||sv==='d'||sv==='t')v=sv}catch(e){}
+function show(nv,save){v=nv;bars.hidden=v!=='b';dn.hidden=v!=='d';tb.hidden=v!=='t';
  [].forEach.call(sw.querySelectorAll('button'),function(b){b.setAttribute('aria-pressed',String(b.dataset.v===v))});
- if(v==='d')rd(true);if(v==='a')ra();
+ if(v==='d')rd(true);if(v==='t')rt();
  if(save){try{localStorage.setItem('grf',v)}catch(e){}}}
 sw.addEventListener('click',function(e){var b=e.target.closest('button');if(b&&b.dataset.v&&b.dataset.v!==v)show(b.dataset.v,true)});
+tb.addEventListener('click',function(e){var r=e.target.closest('tbody tr');if(r)filt(r.dataset.k)});
 dn.addEventListener('click',function(e){var t=e.target.closest('.sg,.lgi');if(t)filt(t.dataset.k)});
-function sync(){if(v==='d')rd(false)}
+function sync(){if(v==='d')rd(false);if(v==='t')rt()}
 sec.addEventListener('click',function(){setTimeout(sync,0)});
 if(inp)inp.addEventListener('input',sync);
 show(v,false);
-document.addEventListener('sertchg',function(){rc();if(v==='d')rd(false);if(v==='a')ra()});
+document.addEventListener('sertchg',function(){rc();if(v==='d')rd(false);if(v==='t')rt()});
 })();
 ;
 (function(){var rm=matchMedia('(prefers-reduced-motion:reduce)').matches||document.documentElement.dataset.mo==='off';if(rm)return;
